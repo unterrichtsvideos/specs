@@ -1,0 +1,1434 @@
+<!DOCType html>
+<html lang='de'>
+<head>
+    <meta charset='utf-8'>
+    <title>XML-Feed Spezifikationen – Anwendungsprofil für das Meta-Videoportal unterrichtsvideos.net</title>
+    <script src='https://unterrichtsvideos.github.io/specs/js/respec-dini.js' aync class='remove'></script>
+    <script class='remove'>
+      var respecConfig = {
+        shortName: "unterrichtsvideos.net/specs",
+        maxTocLevel: 3,
+        editors: [{
+          name: "Zentrum für Videos in der Lehrkräftebildung (ViLeb)",
+          company: "Universität Münster",
+          companyURL: "https://www.uni-muenster.de/"
+        }],
+        /*
+        authors: [{
+          name: "Manuel Oellers",
+          company: "Universität Münster",
+          companyURL: "https://www.uni-muenster.de/"
+        }],
+        */
+        format: "markdown",
+        localBiblio: {
+          "DigCompEdu": {
+            title: "Europäischer Rahmen für die Digitale Kompetenz von Lehrenden",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/digcompedu/",
+            publisher: "unterrichtsvideos.net",
+          },
+          "MAIN-TEACH-Modell": {
+            title: "MAIN-TEACH-Modell zur Unterrichtsqualität",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/",
+            publisher: "unterrichtsvideos.net",
+          },
+          "Granularität": {
+            title: "Granularität",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/granularity/",
+            publisher: "unterrichtsvideos.net",
+          },
+          "Lernformate": {
+            title: "Lernformate",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/learning_format/",
+            publisher: "unterrichtsvideos.net",
+          },
+          "Lizenzen": {
+            title: "Lizenzen",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/license/",
+            publisher: "unterrichtsvideos.net",
+          },
+          "Ressourcentypen": {
+            title: "Ressourcentypen",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/",
+            publisher: "unterrichtsvideos.net",
+          },
+          "Zielgruppen": {
+            title: "Zielgruppen",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/audience/",
+            publisher: "unterrichtsvideos.net",
+          },
+          "Schlagwörter": {
+            title: "Schlagwortvorschläge",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/keyword/",
+            publisher: "unterrichtsvideos.net",
+          },
+          "ROR": {
+            title: "Research Organization Registry",
+            href: "https://ror.org/",
+            publisher: "ROR",
+          },
+          "GND": {
+            title: "Gemeinsame Normdatei",
+            href: "https://www.dnb.de/DE/Home/home_node.html",
+            publisher: "GND",
+          },
+          "ORCID": {
+            title: "Open Researcher and Contributor ID",
+            href: "https://orcid.org/",
+            publisher: "",
+          },
+          "Wikidata": {
+            title: "Wikidata",
+            href: "https://www.wikidata.org/wiki/",
+            publisher: "",
+          },
+          "MAIN-Teach-Modell": {
+            title: "MAIN-Teach-Modell zur Unterrichtsqualität",
+            href: "https://zenodo.org/records/8280389",
+            publisher: "Praetorius, A.-K., Charalambous, C., Wemmer-Rogh, W., Gossner, L., Herrmann, C., Ufer, S., Gräsel, C., & Keller, S. (2023)",
+          },
+          "DigCompEduObserve": {
+            title: "DigCompEduObserve: Beobachtungsinstrument zur Förderung digitaler Kompetenzen von Lehrenden",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/digcompeduobserve/", 
+            // https://epub.ub.uni-muenchen.de/115621/1/TechnicalReportDigCompEduObserveVersion1_0_20240418.pdf
+            publisher: "Oezsoy, M.; Murbök, J.; Schultz-Pernice, F.; Gräsel, C.; Sailer, M. & Fischer, F. (2024)",
+          },
+          "Jahrgangsstufen": {
+            title: "Jahrgangsstufen",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/grade/",
+            publisher: "unterrichtsvideos.net",
+          },
+          "Schularten": {
+            title: "Schularten",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/school_type/",
+            publisher: "unterrichtsvideos.net",
+          },
+          "Schulfächer": {
+            title: "Schulfächer",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/subject/",
+            publisher: "unterrichtsvideos.net",
+          },
+          "Kameraperspektiven": {
+            title: "Kameraperspektiven",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/camera_perspective/",
+            publisher: "unterrichtsvideos.net",
+          },
+          "Bildungsstufen": {
+            title: "Bildungsstufen",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/educational_level/",
+            publisher: "KIM & unterrichtsvideos.net",
+          },
+          "Materialtypen": {
+            title: "Materialtypen",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/material_type/",
+            publisher: "unterrichtsvideos.net",
+          },
+          "Lehrplanthemen": {
+            title: "Lehrplanthemen",
+            href: "https://w3id.org/unterrichtsvideos.net/vocabs/topic/",
+            publisher: "unterrichtsvideos.net",
+          },
+          "BCP47": {
+            title: "Tags for Identifying Languages.",
+            href: "https://www.rfc-editor.org/rfc/rfc5646",
+            publisher: "A. Phillips, Ed.; M. Davis, Ed.. IETF. September 2009.",
+          },
+          "RFC5322": {
+            title: "RFC 5322: Internet Message Format",
+            href: "https://www.rfc-editor.org/rfc/rfc5322",
+            publisher: "P. Resnick, Ed. Network Working Group. October 2008."
+          },
+          "RSS 2.0": {
+            title: "RSS 2.0 Specification",
+            href: "https://www.rssboard.org/rss-2-0-11",
+            publisher: "RSS Advisory Board. March 2009."
+          },
+          "XML 1.0": {
+            title: "Extensible Markup Language (XML) 1.0 (Fifth Edition)",
+            href: "https://www.w3.org/TR/xml/",
+            publisher: "W3C Recommendation. November 2008."
+          },
+          "XML 1.1": {
+            title: "Extensible Markup Language (XML) 1.1 (Second Edition)",
+            href: "https://www.w3.org/TR/2006/REC-xml11-20060816/",
+            publisher: "W3C Recommendation. September 2006."
+          }
+        },
+        logos: [],
+        otherLinks: [{
+          key: "Links zur Spezifikation",
+          data: [{
+              value: "Aktuellste Version",
+              href: "https://w3id.org/unterrichtsvideos.net/specs/latest/"
+            },
+            {
+              value: "Aktuellster Entwurf (zur Kommentierung)",
+              href: "https://w3id.org/unterrichtsvideos.net/specs/draft/"
+            }
+          ]
+          }, {
+                key: "Mitwirken",
+                data: [{
+                    value: "Partizipationsmöglichkeiten",
+                    href: "https://unterrichtsvideos.github.io/specs/#mitwirken"
+                }]
+          },
+        ],
+        // Veröffentlichungsdatum der Spezifikation im ISO 8601-Format (YYYY-MM-DD)
+        // Bei Entwürfen: leer
+        publishDate: "",
+        specStatus: "unofficial"
+      };
+    </script>
+</head>
+<body>
+<section id="abstract">
+## Zusammenfassung
+Das Dokument stellt ein **Anwendungsprofil** zur Bereitstellung von Metadaten in XML-Feeds im Kontext des Meta-Videoportals [unterrichtsvideos.net](https://unterrichtsvideos.net/metaportal/) dar.  
+
+Das Anwendungsprofil ist angelehnt an die Spezifikationen von [[RSS 2.0]] und [[XML 1.0]] zur Strukturierung des Datenaustauschs.
+Der Feed dient dem Austausch der Metadaten von Inhalten zwischen den Portalen/Anbietern (wie bspw. dem Videoportal [ProVision](https://www.uni-muenster.de/ProVision/)) und dem Meta-Videoportal [unterrichtsvideos.net](https://unterrichtsvideos.net/metaportal/).
+
+<div class="copyright" style="display: flex; flex-direction: row; justify-content: space-between;">
+    <div>
+        <img alt="CC-BY" src="https://licensebuttons.net/l/by/4.0/88x31.png" />
+        Dieses Werk ist lizenziert unter
+        <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+            Creative Commons Attribution 4.0 International</a>.
+    </div>
+</div>
+</section>
+
+<section id="conformance">
+## Technische Anforderungen
+
+Die Metadaten der Inhalte werden in einem XML-Dokument repräsentiert.
+Metadatenfelder entsprechen XML-Elementen, bspw. `license` zur Kennzeichnung der Lizenz eines Inhalts. 
+
+### Syntax und Semantik
+- Der Feed MUSS konform zu [[XML 1.0]] und [[RSS 2.0]] validieren.
+- Der Feed MUSS zur <abbr title="XML Schema Definition">XSD</abbr> des Meta-Videoportals unterrichtsvideos.net validieren.
+
+### Format
+- Die Zeichenkodierung des XML-Feeds MUSS [[UTF-8]] oder eine [[XML 1.0]]-spezifikationskonforme anderweitige Kodierung sein.
+- Die Zeichenkodierung SOLL zu Beginn des Feeds in der ersten Zeile deklariert werden.
+- Der bereitgestellte Feed SOLL einen der folgenden MIME-Types aufweisen:
+  - `application/rss+xml`
+  - `application/xml`
+  - `text/xml`
+  - `text/rss+xml`
+
+<pre class="example" title="Zeichenkodierung UTF-8 des XML-Feeds">
+  &lt;?xml version="1.0" encoding="UTF-8"?>
+</pre>
+
+### Mehrwertigkeit
+- Alle Elemente, die nicht Bestandteil dieser Spezifikation sind, werden ignoriert.
+- Elemente dieser Spezifikation DÜRFEN nur einmal pro Inhalt (`item`) vorkommen (z.B. `abstract`).
+- Das Zeichen `|` MUSS zum Trennen von mehreren Werten in den Feldern verwendet werden.
+  - Technisch: `U+007C` (Unicode) (= "pipe", "vertical line", "senkrechter Strich")
+
+### Links
+- Links MÜSSEN absolute URLs (insbesondere keine relativen URLs) darstellen.
+- Links SOLLEN das Schema *https* verwenden.
+
+## XML-Basisstruktur
+
+- Die XML-Basisstruktur MUSS das `rss`-Element enthalten.
+- Die XML-Basissstruktur SOLL den XML-Namensraum des Meta-Videoportals deklarieren:
+`https://w3id.org/unterrichtsvideos.net/specs/` 
+
+<dl>
+  <dt>Pflichtelement &lt;rss&gt;</dt>
+  <dd>ja</dd>
+  <dt>Typ</dt>
+  <dd>`element` [[RSS 2.0]]</dd>
+  <dt>Attribute</dt>
+  <dd>`xmlns` - benennt den deklarierten Namensraum und SOLL folgenden Wert haben: `https://w3id.org/unterrichtsvideos.net/specs/` [[RSS 2.0]]</dd>
+</dl>
+
+<pre class="example" title="Grundstruktur des XML-Feeds">
+  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+  &lt;rss version=&quot;2.0&quot; xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot;&gt;
+    &lt;!-- Metadaten zum Anbieter und den Inhalten gemäß Anwendungsprofil --&gt;
+  &lt;/rss&gt;
+</pre>
+</section>
+
+## Metadaten des Anbieters <code>&lt;channel&gt;</code>
+
+Das `channel`-Element im XML-Feed definiert allgemeine Informationen über den Anbieter der Metadaten, z. B. eines Portals, gemäß [[RSS 2.0]].
+
+- Es MUSS ein `channel`-Element enthalten sein.
+- Es DARF NICHT mehr als ein `channel`-Element enthalten sein.
+
+<dl>
+  <dt>Pflichtelement &lt;channel&gt;</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Typ</dt>
+  <dd>`element` [[RSS 2.0]]</dd>
+</dl>
+
+<pre class="example" title="Grundstruktur des XML-Feeds">
+  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+  &lt;rss version=&quot;2.0&quot; xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot;&gt;
+  &lt;channel&gt;
+    &lt;!-- Metadaten zum Anbieter gemäß Anwendungsprofil [...] --&gt;
+  &lt;/channel&gt;
+    &lt;!-- Metadaten zu den Inhalten gemäß Anwendungsprofil [...] --&gt;
+  &lt;/rss&gt;
+</pre>
+
+#### &#9679; Titel <code>&lt;title&gt;</code>
+
+Das `title`-Feld innerhalb des `channel`-Elements definiert den Titel des Anbieters, gemäß [[RSS 2.0]].
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Typ</dt>
+  <dd>`string` (CDATA) [[XML 1.0]]</dd>
+</dl>
+
+<pre class="example" title="Titel des Portals als Wert des Feldes in CDATA-Sektion">
+&lt;title&gt;&lt;![CDATA[Videoportal ProVision der Universität Münster]]&gt;&lt;/title&gt;
+</pre>
+
+### &#9679; Link <code>&lt;link&gt;</code>
+
+Das `link`-Feld innerhalb des `channel`-Elements definiert die URL des Anbieters, gemäß [[RSS 2.0]].
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Typ</dt>
+  <dd>`string` (URL), Schema: http(s) [[RFC3986]]</dd>
+</dl>
+
+### &#9679; Beschreibung <code>&lt;description&gt;</code>
+
+Das `description`-Feld innerhalb des `channel`-Elements dient der Beschreibung des Anbieters, gemäß [[RSS 2.0]].
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Typ</dt>
+  <dd>`string` (CDATA) [[XML 1.0]]</dd>
+</dl>
+
+<pre class="example" title="Beschreibung des Portals als CDATA-Sektion">
+&lt;description&gt;&lt;![CDATA[Videoportal ProVision der Universität Münster]]&gt;&lt;/description&gt;
+</pre>
+
+### &#9679; Logo <code>&lt;image&gt;</code>
+
+Das `image`-Feld innerhalb des `channel`-Elements definiert das Logo des Anbieters mit den benötigten Elementen, gemäß [[RSS 2.0]]:
+- `link` (URL), Schema: http(s) [[RFC3986]]
+- `url`  (URL zum Logo),  Schema: https [[RFC3986]]
+  - Erlaubte MIME-Types [[RFC6838]] & [[RSS 2.0]]: 
+    - `image/jpeg`
+    - `image/png`
+    - `image/gif` 
+- `title` (string)
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Typ</dt>
+  <dd>`image` [[RSS 2.0]]</dd>
+</dl>
+
+<pre class="example" title="Verwendung">
+  &lt;image&gt;
+    &lt;title&gt;ProVision&lt;/title&gt;
+    &lt;url&gt;https://www.uni-muenster.de/provision/logo.png&lt;/url&gt;
+    &lt;link&gt;https://www.uni-muenster.de/provision/&lt;/link&gt;
+  &lt;/image&gt;
+</pre>
+
+### &#9679; Version <code>&lt;docs&gt;</code>
+
+Das `docs`-Feld gibt die verwendete Version der XML-Feed Spezifikationen des Meta-Videoportal unterrichtsvideos.net als URI an, gemäß [[RSS 2.0]].
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Typ</dt>
+  <dd>`string` (URI)</dd>
+  <dt>Wertebereich</dt>
+  <dd>URI der Version des Anwendungsprofils</dd>
+</dl>
+
+<pre class="example html" title="Wertebeispiel für Version 2.0 der Meta-Videoportal Spezifikationen">
+&lt;docs&gt;https://w3id.org/unterrichtsvideos.net/specs/version/2.0&lt;/docs&gt;
+</pre>
+
+<!--
+### &#9675; Sprache <code>&lt;language&gt;</code>
+
+Das `language`-Feld kennzeichnet die verfügbaren Sprachen des Anbieters an.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dt>Wertebereich</dt>
+  <dd>[[RFC5646]]</dd>
+</dl>
+
+```html "example": "Verwendung"
+de
+```
+-->
+
+<!--
+### &#9675; Copyright <code>&lt;copyright&gt;</code>
+
+Das `copyright`-Feld beschreibt die Informationen zum Copyright, gemäß [[RSS 2.0]].
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Typ</dt>
+  <dd>`string` (CDATA)</dd>
+</dl>
+
+```html "example": "Verwendung"
+© 2025 ProVision
+```
+-->
+
+<!--
+### &#9675; Veröffentlichungsdatum <code>&lt;pubDate&gt;</code>
+
+Das `pubDate`-Feld gibt das Datum der ersten Veröffentlichung des Feeds, gemäß [[RSS 2.0]] an.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Typ</dt>
+  <dd>`dateTime` [[RSS 2.0]] / [[RFC5322]]</dd>
+</dl>
+
+```html "example": "Verwendung"
+Thu, 01 Jan 2026 10:15:45 +0200
+```
+-->
+
+<!--
+### &#9675; Änderungsdatum <code>&lt;lastBuildDate&gt;</code>
+
+Das `lastBuildDate`-Feld gibt das Datum der letzten Änderung/Modifikation des Feeds, gemäß [[RSS 2.0]] an.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Typ</dt>
+  <dd>`dateTime` [[RSS 2.0]] / [[RFC5322]]</dd>
+</dl>
+
+```html "example": "Verwendung"
+Thu, 01 Jan 2026 10:15:45 +0200
+```
+-->
+
+## Metadaten des Inhalts <code>&lt;item&gt;</code>
+
+Jeder Inhalt (z. B. ein Unterrichtsvideo) wird durch ein eindeutiges `item`-Element repräsentiert, gemäß [[RSS 2.0]].
+
+- Ein Feed MUSS mindestens ein `item`-Element aufweisen.
+- Ein Feed KANN mehrere `item`-Elemente aufweisen.
+- Jedes `item`-Element MUSS mindestens die als Pflichtfelder deklarierten Metadaten enthalten.
+
+<pre class="example" title="Grundstruktur des XML-Feeds">
+  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+  &lt;rss version=&quot;2.0&quot; xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot;&gt;
+  &lt;channel&gt;
+    &lt;!-- Metadaten zum Anbieter gemäß Anwendungsprofil --&gt;
+  &lt;/channel&gt;
+  &lt;item&gt;
+    &lt;!-- Metadaten zu einem konkreten Inhalt gemäß Anwendungsprofil [...] --&gt;
+  &lt;/item&gt;
+  &lt;item&gt;
+    &lt;!-- Metadaten zu einem weiteren konkreten Inhalt gemäß Anwendungsprofil (optional) [...] --&gt;
+  &lt;/item&gt;
+  &lt;/rss&gt;
+</pre>
+
+### Deskriptive Metadaten
+
+#### &#9679; Titel <code>&lt;title&gt;</code>
+
+Das `title`-Feld gibt den Titel des Inhalts an (z. B. Titel des Videos), gemäß [[RSS 2.0]].
+
+- Der Titel SOLL eine Länge zwischen 1 und 150 Zeichen aufweisen.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/title">dct:title</a>, 
+    <a href="https://schema.org/name">sdo:name</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (CDATA) [[XML 1.0]]</dd>
+</dl>
+
+<pre class="example" title="Wert des Titel-Feldes">
+&lt;title&gt;&lt;![CDATA[Satz des Pythagoras – 3. Doppelstunde]]&gt;&lt;/title&gt;
+</pre>
+
+#### &#9679; Link <code>&lt;link&gt;</code>
+
+Das `link`-Feld definiert die absolute URL zum Inhalt beim Anbieter, gemäß [[RSS 2.0]].
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="https://schema.org/url">sdo:url</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (URL), Schema: http(s) [[RFC3986]]</dd>
+</dl>
+
+#### &#9679; Identifier <code>&lt;id&gt;</code>
+
+Das `id`-Feld ist die permanente und eindeutige Kennung des Inhalts (z. B. Videos) in einem XML-Feed eines Anbieters.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/identifier">dct:identifier</a>, 
+    <a href="https://schema.org/identifier">sdo:identifier</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string`</dd>
+</dl>
+
+Die Werte des Feldes MÜSSEN folgende Bedingungen erfüllen:
+
+<div class="note" title="Bedingungen für den Wert des Feldes">
+- MUSS dauerhaft einzigartig im jeweiligen Feed eines Anbieters sein
+- DARF NICHT wiederverwendet oder neu an einen anderen Inhalt im jeweiligen Feed eines Anbieters vergeben werden
+- DARF NICHT mehr als 150 Zeichen aufweisen
+- DARF NICHT folgende Sonderzeichen enthalten: `: / ? # [] @ ! $ & ' () " * + , ; = | `<` `> `
+- SOLL NICHT mit Sonderzeichen beginnen oder enden.
+- DARF NICHT typographischen Freiraum / Leerzeichen (Whitespaces) enthalten
+- DARF folgende alphanumerische Zeichen enthalten: `A-Z`, `a-z`, `0-9`
+- DARF folgende (Sonder-)Zeichen enthalten: `- . _` (vgl. auch [[RFC3986]], Sektion 2.3)
+- MUSS case-insensitiv interpretiert gleichbedeutend sein
+</div>
+
+<pre class="example" title="Empfohlener regulärer Ausdruck zur Validierung des id-Feldes">
+^[A-Za-z0-9](?:[A-Za-z0-9._-]{0,148}[A-Za-z0-9])?$
+</pre>
+
+<pre class="example" title="Beispiel-ID für einen Inhalt. Die Werte des Feldes sind case-insensitiv zu interpretieren, d.h. `video-12345` und `VIDEO-12345` und `Video-12345` sind als identische IDs zu betrachten.">
+  &lt;id&gt;video-12345&lt;/id&gt;
+</pre>
+
+Feldalternative:
+- Alternativ zum `id`-Feld KANN auch das `guid`-Element aus [[RSS 2.0]] genutzt werden, sofern die oben genannten Bedingungen für den Wert erfüllt sind.
+- Beide Elemente KÖNNEN parallel verwendet werden.
+- Die Wahl MUSS konsistent für jedes `item`-Element im gesamten Feed eines Anbieters sein.
+
+#### &#9679; Vorschaubild <code>&lt;image&gt;</code>
+
+Das `image`-Feld enthält die URL zu einem Vorschaubild des Videos.
+
+- Das Vorschaubild MUSS einen der folgenden MIME-Types aufweisen:
+  - `image/jpeg`
+  - `image/png`
+  - `image/gif`
+
+- Ein Seitenverhältnis von `16:9` und eine Mindestauflösung von `640x360` Pixel wird empfohlen.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="https://schema.org/thumbnail">sdo:thumbnail</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (URL), Schema: https [[RFC3986]] (2.3)</dd>
+</dl>
+
+<pre class="example xml" title="Vorschaubild als Wert für das image-Feld des Inhalts">
+&lt;image&gt;https://www.uni-muenster.de/ProVision/img/video-teaserbild.png&lt;/image&gt;
+</pre>
+ 
+Feldalternative:
+- Alternativ zum `image`-Feld KANN auch das `enclosure`-Element aus [[RSS 2.0]] mit dem Attribut `type` und einem der o.g. MIME-Types genutzt werden.
+- Beide Elemente KÖNNEN parallel verwendet werden.
+- Die Wahl MUSS konsistent für jedes `item`-Element im gesamten Feed eines Anbieters sein.
+
+<pre class="example" title="Alternatives enclosure-Element mit dem MIME-Type image/jpeg">
+&lt;enclosure type="image/jpeg" length="883133"
+  url="https://www.uni-muenster.de/ProVision/img/video-teaserbild.png"
+/&gt;
+</pre>
+
+#### &#9679; Ressourcentyp <code>&lt;resource_type&gt;</code>
+
+Das `resource_type`-Feld gibt den primären Ressourcentyp eines Inhalts an.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/type">dct:type</a>, 
+    <a href="https://schema.org/learningResourceType">sdo:learningResourceType</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dt>Wertebereich</dt>
+  <dd>Werte aus [[Ressourcentypen]]</dd>
+</dl>
+
+<pre class="example xml" title="Bei dem Inhalt handelt es sich um ein authentisches Unterrichtsvideo">
+&lt;resource_type&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt005
+&lt;/resource_type&gt;
+</pre>
+
+#### &#9679; Beschreibung <code>&lt;description&gt;</code>
+
+Das `description`-Feld dient zur Angabe einer Kurzbeschreibung des Inhalts, gemäß [[RSS 2.0]].
+
+- Die Kurzbeschreibung SOLL eine maximale Länge von ca. 15.000 Zeichen aufweisen.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/description">dct:description</a>, 
+    <a href="https://schema.org/description">sdo:description</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (CDATA) [[XML 1.0]]</dd>
+</dl>
+
+<pre class="example" title="Verwendung">
+&lt;description&gt;&lt;![CDATA[In dieser Doppelstunde zum Thema...]]&gt;&lt;/description&gt;
+</pre>
+
+
+#### &#9675; Abstract <code>&lt;abstract&gt;</code>
+
+Das `abstract`-Feld dient der Kurzbeschreibung des Inhalts.
+
+- Die Kurzbeschreibung SOLL maximal bis zu 300 Zeichen enthalten
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/abstract">dct:abstract</a>, 
+    <a href="https://schema.org/abstract">sdo:abstract</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (CDATA)</dd>
+</dl>
+
+<pre class="example" title="Verwendung">
+&lt;abstract&gt;&lt;![CDATA[Dieser Clip enthält...]]&gt;&lt;/abstract&gt;
+</pre>
+
+#### &#9675; Sprache <code>&lt;language&gt;</code>
+
+Das `language`-Feld kennzeichnet die Sprachen, in denen der Inhalt verfügbar ist.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/language">dct:language</a>,
+    <a href="https://schema.org/inLanguage">sdo:inLanguage</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dt>Wertebereich</dt>
+  <dd>[[RFC5646]]</dd>
+</dl>
+
+<pre class="example" title="Verwendung">
+&lt;language&gt;de | en&lt;/language&gt;
+</pre>
+
+### Administrative Metadaten
+
+#### &#9679; Erstelldatum <code>&lt;date_created&gt;</code>
+
+Das `date_created`-Feld beschreibt das Datum der Erstellung des Inhalts.
+
+- SOLL eine möglichst präzise Angabe enthalten.
+
+**Varianten**
+- Angabe als Jahr (JJJJ)
+- optional: Monat additiv zu Jahr: (JJJJ-MM)
+- optional: Tag additiv zu Jahr und Monat: (JJJJ-MM-TT)
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/created">dct:created</a>,
+    <a href="https://schema.org/dateCreated">sdo:dateCreated</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string`</dd>
+  <dt>Wertebereich</dt>
+  <dd>JJJJ(-MM(-TT)) [[ISO8601]]</dd>
+</dl>
+
+<pre class="example" title="Möglicher regulärer Ausdruck zur Validierung des Erstelldatums">
+^\d{4}(?:-(0[1-9]|1[0-2])(?:-(0[1-9]|[12]\d|3[01]))?)?$
+</pre>
+
+##### Beispiele zu
+
+<pre class="example" title="Aufnahmejahr des Unterrichtsvideos">
+&lt;date_created&gt;2025&lt;/date_created&gt;
+</pre>
+
+<pre class="example" title="Aufnahmedatum des Interviews">
+&lt;date_created&gt;2025-12-31&lt;/date_created&gt;
+</pre>
+
+#### &#9679; Lizenz <code>&lt;license&gt;</code>
+
+Das `license`-Feld gibt Auskunft über die vorliegende Lizenz zur Nutzung und Verwertung des Inhalts.
+
+<!-- TODO: Mehrfachwerte? -->
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/license">dct:license</a>,
+    <a href="https://schema.org/license">sdo:license</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string`</dd>
+  <dt>Wertebereich</dt>
+  <dd>Wert aus [[Lizenzen]]</dd>
+</dl>
+
+<pre class="example" title="Inhalt mit CC-BY-SA Lizenz">
+&lt;license&gt;https://w3id.org/unterrichtsvideos.net/vocabs/license/cc-by-sa&lt;/license&gt;
+</pre>
+
+#### &#9679; Nutzungsbeschränkungen <code>&lt;use_restrictions&gt;</code>
+
+Das `use_restrictions`-Feld definiert Einschränkungen der Nutzbarkeit durch Zielgruppen. 
+
+Eine Zielgruppe wird nur und immer dann angegeben, wenn ...
+- die jeweilige Zielgruppe potenziell einen Zugriff auf die Ressource erlangen kann<br/>
+(z. B. direkt selbst oder indirekt über einen Kurs)<br/>
+_und_
+- der Inhalt für die jeweilige Zielgruppe gemäß dem Anbieter relevant ist
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/audience">dct:audience</a>,
+    <a href="https://schema.org/audience">sdo:audience</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit |)</dd>
+  <dt>Wertebereich</dt>
+  <dd>Werte aus [[Zielgruppen]]</dd>
+</dl>
+
+<pre class="example xml" title="Studierende und Hochschullehrende haben Zugriff und der Inhalt ist für diese Zielgruppen relevant.">
+&lt;use_restrictions&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/audience/g1 | 
+  https://w3id.org/unterrichtsvideos.net/vocabs/audience/g3
+&lt;/use_restrictions&gt;
+</pre>
+
+#### &#9675; Nutzungsbeschränkungen (Beschreibung) <code>&lt;use_restrictions_label&gt;</code>
+
+Das `use_restrictions_label`-Feld definiert mögliche Einschränkungen bei der Nutzung durch die Zielgruppen.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/accessRights">dct:accessRights</a>,
+    <a href="https://schema.org/conditionsOfAccess">sdo:conditionsOfAccess</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (CDATA) [[XML 1.0]]</dd>
+</dl>
+
+<pre class="example xml" title="Nutzungsbeschränkungen eines spezifischen Inhalts.">
+&lt;use_restrictions_label&gt;
+  &lt;![CDATA[Zugriff für Studierende nur innerhalb eines Kurses an einer Hochschule.]]&gt;
+&lt;/use_restrictions_label&gt;
+</pre>
+
+#### &#9675; Veröffentlichungsdatum <code>&lt;pubDate&gt;</code>
+
+Das `pubDate`-Feld gibt das Datum der ersten Veröffentlichung an, gemäß [[RSS 2.0]].
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/date">dct:date</a>,
+    <a href="https://schema.org/datePublished">sdo:datePublished</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`dateTime` [[RSS 2.0]] / [[RFC822]]</dd>
+</dl>
+
+<pre class="example xml" title="Inhalt wurde am 26.09.2025 veröffentlicht.">
+&lt;pubDate&gt;Wed, 26 Sep 2025 10:34:44 +0200&lt;/pubDate&gt;
+</pre>
+
+
+#### &#9675; Urheber/-innen <code>&lt;creator&gt;</code>
+
+Im `creator`-Feld kann eine Organisation oder eine Einzelperson angegeben werden, die bei der Erstellung des Inhalts beteilgt war. 
+
+Empfohlen wird dabei die Angabe eines Wertes nach folgender Präferenz: 
+Personen: GND, ORCID, WIKIDATA
+Organisationen: GND, ROR, WIKIDATA
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/creator">dct:creator</a>, 
+    <a href="https://schema.org/creator">sdo:creator</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dt>Wertebereich</dt>
+  <dd>Werte aus [[GND]] [[ORCID]] [[ROR]] [[Wikidata]]</dd>
+</dl>
+
+<pre class="example xml" title="Einrichtung als Urheber (hier: GND-ID der Universität Münster)">
+&lt;creator&gt;https://d-nb.info/gnd/1194191657&lt;/creator&gt;
+</pre>
+
+### Strukturelle Metadaten
+
+#### &#9675; hat Teile <code>&lt;hasPart&gt;</code>
+
+Das `hasPart`-Feld definiert die Zugehörigkeit von Inhalten untereinander. 
+Die Reihenfolge der Werte ist bedeutsam. 
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a>, 
+    <a href="https://schema.org/hasPart">sdo:hasPart</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dt>Wertebereich</dt>
+  <dd>Jeder Wert MUSS dem Wert einer ID desselben XML-Feeds entsprechen (siehe: [[[#identifier-id]]]).</dd>
+</dl>
+
+##### Beispiele für die Verwendung des `hasPart`-Feldes
+
+<strong>Hiearchische Über-/Unterordnung</strong>
+- KANN als hierarchische Relation (Über-/Unterordnung) genutzt werden, z. B. {Inhalt} besitzt als Teile 1..n {Inhalte}.
+  - Beispiel: Ein Video {ID_2} besitzt als Teile einen Clip 1 {ID_2_1} und einen Clip 2 {ID_2_2}, somit gilt:
+    - {ID_2} *hasPart* {ID_2_1} | {ID_2_2}
+
+<pre class="example" title="Der beschriebene Inhalt ID_2 hat dazugehörige Inhalte ID_2_1 und ID_2_2">
+  &lt;hasPart&gt;ID_2_1 | ID_2_2&lt;/hasPart&gt;
+</pre>
+
+<strong>Heterarchische Nebenordnung</strong>
+ - KANN als Relation (Nebenordnung) genutzt werden.
+   - Beispiel: Ein Video {ID_4} hat ein dazugehöriges Interview {ID_5], somit gilt:
+      - {ID_4} *hasPart* {ID_5}
+
+<pre class="example" title="Der beschriebene Inhalt ID_4 hat einen dazugehörigen Inhalt ID_5">
+  &lt;hasPart&gt;ID_5&lt;/hasPart&gt;
+</pre>
+
+<strong>Assoziative Relation</strong>
+- KANN als assoziative Relation genutzt werden, z. B. {Inhalt} ist eine Reihe/Serie, bestehend aus 1..n {Inhalten}.
+  - Beispiel: Videos sind Teil einer Videoreihe/-serie und besitzen ggf. Vorgänger und/oder Nachfolger, somit gilt:
+    - {ID_1} *hasPart* {ID_2} | {ID_3}
+
+<pre class="example" title="Der beschriebene Inhalt ID_1 hat dazugehörige Inhalte ID_2 und ID_3">
+  &lt;hasPart&gt;ID_2 | ID_3&lt;/hasPart&gt;
+</pre>
+
+#### &#9675; ist Teil <code>&lt;isPartOf&gt;</code>
+
+Das `isPartOf`-Feld definiert die Zugehörigkeit von Inhalten untereinander und ist invers zu [[[#hat-teile-haspart]]]. 
+Die Reihenfolge der Werte ist bedeutsam. 
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/isPartOf">dct:isPartOf</a>, 
+    <a href="https://schema.org/isPartOf">sdo:isPartOf</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dt>Wertebereich</dt>
+  <dd>Jeder Wert MUSS dem Wert einer ID desselben XML-Feeds entsprechen (siehe: [[[#identifier-id]]]).</dd>
+</dl>
+
+##### Beispiele für die Verwendung des `isPartOf`-Feldes
+
+<strong>Hierarchische Relation: Über-/Unterordnung</strong>
+- KANN als hierarchische Relation (Über-/Unterordnung) genutzt werden, z. B. {Inhalt} besitzt als Teile 1..n {Inhalte}.
+  - Beispiel: Ein Video {ID_2} besitzt als Teile einen Clip 1 {ID_2_1} und einen Clip 2 {ID_2_2}, somit gilt:
+    - {ID_2} *hasPart* {ID_2_1} | {ID_2_2}
+    - {ID_2_1} *isPartOf* {ID_2}
+    - {ID_2_2} *isPartOf* {ID_2}
+
+<pre class="example" title="Der beschriebene Inhalt ID_2_1 ist Teil von ID_2">
+  &lt;isPartOf&gt;ID_2&lt;/isPartOf&gt;
+</pre>
+
+<strong>Hierarchische Relation: Nebenordnung</strong>
+ - KANN als hierarchische Relation (Nebenordnung) genutzt werden.
+   - Beispiel: Ein Video {ID_4} hat ein dazugehöriges Interview {ID_5], somit gilt:
+      - {ID_4} *hasPart* {ID_5}
+      - {ID_5} *isPartOf* {ID_4}
+
+<pre class="example" title="Der beschriebene Inhalt ID_5 ist Teil von ID_4">
+  &lt;isPartOf&gt;ID_4&lt;/isPartOf&gt;
+</pre>
+
+<strong>Assoziative Relation</strong>
+- KANN als assoziative Relation genutzt werden, z. B. {Inhalt} ist Teil einer Reihe/Serie.
+  - Beispiel: Videos sind Teil einer Videoreihe/-serie, somit gilt:
+    - {ID_2} *isPartOf* {ID_1}
+
+<pre class="example" title="Der beschriebene Inhalt ID_2 ist Teil von ID_1">
+  &lt;isPartOf&gt;ID_1&lt;/isPartOf&gt;
+</pre>
+
+### Didaktische Metadaten
+
+#### &#9679; Schulart <code>&lt;school_type&gt;</code>
+
+Das `school_type`-Feld beschreibt die Schulart.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/educationLevel">dct:educationLevel</a>,
+    <a href="https://schema.org/educationalLevel">sdo:educationalLevel</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dt>Wertebereich</dt>
+  <dd>Werte aus [[Schularten]]</dd>
+</dl>
+
+<pre class="example" title="Das Unterrichtsvideo wurde an einer Grundschule aufgenommen.">
+  &lt;school_type&gt;https://w3id.org/unterrichtsvideos.net/vocabs/school_type/st02&lt;/school_type&gt;
+</pre>
+
+<pre class="example" title="Der Inhalt ist für das Lehramt an Grundschulen relevant.">
+  &lt;school_type&gt;https://w3id.org/unterrichtsvideos.net/vocabs/school_type/st02&lt;/school_type&gt;
+</pre>
+
+<pre class="example" title="Der Inhalt ist für schulartübergreifend relevant.">
+  &lt;school_type&gt;https://w3id.org/unterrichtsvideos.net/vocabs/school_type/st1&lt;/school_type&gt;
+</pre>
+
+#### &#9679; Jahrgangsstufe <code>&lt;grade&gt;</code>
+
+Das `grade`-Feld beschreibt die Jahrgangsstufe.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/educationLevel">dct:educationLevel</a>,
+    <a href="https://schema.org/educationalLevel">sdo:educationalLevel</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dt>Wertebereich</dt>
+  <dd>Werte aus [[Jahrgangsstufen]]</dd>
+</dl>
+
+<pre class="example" title="Das Unterrichtsvideo wurde in einer 4. Klasse aufgenommen.">
+  &lt;grade&gt;https://w3id.org/unterrichtsvideos.net/vocabs/grade/4&lt;/grade&gt;
+</pre>
+
+<pre class="example" title="Der Inhalt ist für die Ausübung eines Lehramts in der Jahrgangsstufe 5 relevant.">
+  &lt;grade&gt;https://w3id.org/unterrichtsvideos.net/vocabs/grade/5&lt;/grade&gt;
+</pre>
+
+<!--
+#### Bildungsstufe <code>&lt;educational_level&gt;</code>
+
+Das `educational_level`-Feld beschreibt die Bildungsstufe der Lernenden.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/educationLevel">dct:educationLevel</a>,
+    <a href="https://schema.org/educationalLevel">sdo:educationalLevel</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dt>Wertebereich</dt>
+  <dd>Werte aus [[Bildungsstufen]]</dd>
+</dl>
+-->
+
+#### &#9679; Schulfach <code>&lt;subject&gt;</code>
+
+Das `subject`-Feld definiert das Schulfach.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/subject">dct:subject</a>, 
+    <a href="https://schema.org/about">sdo:about</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dt>Wertebereich</dt>
+  <dd>Werte aus [[Schulfächer]]</dd>
+</dl>
+
+<pre class="example xml" title="Das Video zeigt einen fächerübergreifenden Informatik- und Geografieunterricht.">
+&lt;subject&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/subject/se1010 |
+  https://w3id.org/unterrichtsvideos.net/vocabs/subject/s1013 |
+  https://w3id.org/unterrichtsvideos.net/vocabs/subject/s1010
+&lt;/subject&gt;
+</pre>
+
+<pre class="example" title="Der Inhalt ist für das Fach Mathematik relevant/konzipiert.">
+  &lt;subject&gt;https://w3id.org/unterrichtsvideos.net/vocabs/subject/s1017&lt;/subject&gt;
+</pre>
+
+#### &#9675; Dauer <code>&lt;time_required&gt;</code>
+
+Das `time_required`-Feld gibt die (Beschäftigungs-)Dauer des Inhalts an, z. B. die Länge des Videos oder die durchschnittliche Bearbeitungsdauer eines Lernmoduls zum Erreichen der Lernziele. 
+
+- Format der Zeitspanne gemäß [[ISO8601]]:
+  - `P` (Präfix der Zeitperiode, obligatorisch)
+    - `nY` Jahre
+    - `nM` Monate
+    - `nW` Wochen
+    - `nD` Tage
+  - `T` (Präfix für Zeitangaben, obligatorisch bei Zeitangaben)
+    - `nH` Stunden
+    - `nM` Minuten
+    - `nS` Sekunden
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="https://schema.org/timeRequired">sdo:timeRequired</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` der Form `P(n)Y(n)M(n)W(n)DT(n)H(n)M(n)S` [[ISO8601]]</dd>
+</dl>
+
+<pre class="example" title="Möglicher regulärer Ausdruck zur Validierung der Dauer">
+^(-?)P(?=\d|T\d)(?:(\d+)Y(?:(\d+)M)?(?:(\d+)D)?|(?:(\d+)W))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$
+</pre>
+
+##### Beispiele zur Verwendung der Angaben zur Dauer
+
+<pre class="example" title="Dauer des Unterrichtsvideos: 1 Stunde, 12 Minuten und 23 Sekunden">
+  &lt;time_required&gt;PT1H12M23S&lt;/time_required&gt;
+</pre>
+
+<pre class="example" title="Beschäftigungsdauer für ein Lernmodul: 2 Wochen">
+  &lt;time_required&gt;P2W&lt;/time_required&gt;
+</pre>
+ 
+#### &#9675; Begleitmaterialtypen <code>&lt;material_type&gt;</code>
+
+Das `material_type`-Feld gibt eine Liste mit verfügbaren Begleitmaterialien zu einem spezifischen Inhalt an.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/type">dct:type</a>,
+    <a href="https://schema.org/learningResourceType">sdo:learningResourceType</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dt>Wertebereich</dt>
+  <dd>Werte aus [[Materialtypen]]</dd>
+</dl>
+
+<pre class="example xml" title="Zu dem Inhalt gibt es einen Unterrichtsverlaufsplan und ein Transkript.">
+&lt;material_type&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/material_type/mt1000 |
+  https://w3id.org/unterrichtsvideos.net/vocabs/material_type/mt1003
+&lt;/material_type&gt;
+</pre>
+
+#### &#9675; Lernformat <code>&lt;learning_format&gt;</code>
+
+Das `learning_format`-Feld kennzeichnet die vorherschende Lehr-/Lernform des Inhalts.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/instructionalMethod">dct:instructionalMethod</a>,
+    <a href="https://schema.org/interactivityType">sdo:interactivityType</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dt>Wertebereich</dt>
+  <dd>Werte aus [[Lernformate]]</dd>
+</dl>
+
+<pre class="example xml" title="Der Inhalt kann als Online (Selbstlernangebot) genutzt werden.">
+&lt;learning_format&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/learning_format/lf2
+&lt;/learning_format&gt;
+</pre>
+
+#### &#9675; Lehrplanthema <code>&lt;topic&gt;</code>
+
+Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts. 
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/subject">dct:subject</a>,
+    <a href="https://schema.org/about">sdo:about</a>
+  </dd>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dt>Wertebereich</dt>
+  <dd>Werte aus [[Lehrplanthemen]]</dd>
+</dl>
+
+<pre class="example xml" title="Der Inhalt gehört zum Thema Physik > Akustik">
+&lt;topic&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/topic/a37552ec-78c4-44f2-8564-8e84e4ca26b3
+&lt;/topic&gt;
+</pre>
+
+#### &#9675; Kameraperspektive <code>&lt;camera_perspective&gt;</code>
+
+Das `camera_perspective`-Feld beschreibt die Kameraperspektive bzw. den Point of Interest, sofern der Inhalt ein Video enthält. 
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="https://iptc.org/std/videometadatahub/userguide/#Shot-Type">XMP/EBUcore:videoShotTypes</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dt>Wertebereich</dt>
+  <dd>Werte aus [[Kameraperspektiven]]</dd>
+</dl>
+
+<pre class="example xml" title="Das Video wurde aus der Perspektive der Lehrkraft aufgenommen.">
+&lt;camera_perspective&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/camera_perspective/c01
+&lt;/camera_perspective&gt;
+</pre>
+
+<pre class="example xml" title="Der Inhalt verwendet ein 360° Unterrichtsvideo.">
+&lt;camera_perspective&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/camera_perspective/c09
+&lt;/camera_perspective&gt;
+</pre>
+
+#### &#9675; Analysefokus: Unterrichtsqualität <code>&lt;focus_instructional_quality&gt;</code>
+
+Das `focus_instructional_quality`-Feld benennt die Eignung des Inhalts für einen spezifischen Analysefokus mit Bezug zum [[MAIN-TEACH-Modell]].
+Inhalte können dabei sowohl positive Beispiele, als auch potenzielle Lerngelegenheiten beinhalten.
+Nur eine besonders prägnante Stellvertretung für den Beobachtungsschwerpunkt sollte hier erfasst werden.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/relation">dct:relation</a>,
+    <a href="https://schema.org/teaches">sdo:teaches</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )`</dd>
+  <dt>Wertebereich</dt>
+  <dd>Werte aus [[MAIN-TEACH-Modell]]</dd>
+</dl>
+
+<pre class="example xml" title="Das Unterrichtsvideo hat einen besonders prägnanten Fokus auf die Unterstützung der kognitiven Aktivierung von Lernenden.">
+&lt;focus_instructional_quality&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/3.2
+&lt;/focus_instructional_quality&gt;
+</pre>
+
+<pre class="example xml" title="Der Inhalt adressiert im Besonderen qualtiativ hochwertiges Feedback im Unterricht (z.B. als Thema/Lernziel/Lerngegenstand).">
+&lt;focus_instructional_quality&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/5.3
+&lt;/focus_instructional_quality&gt;
+</pre>
+
+
+#### &#9675; Analysefokus: Digitale Kompetenzen <code>&lt;focus_digital_competence&gt;</code>
+
+Das `focus_digital_competence`-Feld benennt die Eignung des Inhalts für einen spezifischen Analysefokus mit Bezug zum [[DigCompEduObserve]].
+Inhalte können dabei sowohl positive Beispiele, als auch potenzielle Lerngelegenheiten beinhalten.
+Nur eine besonders prägnante Stellvertretung für den Beobachtungsschwerpunkt sollte hier erfasst werden.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/relation">dct:relation</a>,
+    <a href="https://schema.org/teaches">sdo:teaches</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )`</dd>
+  <dt>Wertebereich</dt>
+  <dd>Werte aus [[DigCompEduObserve]]</dd>
+  <dd>Werte aus [[DigCompEduObserve]]</dd>
+</dl>
+
+<pre class="example xml" title="Das Unterrichtsvideo zeigt besonders prägnant selbstgesteuerte Lernprozesse mit digitalen Medien.">
+&lt;focus_digital_competence&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/digcompedu/3.4
+&lt;/focus_digital_competence&gt;
+</pre>
+
+<pre class="example xml" title="Der Inhalt adressiert im Besonderen die Vermittlung digitaler Problemlösekompetenz.">
+&lt;focus_digital_competence&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/digcompedu/6.5
+&lt;/focus_digital_competence&gt;
+</pre>
+
+
+#### &#9675; Schlagworte <code>&lt;keywords&gt;</code>
+
+Das `keywords`-Feld stellt eine Liste von Schlagworten zur Beschreibung des Inhalts dar.
+So können beispielsweise Ergänzungen zum Analysefokus angegeben werden.
+
+Es wird bei der Erfassung eine Orientierung an der Liste von Schlagwortvorschlägen empfohlen: [[Schlagwörter]]
+
+<!-- TODO: Definition: Hierarchische Schlagworte -->
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+</dl>
+
+<section class="informative">
+## Beispiel: RSS-/XML-Feed
+
+<pre class="example" title="Channel mit einem Item">
+  &#60;?xml version="1.0" encoding="UTF-8"?&#62;
+  &#60;rss version="2.0" xmlns:mvp="https://w3id.org/unterrichtsvideos.net/specs/"&#62;
+    &#60;channel&#62;
+      &#60;title&#62;&#60;![CDATA[ProVision]]&#62;&#60;/title&#62;
+      &#60;link&#62;https://www.uni-muenster.de/ProVision/&#60;/link&#62;
+      &#60;description&#62;&#60;![CDATA[ProVision | learning professional vision]]&#62;&#60;/description&#62;
+      &#60;image&#62;
+        &#60;url&#62;https://www.uni-muenster.de/ProVision/img/logo.png&#60;/url&#62;
+        &#60;title&#62;&#60;![CDATA[ProVision]]&#62;&#60;/title&#62;
+        &#60;link&#62;https://www.uni-muenster.de/ProVision/&#60;/link&#62;
+      &#60;/image&#62;
+      &#60;docs&#62;https://w3id.org/unterrichtsvideos.net/specs/version/2.0&#60;/docs&#62;
+      &#60;item&#62;
+        &#60;title&#62;&#60;![CDATA[Partnerpuzzle im Lesestrategietraining: Austausch von Steckbriefen]]&#62;&#60;/title&#62;
+        &#60;link&#62;https://www.uni-muenster.de/ProVision/video/#DEU_K5_LK2_2DS_LF_Clip5&#60;/link&#62;
+        &#60;description&#62;&#60;![CDATA[In der Vermittlungsphase des Partnerpuzzles tauschen sich die Sch&#252;lerinnen und Sch&#252;ler innerhalb der Tischgruppen &#252;ber die Inhalte der gelesenen Texte aus und vergleichen diese anhand der angefertigten Steckbriefe miteinander. Ziel ist es, dass alle Sch&#252;lerinnen und Sch&#252;ler, die sich jeweils nur mit einem der beiden Texte zu den Superhelden-Figuren auseinandergesetzt haben, am Ende &#252;ber beide Figuren gleicherma&#223;en informiert sind.]]&#62;&#60;/description&#62;
+        &#60;abstract&#62;&#60;![CDATA[Dieser Clip aus einer Unterrichtsstunde, in der die ersten drei Lesestrategien des Trainingsprogramms &#8222;Lesen(d) lernen&#8220; trainiert werden, zeigt die Austausch- bzw. Vermittlungsphase im Rahmen des Partnerpuzzles. ]]&#62;&#60;/abstract&#62;
+        &#60;id&#62;DEU_K5_LK2_2DS_LF_Clip5&#60;/id&#62;
+        &#60;resource_type&#62;https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt005 | https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt001&#60;/resource_type&#62;
+        &#60;image&#62;https://www.uni-muenster.de/imperia/md/images/ProVision/videos/02_Deutsch/fittosize_1140_641_fae1dab1f2a1f67ed848fd84ade1c892_deu_k5_lk2_2ds_lf_clip5_partnerpuzzle_ga_teaserbild.jpeg&#60;/image&#62;
+        &#60;language&#62;de&#60;/language&#62;
+        &#60;date_created&#62;2025-12-31&#60;/date_created&#62;
+        &#60;license&#62;Copyright&#60;/license&#62;
+        &#60;creator&#62;Universita&#776;t Mu&#776;nster&#60;/creator&#62;
+        &#60;pubDate&#62;Mo, 01 Dez 2025 00:00:00 GMT&#60;/pubDate&#62;
+        &#60;time_required&#62;PT2H15M30S&#60;/time_required&#62;
+        &#60;use_restrictions&#62;https://w3id.org/unterrichtsvideos.net/vocabs/audience/g6 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g3 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g1 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g4 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g7&#60;/use_restrictions&#62;
+        &#60;use_restrictions_label&#62;&#60;![CDATA[Abrufbar im Rahmen eines aktiven Kurses.]]&#62;&#60;/use_restrictions_label&#62;
+        &#60;focus_instructional_quality&#62;https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/1 | https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/4&#60;/focus_instructional_quality&#62;
+        &#60;focus_digital_competence&#62;https://w3id.org/unterrichtsvideos.net/vocabs/digcompeduobserve/2.4&#60;/focus_digital_competence&#62;
+        &#60;material_type&#62;https://w3id.org/unterrichtsvideos.net/vocabs/material_type/mt1002&#60;/material_type&#62;
+        &#60;camera_perspective&#62;https://w3id.org/unterrichtsvideos.net/vocabs/camera_perspective/c05&#60;/camera_perspective&#62;
+        &#60;learning_format&#62;https://w3id.org/unterrichtsvideos.net/vocabs/learning_format/lf2&#60;/learning_format&#62;
+        &#60;school_type&#62;https://w3id.org/unterrichtsvideos.net/vocabs/school_type/st04&#60;/school_type&#62;
+        &#60;grade&#62;https://w3id.org/unterrichtsvideos.net/vocabs/grade/7&#60;/grade&#62;
+        &#60;subject&#62;https://w3id.org/unterrichtsvideos.net/vocabs/subject/s1005&#60;/subject&#62;
+        &#60;topic&#62;https://w3id.org/unterrichtsvideos.net/vocabs/topic/81dbdf0e-c20d-481e-a0f9-ebbbb0abc2bd&#60;/topic&#62;
+        &#60;keywords&#62;Binnendifferenzierung | Lernstrategien&#60;/keywords&#62;
+      &#60;/item&#62;
+    &#60;/channel&#62;
+  &#60;/rss&#62;
+</pre>
+</section>
+
+<section id="glossary" class="appendix">
+  ## Glossar
+
+  <dl>
+    <dt><abbr title="Extensible Markup Language">XML</abbr></dt>
+    <dd>Extensible Markup Language</dd>
+    <dt><abbr title="XML Schema Definition">XSD</abbr></dt>
+    <dd>XML Schema Definition</dd>
+    <dt><abbr title="Uniform Resource Identifier">URI</abbr></dt>
+    <dd>Uniform Resource Identifier</dd>
+    <dt><abbr title="Uniform Resource Locator">URL</abbr>, <abbr title="Uniform Resource Locators">URLs</abbr></dt>
+    <dd>Uniform Resource Locator</dd>
+    <dt><abbr title="Character Data">CDATA</abbr></dt>
+    <dd>Character Data (in <abbr title="Extensible Markup Language">XML</abbr>, ein Bereich, in dem Zeichen nicht als Markup interpretiert werden)</dd>
+    <dt><abbr title="Multipurpose Internet Mail Extensions">MIME</abbr></dt>
+    <dd>Multipurpose Internet Mail Extensions</dd>
+    <dt><abbr title="International Organization for Standardization">ISO</abbr></dt>
+    <dd>International Organization for Standardization</dd>
+    <dt><abbr title="Gemeinsame Normdatei">GND</abbr></dt>
+    <dd>Gemeinsame Normdatei</dd>
+    <dt><abbr title="Research Organization Registry">ROR</abbr></dt>
+    <dd>Research Organization Registry</dd>
+    <dt><abbr title="Open Researcher and Contributor ID">ORCID</abbr></dt>
+    <dd>Open Researcher and Contributor ID</dd>
+    <dt><abbr title="Extensible Metadata Platform">XMP</abbr></dt>
+    <dd>Extensible Metadata Platform</dd>
+    <dt><abbr title="EBU Core Metadata Set">EBUcore</abbr></dt>
+    <dd>EBU Core Metadata Set (Metadatenstandard der European Broadcasting Union)</dd>
+    <dt><abbr title="Really Simple Syndication">RSS</abbr></dt>
+    <dd>Really Simple Syndication (Web-Feed-Format)</dd>
+    <dt><abbr title="Freie Wissensdatenbank, die strukturierte Daten bereitstellt">WIKIDATA</abbr></dt>
+    <dd>Freie Wissensdatenbank, die strukturierte Daten bereitstellt</dd>
+  </dl>
+</section>
+
+<!-- Hypothesis for draft specifications -->
+<script>
+  if (window.location.pathname.includes('/draft/')) {
+    var s = document.createElement('script');
+    s.src = 'https://hypothes.is/embed.js';
+    s.async = true;
+    document.body.appendChild(s);
+  }
+</script>
+
+</body>
