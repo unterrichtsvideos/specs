@@ -1,1 +1,3 @@
-# specs
+# Metadata specifications
+
+Current state: old draft
