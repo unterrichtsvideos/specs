@@ -3,50 +3,60 @@
 <head>
     <meta charset='utf-8'>
     <title>XML-Feed Spezifikationen – Anwendungsprofil für das Meta-Videoportal unterrichtsvideos.net</title>
-    <script src='https://www.w3.org/Tools/respec/respec-w3c' class='remove' defer></script>
+    <script src='https://speced.github.io/respec/builds/respec-dini.js' aync class='remove'></script>
     <script class='remove'>
         var respecConfig = {
-            shortName: "unterrichtsvideos/metaportalSpecs",
+            shortName: "unterrichtsvideos.net/specs",
             editors: [{
                 name: "Manuel Oellers",
-                company: "WWU Münster",
+                company: "Universität Münster",
                 companyURL: "https://www.uni-muenster.de/"
             }],
             format: "markdown",
             localBiblio: {
               "Art des Videos": {
                 title: "Art des Videos",
-                href: "https://unterrichtsvideos.github.io/vocabs/w3id.org/unterrichtsvideos.net/vocabs/videoTypes/index.de.html",
+                href: "https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/",
                 publisher: "unterrichtsvideos.net",
               },
               "Jahrgangsstufe": {
                 title: "Jahrgangsstufe",
-                href: "https://unterrichtsvideos.github.io/vocabs/w3id.org/unterrichtsvideos.net/vocabs/grade/index.de.html",
+                href: "https://w3id.org/unterrichtsvideos.net/vocabs/grade/",
                 publisher: "unterrichtsvideos.net",
               },
               "Schularten": {
                 title: "Schularten",
-                href: "https://unterrichtsvideos.github.io/vocabs/w3id.org/unterrichtsvideos.net/vocabs/schooltype/index.de.html",
+                href: "https://w3id.org/unterrichtsvideos.net/vocabs/school_type/",
                 publisher: "unterrichtsvideos.net",
               },
               "Schulfächer": {
                 title: "Schulfächer",
-                href: "https://unterrichtsvideos.github.io/vocabs/w3id.org/unterrichtsvideos.net/vocabs/subject/index.de.html",
+                href: "https://w3id.org/unterrichtsvideos.net/vocabs/subject/",
+                publisher: "unterrichtsvideos.net",
+              },
+              "Kameraperspektiven": {
+                title: "Kameraperspektiven",
+                href: "https://w3id.org/unterrichtsvideos.net/vocabs/camera_perspective/",
+                publisher: "unterrichtsvideos.net",
+              },
+              "Unterrichtsaktivitäten": {
+                title: "Unterrichtsaktivitäten",
+                href: "https://w3id.org/unterrichtsvideos.net/vocabs/lecture_activity/",
                 publisher: "unterrichtsvideos.net",
               },
               "Bildungsstufe": {
                 title: "Bildungsstufe",
-                href: "https://w3id.org/kim/educationalLevel/",
+                href: "https://w3id.org/unterrichtsvideos.net/vocabs/educational_level/",
                 publisher: "KIM & unterrichtsvideos.net",
               },
               "Materialtypen": {
                 title: "Materialtypen",
-                href: "https://unterrichtsvideos.github.io/vocabs/w3id.org/unterrichtsvideos.net/vocabs/materialTypes/index.de.html",
+                href: "https://w3id.org/unterrichtsvideos.net/vocabs/material_type/",
                 publisher: "unterrichtsvideos.net",
               },
               "Lehrplanthemen": {
                 title: "Lehrplanthemen",
-                href: "https://vocabs.openeduhub.de/w3id.org/openeduhub/vocabs/oeh-topics/5e40e372-735c-4b17-bbf7-e827a5702b57.html",
+                href: "https://w3id.org/openeduhub/vocabs/oeh-topics/5e40e372-735c-4b17-bbf7-e827a5702b57",
                 publisher: "unterrichtsvideos.net",
               },
               "BCP47": {
@@ -76,28 +86,19 @@
                 key: "Links zur Spezifikation",
                 data: [{
                     value: "Aktuellste Version",
-                    href: "/xx/latest/#"
+                    href: "https://w3id.org/unterrichtsvideos.net/specs/latest/"
                 },
                 {
                     value: "Aktuellster Draft",
-                    href: "/xx/draft/#"
+                    href: "https://w3id.org/unterrichtsvideos.net/specs/draft/"
                 }]
-            }, {
-                key: "Mitmachen",
-                data: [{
-                    value: "GitHub-Repository",
-                    href: "/xx/#"
-                },
-                ]
             }],
             publishDate: "", // Veröffentlichungsdatum der Spezifikation im ISO 8601-Format (YYYY-MM-DD). Bei Entwürfen leer lassen!
             specStatus: "unofficial"
         };
     </script>
 </head>
-
 <body>
-
 <section id="abstract">
 ## Zusammenfassung
 Das Dokument stellt ein **Anwendungsprofil** für XML-Feeds im Kontext des Meta-Videoportal [unterrichtsvideos.net](https://unterrichtsvideos.net/metaportal/) dar und ist angelehnt an die Spezifikationen von [[RSS 2.0]] und [[XML 1.1]] zur Strukturierung des Datenaustauschs. Der Feed dient dem Austausch von Metadaten zwischen den Portalen/Anbietern (wie beispielsweise den Videoportal [ProVision](https://www.uni-muenster.de/ProVision/)) und dem Meta-Videoportal unterrichtsvideos.net.
@@ -133,13 +134,13 @@ Das Dokument stellt ein **Anwendungsprofil** für XML-Feeds im Kontext des Meta-
 
 <pre class="example" title="Grundstruktur des XML-Feeds">
   &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-  &lt;rss xmlns:videos=&quot;https://unterrichtsvideos.net/rss/videos&quot; version=&quot;2.0&quot;&gt;
+  &lt;rss xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot; version=&quot;2.0&quot;&gt;
   &lt;!-- Metadaten zum Anbieter und den Inhalten gemäß Anwendungsprofil --&gt;
   &lt;/rss&gt;
 </pre>
 </section>
 
-## Metadaten des Anbieters &lt;channel&gt;
+## Metadaten des Anbieters <code>&lt;channel&gt;</code>
 
 Das `channel`-Element im XML-Feed definiert allgemeine Informationen über den Anbieter der Metadaten, z. B. eines Portals.
 
@@ -155,7 +156,7 @@ Das `channel`-Element im XML-Feed definiert allgemeine Informationen über den A
 
 <pre class="example" title="Grundstruktur des XML-Feeds">
   &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-  &lt;rss xmlns:videos=&quot;https://unterrichtsvideos.net/rss/videos&quot; version=&quot;2.0&quot;&gt;
+  &lt;rss xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot; version=&quot;2.0&quot;&gt;
   &lt;channel&gt;
     &lt;!-- Metadaten zum Anbieter gemäß Anwendungsprofil [...] --&gt;
   &lt;/channel&gt;
@@ -163,7 +164,7 @@ Das `channel`-Element im XML-Feed definiert allgemeine Informationen über den A
   &lt;/rss&gt;
 </pre>
 
-### Titel &lt;title&gt;
+### Titel <code>&lt;title&gt;</code>
 
 Das `title`-Feld definiert den Titel des Anbieters. Der Titel wird dabei gemäß [[XML 1.1]] als CDATA-Sektion übermittelt.
 
@@ -178,7 +179,7 @@ Das `title`-Feld definiert den Titel des Anbieters. Der Titel wird dabei gemäß
   &lt;![CDATA[Videoportal ProVision der WWU Münster]]&gt;
 </pre>
 
-### Link &lt;link&gt;
+### Link <code>&lt;link&gt;</code>
 
 Das `link`-Feld definiert die absolute URL des Anbieters.
 
@@ -189,7 +190,7 @@ Das `link`-Feld definiert die absolute URL des Anbieters.
   <dd>`string` (URL), Schema: http(s) [[RFC3986]]</dd>
 </dl>
 
-### Beschreibung &lt;description&gt;
+### Beschreibung <code>&lt;description&gt;</code>
 
 Das `description`-Feld dient der Beschreibung des Anbieters. Die Beschreibung wird dabei gemäß [[XML 1.1]] als CDATA-Sektion übermittelt.
 <dl>
@@ -203,7 +204,7 @@ Das `description`-Feld dient der Beschreibung des Anbieters. Die Beschreibung wi
   &lt;![CDATA[Videoportal ProVision der WWU Münster]]&gt;
 </pre>
 
-### Sprache &lt;language&gt;
+### Sprache <code>&lt;language&gt;</code>
 
 Das `language`-Feld gibt die Hauptsprache des Anbieters an.
 
@@ -220,7 +221,7 @@ Das `language`-Feld gibt die Hauptsprache des Anbieters an.
 de-de
 ```
 
-### Copyright  &lt;copyright&gt;
+### Copyright <code>&lt;copyright&gt;</code>
 
 Das `copyright`-Feld beschreibt die Informationen zum Copyright.
 
@@ -235,7 +236,7 @@ Das `copyright`-Feld beschreibt die Informationen zum Copyright.
 Copyright 2018 ProVision
 ```
 
-### Veröffentlichungsdatum &lt;pubDate&gt;
+### Veröffentlichungsdatum <code>&lt;pubDate&gt;</code>
 
 Das `pubDate`-Feld gibt das Datum der ersten Veröffentlichung des Feeds an.
 
@@ -250,7 +251,7 @@ Das `pubDate`-Feld gibt das Datum der ersten Veröffentlichung des Feeds an.
 Wed, 26 Sep 2018 10:34:44 +0200
 ```
 
-### Änderungsdatum &lt;lastBuildDate&gt;
+### Änderungsdatum <code>&lt;lastBuildDate&gt;</code>
 
 Das `lastBuildDate`-Feld gibt das Datum der letzten Änderung/Modifikation des Feeds an.
 
@@ -265,7 +266,7 @@ Das `lastBuildDate`-Feld gibt das Datum der letzten Änderung/Modifikation des F
 Thu, 29 Sep 2022 10:15:45 +0200
 ```
 
-### Logo &lt;image&gt;
+### Logo <code>&lt;image&gt;</code>
 
 Das `image`-Feld definiert das Logo des Anbieters mit den benötigten [[RSS 2.0]]-Elementen:
 - `link` (URL), Schema: http(s) [[RFC3986]]
@@ -289,7 +290,7 @@ Das `image`-Feld definiert das Logo des Anbieters mit den benötigten [[RSS 2.0]
   &lt;/image&gt;
 </pre>
 
-### Version &lt;docs&gt;
+### Version <code>&lt;docs&gt;</code>
 
 Das `docs`-Feld gibt die verwendete Version der XML-Feed Spezifikationen des Meta-Videoportal unterrichtsvideos.net als URI an.
 
@@ -306,7 +307,7 @@ Das `docs`-Feld gibt die verwendete Version der XML-Feed Spezifikationen des Met
   https://unterrichtsvideos.net/specs/1.1
 </pre>
 
-## Metadaten des Inhalts &lt;item&gt;
+## Metadaten des Inhalts <code>&lt;item&gt;</code>
 
 Jeder Inhalt (z. B. Video) wird durch ein eindeutiges `item`-Element repräsentiert.
 
@@ -329,7 +330,7 @@ Jeder Inhalt (z. B. Video) wird durch ein eindeutiges `item`-Element repräsenti
   &lt;/rss&gt;
 </pre>
 
-### Titel &lt;title&gt;
+### Titel <code>&lt;title&gt;</code>
 
 Das `title`-Feld gibt den Titel des Inhalts (z. B. Videotitel) an.
 
@@ -346,7 +347,7 @@ Das `title`-Feld gibt den Titel des Inhalts (z. B. Videotitel) an.
   &lt;![CDATA[Satz des Pythagoras – 3. Doppelstunde]]&gt;
 </pre>
 
-### Link &lt;link&gt;
+### Link <code>&lt;link&gt;</code>
 
 Das `link`-Feld definiert die URL zum Inhalt beim Anbieter.
 
@@ -357,7 +358,7 @@ Das `link`-Feld definiert die URL zum Inhalt beim Anbieter.
   <dd>`string` (URL), Schema: http(s) [[RFC3986]]</dd>
 </dl>
 
-### Beschreibung &lt;description&gt;
+### Beschreibung <code>&lt;description&gt;</code>
 
 Das `description`-Feld im `description`-Element dient zur Angabe einer Kurzbeschreibung des Inhalts.
 
@@ -374,7 +375,7 @@ Das `description`-Feld im `description`-Element dient zur Angabe einer Kurzbesch
   &lt;![CDATA[In dieser Doppelstunde wird eine Unterrichtsreihe zum Thema...]]&gt;
 </pre>
 
-### Sprache &lt;language&gt;
+### Sprache <code>&lt;language&gt;</code>
 
 Das `language`-Feld definiert die Hauptsprache des Inhalts.
 
@@ -391,7 +392,7 @@ Das `language`-Feld definiert die Hauptsprache des Inhalts.
 de-de
 ```
 
-### Urheberrecht &lt;copyright&gt;
+### Urheberrecht <code>&lt;copyright&gt;</code>
 
 Das `copyright`-Feld gibt die Urheberrechtsangaben des einzelnen Inhalts an.
 
@@ -406,7 +407,7 @@ Das `copyright`-Feld gibt die Urheberrechtsangaben des einzelnen Inhalts an.
 Studiumdigitale, GU Frankfurt
 ```
 
-### Veröffentlichungsdatum &lt;pubDate&gt;
+### Veröffentlichungsdatum <code>&lt;pubDate&gt;</code>
 
 Das `pubDate`-Feld gibt das Datum der ersten Veröffentlichung an.
 <dl>
@@ -420,7 +421,7 @@ Das `pubDate`-Feld gibt das Datum der ersten Veröffentlichung an.
 Wed, 26 Sep 2018 10:34:44 +0200
 ```
 
-### Änderungsdatum &lt;lastBuildDate&gt;
+### Änderungsdatum <code>&lt;lastBuildDate&gt;</code>
 
 Das `lastBuildDate`-Feld gibt das Datum der letzten Änderung/Modifikation des Inhalts an.
 
@@ -435,7 +436,7 @@ Das `lastBuildDate`-Feld gibt das Datum der letzten Änderung/Modifikation des I
 Wed, 26 Sep 2018 10:34:44 +0200
 ```
 
-### Identifier &lt;id&gt;
+### Identifier <code>&lt;id&gt;</code>
 
 Das `id`-Feld ist der permanente und eindeutige Kennung des Inhalts, z. B. Videos.
 
@@ -456,7 +457,7 @@ Das `id`-Feld ist der permanente und eindeutige Kennung des Inhalts, z. B. Video
 - DARF folgende (Sonder-)Zeichen enthalten: `- . _`
 </div>
 
-### hat Teile &lt;hasPart&gt;
+### hat Teile <code>&lt;hasPart&gt;</code>
 
 Das `hasPart`-Feld definiert die Zugehörigkeit von Teilen zum {Inhalt} und ist invers zu [[[#ist-teil-ispartof]]]. Die Reihenfolge der Werte ist bedeutsam.
 
@@ -469,7 +470,7 @@ Das `hasPart`-Feld definiert die Zugehörigkeit von Teilen zum {Inhalt} und ist 
  <dd>Jeder Wert MUSS einem [[[#identifier-id]]] desselben XML-Feeds entsprechen.</dd>
 </dl>
 
-### ist Teil &lt;isPartOf&gt;
+### ist Teil <code>&lt;isPartOf&gt;</code>
 
 Das `isPartOf`-Feld definiert die Zugehörigkeit von Teilen zu einem oder mehreren Inhalten und ist invers zu *hasPart*. Die Reihenfolge der Werte ist bedeutsam.
 
@@ -503,7 +504,7 @@ Das `isPartOf`-Feld definiert die Zugehörigkeit von Teilen zu einem oder mehrer
  <dd>Jeder Wert MUSS einem [[[#identifier-id]]] desselben XML-Feeds entsprechen.</dd>
 </dl>
 
-### Teaser  &lt;teaser&gt;
+### Teaser  <code>&lt;teaser&gt;</code>
 
 Das `teaser`-Feld dient der kurzen Teaser-Beschreibung des Inhalts.
 
@@ -520,7 +521,7 @@ Das `teaser`-Feld dient der kurzen Teaser-Beschreibung des Inhalts.
   &lt;![CDATA[Dieser Clip enthält XY...]]&gt;
 </pre>
 
-### Vorschaubild &lt;image&gt;
+### Vorschaubild <code>&lt;image&gt;</code>
 
 Das `image`-Feld enthält die URL zu einem Vorschaubild des Videos;
 
@@ -540,7 +541,7 @@ Das `image`-Feld enthält die URL zu einem Vorschaubild des Videos;
 https://www.uni-muenster.de/ProVision/teaserbild.jpg
 ```
 
-### Dauer &lt;duration&gt;
+### Dauer <code>&lt;duration&gt;</code>
 
 Das `duration`-Feld gibt die (Beschäftigungs-)Dauer des Inhalts an, z. B. die Länge des Videos.
 
@@ -555,7 +556,7 @@ Das `duration`-Feld gibt die (Beschäftigungs-)Dauer des Inhalts an, z. B. die L
 01:12:23
 ```
 
-### Auflösung &lt;resolution&gt;
+### Auflösung <code>&lt;resolution&gt;</code>
 
 Das `resolution`-Feld definiert die Auflösung (z. B. des Videos) in Pixeln.
 
@@ -570,7 +571,7 @@ Das `resolution`-Feld definiert die Auflösung (z. B. des Videos) in Pixeln.
 1920x1080
 ```
 
-### Nutzungsbeschränkung &lt;use_restrictions&gt;
+### Nutzungsbeschränkung <code>&lt;use_restrictions&gt;</code>
 
 Das `use_restrictions`-Feld defniert die Einschränkungen bei Benutzung (siehe [[[#useRestrictionsTabelle]]]). Die Werte müssen mit einem vertikalen Strich getrennt werden: `Wert | Wert`.
 
@@ -581,7 +582,7 @@ Das `use_restrictions`-Feld defniert die Einschränkungen bei Benutzung (siehe [
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
 </dl>
 
-### Nutzungsbeschränkung (Beschreibung) &lt;use_restrictions_label&gt;
+### Nutzungsbeschränkung (Beschreibung) <code>&lt;use_restrictions_label&gt;</code>
 
 Das `use_restrictions_label`-Feld definiert mögliche Einschränkungen bei der Benutzung.
 
@@ -596,7 +597,7 @@ Das `use_restrictions_label`-Feld definiert mögliche Einschränkungen bei der B
   &lt;![CDATA[abrufbar nur für Studierende der LMU München]]&gt;
 </pre>
 
-### Analysefokus &lt;focus_of_analysis&gt;
+### Analysefokus <code>&lt;focus_of_analysis&gt;</code>
 
 Das `focus_of_analysis`-Feld benennt die vorgeschlagenen Analysefokusse. Die Werte müssen mit einem vertikalen Strich getrennt werden: `Wert | Wert`.
 
@@ -609,7 +610,7 @@ Das `focus_of_analysis`-Feld benennt die vorgeschlagenen Analysefokusse. Die Wer
   <dd>{TODO: in Vorbereitung}</dd>
 </dl>
 
-### Material &lt;materials&gt;
+### Material <code>&lt;materials&gt;</code>
 
 Das `materials`-Feld gibt eine Liste mit mit verfügbaren Materialien zu einem spezifischen Inhalt an.
 
@@ -622,7 +623,7 @@ Das `materials`-Feld gibt eine Liste mit mit verfügbaren Materialien zu einem s
   <dd>Werte aus [[Materialtypen]] (Mehrfachwerte, getrennt mit | )</dd>
 </dl>
 
-### Kameraperspektive &lt;camera_perspective&gt;
+### Kameraperspektive <code>&lt;camera_perspective&gt;</code>
 
 Das `camera_perspective`-Feld beschreibt die Kameraperspektive des Videos bzw. den POV.
 
@@ -632,10 +633,10 @@ Das `camera_perspective`-Feld beschreibt die Kameraperspektive des Videos bzw. d
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
-  <dd>{TODO: in Vorbereitung}</dd>
+  <dd>Werte aus [[Kameraperspektiven]] (Mehrfachwerte, getrennt mit | )</dd>
 </dl>
 
-### Unterrichtsaktivität &lt;lecture_activity&gt;
+### Unterrichtsaktivität <code>&lt;lecture_activity&gt;</code>
 
 Das `lecture_activities`-Feld benennt eine Liste von Unterrichtsaktivitäten, die beobachtet werden können.
 
@@ -645,10 +646,10 @@ Das `lecture_activities`-Feld benennt eine Liste von Unterrichtsaktivitäten, di
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
-  <dd>{TODO: in Vorbereitung}</dd>
+  <dd>Werte aus [[Unterrichtsaktivitäten]] (Mehrfachwerte, getrennt mit | )</dd>
 </dl>
 
-### Unterrichtsphase &lt;lecture_phase&gt;
+### Unterrichtsphase <code>&lt;lecture_phase&gt;</code>
 
 Das `lecture_phases`-Feld definiert eine Liste der Unterrichtsphasen, die beobachtet werden können.
 
@@ -661,7 +662,7 @@ Das `lecture_phases`-Feld definiert eine Liste der Unterrichtsphasen, die beobac
   <dd>{TODO: in Vorbereitung}</dd>
 </dl>
 
-### Thema &lt;about&gt;
+### Thema <code>&lt;about&gt;</code>
 
 Das `about`-Feld beschreibt das (Lehrplan-)Thema der Inhalte.
 
@@ -674,7 +675,7 @@ Das `about`-Feld beschreibt das (Lehrplan-)Thema der Inhalte.
   <dd>Werte aus [[Lehrplanthemen]] (Mehrfachwerte, getrennt mit | )</dd>
 </dl>
 
-### Typisierung  &lt;type&gt;
+### Typisierung  <code>&lt;type&gt;</code>
 
 Das `type`-Feld beschreibt die Art des Inhalts.
 
@@ -688,7 +689,7 @@ Das `type`-Feld beschreibt die Art des Inhalts.
   <dd>Werte aus [[Materialtypen]] (Mehrfachwerte, getrennt mit | )</dd>
 </dl>
 
-### Schulart &lt;school_type&gt;
+### Schulart <code>&lt;school_type&gt;</code>
 
 Das `school_type`-Feld beschreibt die Schulart.
 
@@ -701,7 +702,7 @@ Das `school_type`-Feld beschreibt die Schulart.
   <dd>Werte aus [[Schularten]]</dd>
 </dl>
 
-### Jahrgangsstufe &lt;grade&gt;
+### Jahrgangsstufe <code>&lt;grade&gt;</code>
 
 Das `grade`-Feld beschreibt die Jahrgangsstufe.
 
@@ -714,7 +715,7 @@ Das `grade`-Feld beschreibt die Jahrgangsstufe.
   <dd>Werte aus [[Jahrgangsstufe]]</dd>
 </dl>
 
-### Bildungsstufe &lt;educational_level&gt;
+### Bildungsstufe <code>&lt;educational_level&gt;</code>
 
 Das `educational_level`-Feld beschreibt die Bildungsstufe.
 
@@ -727,7 +728,7 @@ Das `educational_level`-Feld beschreibt die Bildungsstufe.
   <dd>Werte aus [[Bildungsstufe]]</dd>
 </dl>
 
-### Erstelldatum &lt;dateCreated&gt;
+### Erstelldatum <code>&lt;dateCreated&gt;</code>
 
 Das `dateCreated`-Feld beschreibt das Datum der Erstellung des Inhalts.
 
@@ -745,7 +746,7 @@ Das `dateCreated`-Feld beschreibt das Datum der Erstellung des Inhalts.
   <dd>JJJJ(-MM(-TT)) [[ISO8601]]</dd>
 </dl>
 
-### Schulfach &lt;subject&gt;
+### Schulfach <code>&lt;subject&gt;</code>
 
 Das `subject`-Feld definiert das Schulfach.
 
@@ -770,7 +771,7 @@ Mathematik
 
 <div class="note"><p>Wenn es mehr als ein Fach zutreffend ist, werden diese aufgelistet, aber ebenfalls "Fachübergreifender Unterricht". Es muss der Term aus dem geschlossenen Vokabular genommen werden, der das Fach am besten beschreibt.</p><p>Freiarbeit = "Sonstiges"; Energie und Umwelt (Maschinenbau) = "Berufliche Fachrichtungen"; Naturwissenschaften = "Fachübergreifender Unterricht"</p></div>
 
-### Schlagworte &lt;keywords&gt;
+### Schlagworte <code>&lt;keywords&gt;</code>
 
 Das `keywords`-Feld stellt eine Liste von Schlagworten zur Beschreibung des Inhalts dar.
 
@@ -781,7 +782,7 @@ Das `keywords`-Feld stellt eine Liste von Schlagworten zur Beschreibung des Inha
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
 </dl>
 
-### Literatur &lt;references&gt;
+### Literatur <code>&lt;references&gt;</code>
 
 Das `references`-Feld benennt die Referenzen (BibTex Markup)
 
@@ -942,7 +943,7 @@ use_restrictions = G1:1 | G2:2 | G6:3
 
 <pre class="example" title="Channel mit zwei Items">
   &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-  &lt;rss xmlns:videos="https://unterrichtsvideos.net/specs/items/video" version="2.0"&gt;
+  &lt;rss xmlns:mvp="https://w3id.org/unterrichtsvideos.net/specs/" version="2.0"&gt;
     &lt;channel&gt;
       &lt;title&gt;Videos | Videoportal ProVision der WWU Münster | learning professional vision&lt;/title&gt;
       &lt;link&gt;https://www.uni-muenster.de/ProVision/video/&lt;/link&gt;
