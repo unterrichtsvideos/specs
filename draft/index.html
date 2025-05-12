@@ -52,12 +52,12 @@
 			"ROR": {
 			title: "Research Organization Registry",
 			href: "https://ror.org/",
-			publisher: "",
+			publisher: "ROR",
 			},
 			"GND": {
 			title: "Gemeinsame Normdatei",
 			href: "https://www.dnb.de/DE/Home/home_node.html",
-			publisher: "",
+			publisher: "GND",
 			},
 			"ORCID": {
 			title: "Open Researcher and Contributor ID",
@@ -76,7 +76,7 @@
 			},
 			"DigCompEduObserve": {
 			title: "DigCompEduObserve ",
-			href: "https://epub.ub.uni-muenchen.de/115621/1/TechnicalReportDigCompEduObserveVersion1_0_20240418.pdf",
+			href: "https://w3id.org/unterrichtsvideos.net/vocabs/digcompeduobserve/", // https://epub.ub.uni-muenchen.de/115621/1/TechnicalReportDigCompEduObserveVersion1_0_20240418.pdf
 			publisher: "Oezsoy, M.; Murbök, J.; Schultz-Pernice, F.; Gräsel, C.; Sailer, M. & Fischer, F. (2024)",
 			},
 			"Jahrgangsstufen": {
@@ -260,13 +260,13 @@ Das `description`-Feld dient der Beschreibung des Anbieters. Die Beschreibung wi
 
 ### Sprache <code>&lt;language&gt;</code>
 
-Das `language`-Feld gibt die Hauptsprache des Anbieters an.
+Das `language`-Feld kennzeichnet die verfügbaren Sprachen des Anbieters an.
 
 <dl>
   <dt>Pflichtfeld</dt>
   <dd>nein</dd>
   <dt>Typ</dt>
-  <dd>`string`</dd>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
   <dd>[[RFC5646]]</dd>
 </dl>
@@ -358,7 +358,7 @@ Das `docs`-Feld gibt die verwendete Version der XML-Feed Spezifikationen des Met
 </dl>
 
 <pre class="example" title="Wertebeispiel">
-  https://unterrichtsvideos.net/specs/1.1
+  https://unterrichtsvideos.net/specs/2.0
 </pre>
 
 ## Metadaten des Inhalts <code>&lt;item&gt;</code>
@@ -386,9 +386,9 @@ Jeder Inhalt (z. B. Video) wird durch ein eindeutiges `item`-Element repräsenti
 
 ### Titel <code>&lt;title&gt;</code>
 
-Das `title`-Feld gibt den Titel des Inhalts (z. B. Videotitel) an.
+Das `title`-Feld gibt den Titel des Inhalts an (z. B. Videotitel).
 
-- Der Titel SOLL eine Länge von zwischen 1 und 150 Zeichen aufweisen.
+- Der Titel SOLL eine Länge zwischen 1 und 150 Zeichen aufweisen.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -431,7 +431,7 @@ Das `description`-Feld im `description`-Element dient zur Angabe einer Kurzbesch
 
 ### Sprache <code>&lt;language&gt;</code>
 
-Das `language`-Feld definiert die Hauptsprache des Inhalts.
+Das `language`-Feld kennzeichnet die verfügbaren Sprachen des Inhalts.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -462,7 +462,9 @@ Das `license`-Feld gibt Auskunft über die vorliegende Lizenz zur Nutzung und Ve
 
 ### Erstellung <code>&lt;creator&gt;</code>
 
-Im `creator`-Feld kann eine Organisation oder eine Einzelperson angegeben werden, die bei der Erstellung des Items beteilgt war. Empfohlen wird dabei die Angabe eines Wertes nach folgender Präferenz: 
+Im `creator`-Feld kann eine Organisation oder eine Einzelperson angegeben werden, die bei der Erstellung des Items beteilgt war. 
+
+Empfohlen wird dabei die Angabe eines Wertes nach folgender Präferenz: 
 Personen: GND, ORCID, WIKIDATA
 Organisationen: GND, ROR, WIKIDATA
 
@@ -516,7 +518,7 @@ Das `id`-Feld ist der permanente und eindeutige Kennung des Inhalts, z. B. Video
 
 ### hat Teile <code>&lt;hasPart&gt;</code>
 
-Das `hasPart`-Feld definiert die Zugehörigkeit von Items untereinander und ist invers zu [[[#ist-teil-ispartof]]]. Die Reihenfolge der Werte ist bedeutsam. Die Zuordnung der Ressourcen erfolgt hierarchisch zwischen isPartOf (Ebene 1) und hasPart (Ebene 2). Items der jeweils anderen Kategorie eines #Ressourcentyp-resource_type (Unterrichtsvideos vs. Bildungsangebot) werden immer nach dem Schema Unterrichtsvideo [[[#ist-teil-ispartof]]] Bildungsangebot zugeordnet, sofern eine Zugehörigkeit zwischen den Ressourcen besteht.
+Das `hasPart`-Feld definiert die Zugehörigkeit von Ressourcen untereinander und ist invers zu [[[#ist-teil-ispartof]]]. Die Reihenfolge der Werte ist bedeutsam. Die Zuordnung der Ressourcen erfolgt hierarchisch zwischen isPartOf (Ebene 1) und hasPart (Ebene 2). Ressourcen der jeweils anderen Kategorie eines #Ressourcentyp-resource_type (Unterrichtsvideos vs. Bildungsangebot) werden nach dem Schema Unterrichtsvideo [[[#ist-teil-ispartof]]] Bildungsangebot zugeordnet, sofern eine Zugehörigkeit zwischen den Ressourcen besteht.
 
 <dl>
  <dt>Pflichtfeld</dt>
@@ -529,7 +531,7 @@ Das `hasPart`-Feld definiert die Zugehörigkeit von Items untereinander und ist 
 
 ### ist Teil <code>&lt;isPartOf&gt;</code>
 
-Das `isPartOf`-Feld definiert die Zugehörigkeit von Items untereinander und ist invers zu [[[#hat-teile-haspart]]]. Die Reihenfolge der Werte ist bedeutsam. Ressourcen der jeweils anderen Kategorie eines [[[#ressourcentyp-resource_type]]]  (Unterrichtsvideos vs. Bildungsangebot) werden immer nach dem Schema Unterrichtsvideo [[[#ist-teil-ispartof]]] Bildungsangebot zugeordnet, sofern eine Zugehörigkeit zwischen den Items besteht.
+Das `isPartOf`-Feld definiert die Zugehörigkeit von Ressourcen untereinander und ist invers zu [[[#hat-teile-haspart]]]. Die Reihenfolge der Werte ist bedeutsam. Ressourcen der jeweils anderen Kategorie eines [[[#ressourcentyp-resource_type]]]  (Unterrichtsvideos vs. Bildungsangebot) werden nach dem Schema Unterrichtsvideo [[[#ist-teil-ispartof]]] Bildungsangebot zugeordnet, sofern eine Zugehörigkeit zwischen den Ressourcen besteht.
 
 - KANN als assoziative Relation genutzt werden, z. B. {Inhalt} ist Teil einer Reihe/Serie, bestehend aus 1..n {Inhalten}.
   - Beispiel: Videos sind Teil einer Videoreihe und besitzen ggf. Vorgänger und/oder Nachfolger, somit gilt:
@@ -563,7 +565,7 @@ Das `isPartOf`-Feld definiert die Zugehörigkeit von Items untereinander und ist
 
 ### Abstract  <code>&lt;abstract&gt;</code>
 
-Das `abstract`-Feld dient der kurzen Teaser-Beschreibung des Inhalts.
+Das `abstract`-Feld dient der Kurzbeschreibung des Inhalts.
 
 - Das Abstract SOLL maximal bis zu 300 Zeichen enthalten
 
@@ -704,19 +706,6 @@ Das `camera_perspective`-Feld beschreibt die Perspektive der Kamera bzw. den Poi
   <dd>Werte aus [[Kameraperspektiven]]</dd>
 </dl>
 
-### Granularitätn <code>&lt;granularity&gt;</code>
-
-Das `granularity`-Feld beschreibt die Aggregierung eine Items. 
-
-<dl>
-  <dt>Pflichtfeld</dt>
-  <dd>ja</dd>
-  <dt>Typ</dt>
-  <dd>`string`</dd>
-  <dt>Wertebereich</dt>
-  <dd>Werte aus [[Granularität]]</dd>
-</dl>
-
 ### Lernformat <code>&lt;learning_format&gt;</code>
 
 Das `learning_format`-Feld kennzeichnet die vorherschende Lehr-/Lernform des Items
@@ -758,7 +747,7 @@ Das `grade`-Feld beschreibt die Jahrgangsstufe.
 
 ### Bildungsstufe <code>&lt;educational_level&gt;</code>
 
-Das `educational_level`-Feld beschreibt die Bildungsstufe.
+Das `educational_level`-Feld beschreibt die Bildungsstufe der Lernenden.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -769,9 +758,9 @@ Das `educational_level`-Feld beschreibt die Bildungsstufe.
   <dd>Werte aus [[Bildungsstufen]]</dd>
 </dl>
 
-### Erstelldatum <code>&lt;dateCreated&gt;</code>
+### Erstelldatum <code>&lt;date_created&gt;</code>
 
-Das `dateCreated`-Feld beschreibt das Datum der Erstellung des Inhalts.
+Das `date_created`-Feld beschreibt das Datum der Erstellung des Inhalts.
 
 **Varianten**
 - Angabe als Jahr (JJJJ)
@@ -827,6 +816,7 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
 ### Schlagworte <code>&lt;keywords&gt;</code>
 
 Das `keywords`-Feld stellt eine Liste von Schlagworten zur Beschreibung des Inhalts dar.
+So können beispielsweise Ergänzungen zum Analysefokus angegeben werden.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -834,7 +824,6 @@ Das `keywords`-Feld stellt eine Liste von Schlagworten zur Beschreibung des Inha
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
 </dl>
-
 
 ## Vorgaben für Werte
 - Werden Links erwartet, so MÜSSEN absolute URLs und keine relativen URIs verwendet werden.
