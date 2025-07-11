@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RSS Feed Specifications – Video-Metaportal unterrichtsvideos.net | Version 1.1</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.5; margin: 20px; }
+    h1, h2 { color: #333; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 1.5em; }
+    th, td { border: 1px solid #666; padding: 8px; vertical-align: top; }
+    th { background: #f0f0f0; }
+    .legend-table td { border: none; padding: 4px; }
+    .legend-key { display: inline-block; width: 1em; height: 1em; margin-right: 6px; vertical-align: middle; }
+    .orange { background: orange; }
+    .green  { background: lightgreen; }
+    .blue   { background: lightblue; }
+    .grey   { background: lightgrey; }
+    code { background: #eee; padding: 2px 4px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+  <h1>RSS Feed Specifications<br>
+    <small>Video-Metaportal unterrichtsvideos.net | Version 1.1 (08.03.2021) | [<a href="1.1.pdf">PDF</a>] [<a href="1.1-changelog.pdf">Changelog</a>]</small>
+  </h1>
+  
+  
+  <p>This manual contains specifications of an RSS feed used to exchange metadata between channel providers (e.g. ProVision) and Metaportal.</p>
+
+  <h2>1. Channel Specifications</h2>
+  <p>General information about video provider / channel.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Color</th>
+        <th>Tag</th>
+        <th>Specification</th>
+        <th>Description</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="5"><strong>— tags by RSS 2.x specification —</strong></td></tr>
+      <tr><td class="orange"></td><td>title</td><td>TEXT</td><td>Channel title</td><td>ProVision</td></tr>
+      <tr><td class="orange"></td><td>link</td><td>LINK</td><td>Channel’s absolute URI</td><td>https://www.wwu.de/provision/</td></tr>
+      <tr><td class="orange"></td><td>description</td><td>TEXT</td><td>Channel description</td><td>Videoportal ProVision der WWU Münster | learning professional vision</td></tr>
+      <tr><td class="grey"></td><td>language</td><td>RSS</td><td>Channel’s main language</td><td>de-de</td></tr>
+      <tr><td class="grey"></td><td>copyright</td><td>TEXT</td><td>Copyright info</td><td>Copyright 2018 ProVision</td></tr>
+      <tr><td class="grey"></td><td>pubDate</td><td>DATE RSS</td><td>Date: first published</td><td>Wed, 26 Sep 2018 10:34:44 +0200</td></tr>
+      <tr><td class="grey"></td><td>lastBuildDate</td><td>DATE RSS</td><td>Date: last modified feed</td><td>Wed, 26 Sep 2018 10:36:44 +0200</td></tr>
+      <tr>
+        <td class="green"></td>
+        <td>image</td><td>RSS</td>
+        <td>
+          Channel logo with required RSS 2.x elements: <code>URL</code>, <code>Title</code>, <code>Link</code><br>
+          URI to JPEG, PNG, GIF
+        </td>
+        <td>
+          &lt;image&gt;<br>
+          &nbsp;&lt;title&gt;ProVision&lt;/title&gt;<br>
+          &nbsp;&lt;url&gt;https://.../logo.png&lt;/url&gt;<br>
+          &nbsp;&lt;link&gt;https://.../&lt;/link&gt;<br>
+          &lt;/image&gt;
+        </td>
+      </tr>
+      <tr><td colspan="5"><strong>— custom tags —</strong></td></tr>
+      <tr><td class="blue"></td><td>channel_version</td><td>1.1</td><td>Specification version of channel</td><td>1.1</td></tr>
+    </tbody>
+  </table>
+
+  <h2>2. Item Specifications – Meta Data</h2>
+  <p>Each video or clip is represented by a unique &lt;item&gt;.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Color</th>
+        <th>Tag</th>
+        <th>Specification</th>
+        <th>Description</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="5"><strong>— tags by RSS 2.x specification —</strong></td></tr>
+    <tr><td class="orange"></td><td>title</td><td>CDATA</td><td>Main title of video</td><td>
+      &lt;![CDATA[Satz des Pythagoras – 3. Doppelstunde]]&gt;
+    </td></tr>
+      <tr><td class="orange"></td><td>link</td><td>TEXT (LINK)</td><td>Direct URI to video/item page</td><td>https://www.wwu.de/video.html</td></tr>
+      <tr><td class="orange"></td><td>description</td><td>CDATA</td><td>Long description of content</td><td>
+        &lt;![CDATA[In dieser Doppelstunde wird…]]&gt;
+      </td></tr>
+      <tr><td class="grey"></td><td>language</td><td>RSS</td><td>Main language of item</td><td>de-de</td></tr>
+      <tr><td class="grey"></td><td>copyright</td><td>TEXT</td><td>Individual video copyright</td><td>Studiumdigitale, GU Frankfurt</td></tr>
+      <tr><td class="grey"></td><td>pubDate</td><td>DATE</td><td>Date first published</td><td>Wed, 26 Sep 2018 10:34:44 +0200</td></tr>
+      <tr><td class="grey"></td><td>lastBuildDate</td><td>DATE</td><td>Date last modified</td><td>Wed, 26 Sep 2018 10:36:44 +0200</td></tr>
+      <tr><td colspan="5"><strong>— custom tags —</strong></td></tr>
+      <tr><td class="green"></td><td>id</td><td>TEXT<br><small>(max. 150 chars)</small></td>
+        <td>
+          Permanent item identifier<br/>
+          must not be re-assigned<br/>
+          must be unique in channel feed<br/>
+          must not contain whitespaces<br/>
+          must not contain:<br/>
+        : / ? # [ ] @ ! $ & ' ( ) * + , ; =<br/>
+        Can contain:<br/>
+         A–Z, a–z, 0–9 and special chars: - . _
+        </td><td>53</td></tr>
+      <tr><td class="grey"></td><td>parent_id</td><td>TEXT (list) <i>separated by vertical bar: value | value</i></td><td>List of video ids (IDs: parent) **</td><td>45 | 12</td></tr>
+      <tr><td class="grey"></td><td>child_id</td><td>TEXT (list) <i>separated by vertical bar: value | value</i></td><td>List of video ids (IDs: child) **</td><td>2 | 3</td></tr>
+      <tr><td class="grey"></td><td>subtitle</td><td>CDATA</td><td>Subtitle of video item</td><td>
+        &lt;![CDATA[Zieht ein Magnet überall gleich stark an?]]&gt;
+    </td></tr>
+    <tr><td class="grey"></td><td>teaser</td><td>CDATA</td><td>Short teaser description of clip/video</td><td>
+      &lt;![CDATA[Dieser Clip enthält XY…]]&gt;
+    </td></tr>
+      <tr><td class="grey"></td><td>video_image</td><td>TEXT (https-URI)</td><td>Video preview image, URI to JPEG, PNG, GIF</td><td>https://…/teaserbild.jpeg</td></tr>
+      <tr><td class="green"></td><td>video_duration</td><td>(HH:MM:SS)</td><td>Total video length</td><td>01:12:23</td></tr>
+      <tr><td class="grey"></td><td>video_resolution</td><td>(W)x(H)</td><td>Maximum video resolution in Pixel</td><td>1280x720</td></tr>
+      <tr><td class="green"></td><td>use_restrictions</td><td>TEXT (list) <i>separated by vertical bar: value | value</i></td><td>Restrictions of use (see table) ***</td><td>G1:1 | G2:2 | G6:3</td></tr>
+    <tr><td class="green"></td><td>use_restrictions_label</td><td>CDATA</td><td>Descriptive restrictions of use (human readable)</td><td>
+      &lt;![CDATA[abrufbar nur für Studierende…]]&gt;
+    </td></tr>
+      <tr><td class="grey"></td><td>focus_of_analysis</td><td>TEXT (list) <i>separated by vertical bar: value | value</i></td><td>Suggested focus areas</td><td>Sprachsensible Lernunterstützung | Klassenführung</td></tr>
+      <tr><td class="grey"></td><td>materials</td><td>TEXT (list)<i>separated by vertical bar: value | value</i></td><td>Materials available</td><td>Lehrmaterialien | Schülermaterialien | Transkript | Unterrichtsverlaufsplan</td></tr>
+      <tr><td class="grey"></td><td>camera_perspective</td><td>TEXT (list) <i>separated by vertical bar: value | value</i></td><td>Camera perspective of video / POV</td><td>Lehrerkamera | Totale</td></tr>
+      <tr><td class="grey"></td><td>lecture_activities</td><td>TEXT (list) <i>separated by vertical bar: value | value</i></td><td>Student activities</td><td>Gruppenarbeit | Schülerpräsentation</td></tr>
+      <tr><td class="grey"></td><td>lecture_phase</td><td>TEXT (list) <i>separated by vertical bar: value | value</i></td><td>Lecture phases</td><td>Einstiegsphase | Erarbeitungsphase | Reflexionsphase</td></tr>
+      <tr><td class="blue"></td><td>lecture_type</td><td>
+        <ul>
+    <li>Animationsvideo</li>
+    <li>Unterrichtsreihe</li>
+    <li>Unterrichtsstunde</li>
+    <li>Unterrichtsausschnitt</li>
+    <li>Interview</li>
+    <li>Inszenierte Videoaufnahme</li>
+    <li>Sonstige Videos</li>
+  </ul>
+      </td><td>Lecture type <br/><br/>Multiple grades separated by vertical bar: value | value (order does not matter)</td><td>Unterrichtsstunde</td></tr>
+      <tr><td class="blue"></td><td>school_type</td><td>  <ul>
+    <li>Vorschule</li>
+    <li>Grundschule</li>
+    <li>Hauptschule</li>
+    <li>Realschule</li>
+    <li>Gesamtschule</li>
+    <li>Gymnasium</li>
+    <li>Förderschule</li>
+    <li>Privat- und Ersatzschulen</li>
+    <li>Sekundarschule</li>
+    <li>Berufliche Bildung</li>
+    <li>Sonstige Schulformen</li>
+  </ul></td><td>Type of School <br/><br/>Multiple grades separated by vertical bar: value | value (order does not matter)</td><td>Grundschule</td></tr>
+      <tr><td class="blue"></td><td>grade</td><td><ul>
+    <li>Vorschule</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+    <li>11</li>
+    <li>12</li>
+    <li>13</li>
+    <li>Nicht zutreffend</li>
+  </ul></td><td>Grade level <br/><br/>Multiple grades separated by vertical bar: value | value (order does not matter)</td><td>5</td></tr>
+      <tr><td class="blue"></td><td>subject</td><td><ul><li>(Alt-)Griechisch</li>
+    <li>Bildende Kunst/Kunst/Kunsterziehung</li>
+    <li>Biologie</li>
+    <li>Chemie</li>
+    <li>Deutsch</li>
+    <li>Englisch</li>
+    <li>Erdkunde/Geographie</li>
+    <li>Ethik/Religionskunde</li>
+    <li>Ev. Religion</li>
+    <li>Französisch</li>
+    <li>Geschichte</li>
+    <li>Informatik</li>
+    <li>Italienisch</li>
+    <li>Kath. Religion</li>
+    <li>Latein</li>
+    <li>Mathematik</li>
+    <li>Musik</li>
+    <li>Philosophie</li>
+    <li>Physik</li>
+    <li>Russisch</li>
+    <li>Sachunterricht</li>
+    <li>Sozialkunde/Politik</li>
+    <li>Spanisch</li>
+    <li>Sport</li>
+    <li>Wirtschaft/Verwaltung/Recht</li>
+    <li>Berufliche Fachrichtungen</li>
+    <li>Sonstiges</li>
+    <li>Fachübergreifender Unterricht</li>
+  </ul></i></td><td>Subject * <br/><br/>
+    -- <br/><br/>
+    Naturwissenschaften = „Fachübergreifender Unterricht“<br/>
+Körperpflege = „Berufliche Fachrichtungen“<br/>
+Energie und Umwelt (Maschinenbau) = „Berufliche Fachrichtungen“<br/>
+Freiarbeit = „Sonstiges“<br/><br/> -- <br/><br/>Fachübergreifender Unterricht: If multiple subjects feed should at least contain: „Fachübergreifender Unterricht“
+<br/><br/>Multiple subjects separated by vertical bar: value | value (order does not matter)</td><td>Deutsch | Chemie | Fachübergreifender Unterricht <br/><br/>or<br/><br/> Fachübergreifender Unterricht <br/><br/>or<br/><br/> Mathematik</td></tr>
+    <tr><td class="grey"></td><td>references</td><td>CDATA (+ BibTeX)</td><td>BibTeX markup</td><td>
+      &lt;![CDATA[@book{book,<br>
+author = {The author},<br>
+title = {The title},<br>
+publisher = {The publisher},<br>
+year = (The year), address = {The address}, isbn = {1234567890123}<br>
+}]]&gt;
+      </td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. Legend &amp; Rules for Feed and Content</h2>
+  <table class="legend-table">
+    <tr>
+      <td><span class="legend-key orange"></span>Orange = Required by RSS 2.x</td>
+      <td><span class="legend-key green"></span>Green = Required by Metaportal, Open naming</td>
+      <td><span class="legend-key blue"></span>Blue = Required by Metaportal, Closed naming</td>
+      <td><span class="legend-key grey"></span>Grey = Optional</td>
+    </tr>
+  </table>
+
+  <strong>Rules for Feed and Content:</strong>
+  <ul>
+    <li>Absolute URIs only; HTTPS for images/content.</li>
+    <li>Dates per RSS 2.0 spec.</li>
+    <li>Each tag appears once; order not mandatory.</li>
+    <li>Multi-value fields separated with “ | ”.</li>
+    <li>Required tags must be present; optional may be omitted.</li>
+  </ul>
+
+  <i>Note: There can be more tags in the rss feed than specified above which will be ignored while parsing by metaportal. The order of tags as listed above is not mandatory and can be modified. Make sure all required fields are included in the feed, only tags declared as optional can be omitted.</i>
+
+  <h3>* Subject</h3>
+  <p>If there is more than one subject, list all of them and also make sure to include “Fachübergreifender Unterricht” too. Make sure each subject term matches a closed naming tag, so e.g. instead of “Freiarbeit” the RSS feed should contain “Sonstiges” (compare with list above at field specification).</p>
+
+  <h3>** Parent / Child Logic</h3>
+  <p>To publish linked videos and to show a simple parent/child logic, the channel provider can maintain a list of IDs pointing to parent video or childs. If ID is a parent, there should be a list of childs (child_id). Every ID which is a child should have a parent_id link. If ID is not a parent, child_id can be omitted.</p>
+
+  <h3>*** Table / Scheme of use_restrictions field – Example and explanation:</h3>
+
+  The use_restrictions field defines access possibilities for a concrete video item and specific pre-defined user groups as listed below (G0 – G7). For each of those groups an access level can be specified after a colon. User groups with no access (access level = 0) can be omitted in field value.
+    Example: use_restrictions = G1:1 | G2:2 | G6:3
+
+ <table>
+    <caption>Table / Scheme of <code>use_restrictions</code> field – Example and explanation</caption>
+    <thead>
+      <tr>
+        <th rowspan="3">Value</th>
+        <th rowspan="3">Access Level</th>
+        <th colspan="8">User Group #</th>
+      </tr>
+      <tr>
+        <th>G0</th><th>G1</th><th>G2</th><th>G3</th>
+        <th>G4</th><th>G5</th><th>G6</th><th>G7</th>
+      </tr>
+      <tr>
+        <th>Sonstige</th>
+        <th>Lehramtsstudierende</th>
+        <th>Lehrkräfte im Vorbereitungsdienst</th>
+        <th>Hochschullehrende der 1. Phase des Lehramts</th>
+        <th>Lehrende in der 2. Phase</th>
+        <th>Lehrende in der 3. Phase</th>
+        <th>Lehrkräfte</th>
+        <th>Unterrichtsforscher</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>0</td>
+        <td>No access</td>
+        <td rowspan="4">0</td>
+        <td rowspan="4">1</td>
+        <td rowspan="4">2</td>
+        <td rowspan="4">0</td>
+        <td rowspan="4">0</td>
+        <td rowspan="4">0</td>
+        <td rowspan="4">3</td>
+        <td rowspan="4">0</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Local access</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Trust network access</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Global access</td>
+      </tr>
+      <tr>
+        <td colspan="2">Results in mapping of</td>
+        <td>State</td>
+        <td>University</td>
+        <td>State</td>
+        <td>University</td>
+        <td>State</td>
+        <td>State</td>
+        <td>State</td>
+        <td>University</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <caption><strong>Definition of “access level”</strong></caption>
+    <thead>
+      <tr>
+        <th>Value</th>
+        <th>Access Level</th>
+        <th>Description</th>
+        <th>Effect on Metaportal filter</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>0</td>
+        <td>No access</td>
+        <td>(self-explanatory)</td>
+        <td>Video won’t be displayed when this user group is selected</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Local access</td>
+        <td>
+          Based on the RSS provider’s location and specified user group, either university or state related  
+          to the channel/provider will automatically be mapped.<br><br>
+          <em>Example:</em> ProVision is provided by WWU Münster: Depending on a specific user group which  
+          has level 1 (local access) to the video, the related state = NRW or university = WWU Münster will  
+          be mapped as access possibility to that specific video item.
+        </td>
+        <td>
+          Video will be displayed when selected location is identical to location of university (provider)  
+          or its related state (depending on user group).<br><br>
+          Only location of specific RSS provider / video portal / channel will be mapped.
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Trust network access</td>
+        <td>All universities and states contributing to Metaportal which are Trust Network partners (cooperation contract)</td>
+        <td>Video will be displayed if any cooperation university or its related state (depending on user group) is selected in filter</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Global access</td>
+        <td>
+          Wide user range access possibility (e.g. all verified legitimated SSO users).<br>
+          This level results in mapping each university or state in Metaportal filter.
+        </td>
+        <td>Video will be displayed on Metaportal whatever the user selects as user group and location in filter on search page.</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+  <h2>Example</h2>
+
+  <p>Example from the table above for the value of the <code>use_restrictions</code> field  
+  if provider is <strong>ProVision</strong>:</p>
+
+  <p><strong>Field:</strong> <code>use_restrictions = G1:1 | G2:2 | G6:3</code><br>
+  <em>Note:</em> User groups with no access (access level = 0) can be omitted.</p>
+
+  <p><strong>Meaning</strong> of the <code>use_restrictions</code> value in context of  
+  ProVision being the provider of the RSS feed:</p>
+
+  <ul>
+    <li>
+      <code>G1:1</code> maps local access possibility of group  
+      “Lehramtsstudierende” – only students of “WWU Münster” (the channel provider)  
+      can view the video.
+    </li>
+    <li>
+      <code>G2:2</code> maps trust network access possibility of group  
+      “Lehrkräfte im Vorbereitungsdienst” – all group members based in any state  
+      related to universities contributing to the trust network (per the cooperation contract)  
+      can view the video.
+    </li>
+    <li>
+      <code>G6:3</code> maps global access possibility of group “Lehrkräfte” –  
+      all group members in all states and universities can view the video.
+    </li>
+  </ul>
+
+  <h3>Remember</h3>
+  <p>You can specify an access level for each individual video item, but keep in mind that this is  
+  only a descriptive mapping of use restrictions. It has no direct effect on actual access control;  
+  it only affects the filter options in Metaportal. If you’re unsure, follow this premise:  
+  <em>better to have the video displayed rather than filtered out</em>. You can also use the  
+  <code>use_restrictions_label</code> field to inform users how they might access the video.</p>
+
+
+</body>
+</html>
