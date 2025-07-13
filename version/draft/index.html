@@ -167,14 +167,25 @@
 <body>
 <section id="abstract">
 ## Zusammenfassung
-Das Dokument stellt ein **Anwendungsprofil** zur Bereitstellung von Metadaten in XML-Feeds im Kontext des Meta-Videoportals [unterrichtsvideos.net](https://unterrichtsvideos.net/metaportal/) dar. 
+Das Dokument stellt ein **Anwendungsprofil** zur Bereitstellung von Metadaten in XML-Feeds im Kontext des Meta-Videoportals [unterrichtsvideos.net](https://unterrichtsvideos.net/metaportal/) dar.  
 
 Das Anwendungsprofil ist angelehnt an die Spezifikationen von [[RSS 2.0]] und [[XML 1.1]] zur Strukturierung des Datenaustauschs.
-Der Feed dient dem Austausch von Metadaten zwischen den Portalen/Anbietern (wie bspw. dem Videoportal [ProVision](https://www.uni-muenster.de/ProVision/)) und dem Meta-Videoportal [unterrichtsvideos.net](https://unterrichtsvideos.net/metaportal/).
+Der Feed dient dem Austausch der Metadaten von Inhalten zwischen den Portalen/Anbietern (wie bspw. dem Videoportal [ProVision](https://www.uni-muenster.de/ProVision/)) und dem Meta-Videoportal [unterrichtsvideos.net](https://unterrichtsvideos.net/metaportal/).
+
+<div class="copyright" style="display: flex; flex-direction: row; justify-content: space-between;">
+    <div>
+        <img alt="CC-BY" src="https://licensebuttons.net/l/by/4.0/88x31.png" />
+        Dieses Werk ist lizenziert unter
+        <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+            Creative Commons Attribution 4.0 International</a>.
+    </div>
+</div>
 </section>
 
 <section id="conformance">
 ## Technische Anforderungen
+
+Die Metadaten von Inhalten werden in einem XML-Dokument repräsentiert.
 
 ### Kodierung
 - Die Zeichenkodierung des XML-Feeds MUSS [[UTF-8]] oder eine [[XML 1.1]]-spezifikationskonforme anderweitige Kodierung sein.
@@ -209,7 +220,7 @@ Der Feed dient dem Austausch von Metadaten zwischen den Portalen/Anbietern (wie 
 
 <pre class="example" title="Grundstruktur des XML-Feeds">
   &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-  &lt;rss version=&quot;2.0&quot; xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot;&gt;
+  &lt;rss xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot; version=&quot;2.0&quot;&gt;
     &lt;!-- Metadaten zum Anbieter und den Inhalten gemäß Anwendungsprofil --&gt;
   &lt;/rss&gt;
 </pre>
@@ -289,7 +300,7 @@ Das `description`-Feld innerhalb des `channel`-Elements dient der Beschreibung d
 
 ### &#9679; Logo <code>&lt;image&gt;</code>
 
-Das `image`-Feld innerhalb des `channel`-Elements definiert das Logo des Anbieters mit den benötigten Elementen gemäß [[RSS 2.0]]:
+Das `image`-Feld innerhalb des `channel`-Elements definiert das Logo des Anbieters mit den benötigten Elementen, gemäß [[RSS 2.0]]:
 - `link` (URL), Schema: http(s) [[RFC3986]]
 - `url`  (URL zum Logo),  Schema: https [[RFC3986]]
   - Erlaubte MIME-Types [[RFC6838]] & [[RSS 2.0]]: 
@@ -317,7 +328,7 @@ Das `image`-Feld innerhalb des `channel`-Elements definiert das Logo des Anbiete
 
 ### &#9679; Version <code>&lt;docs&gt;</code>
 
-Das `docs`-Feld gibt die verwendete Version der XML-Feed Spezifikationen des Meta-Videoportal unterrichtsvideos.net gemäß [[RSS 2.0]] als URI an.
+Das `docs`-Feld gibt die verwendete Version der XML-Feed Spezifikationen des Meta-Videoportal unterrichtsvideos.net als URI an, gemäß [[RSS 2.0]].
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -358,7 +369,7 @@ de-de
 <!--
 ### &#9675; Copyright <code>&lt;copyright&gt;</code>
 
-Das `copyright`-Feld beschreibt die Informationen zum Copyright gemäß [[RSS 2.0]].
+Das `copyright`-Feld beschreibt die Informationen zum Copyright, gemäß [[RSS 2.0]].
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -377,7 +388,7 @@ Das `copyright`-Feld beschreibt die Informationen zum Copyright gemäß [[RSS 2.
 <!--
 ### &#9675; Veröffentlichungsdatum <code>&lt;pubDate&gt;</code>
 
-Das `pubDate`-Feld gibt das Datum der ersten Veröffentlichung des Feeds gemäß [[RSS 2.0]] an.
+Das `pubDate`-Feld gibt das Datum der ersten Veröffentlichung des Feeds, gemäß [[RSS 2.0]] an.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -396,7 +407,7 @@ Thu, 01 Jan 2026 10:15:45 +0200
 <!--
 ### &#9675; Änderungsdatum <code>&lt;lastBuildDate&gt;</code>
 
-Das `lastBuildDate`-Feld gibt das Datum der letzten Änderung/Modifikation des Feeds gemäß [[RSS 2.0]] an.
+Das `lastBuildDate`-Feld gibt das Datum der letzten Änderung/Modifikation des Feeds, gemäß [[RSS 2.0]] an.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -439,7 +450,7 @@ Jeder Inhalt (z. B. ein Unterrichtsvideo) wird durch ein eindeutiges `item`-Elem
 
 #### &#9679; Titel <code>&lt;title&gt;</code>
 
-Das `title`-Feld gibt den Titel des Inhalts an (z. B. Titel des Videos) gemäß [[RSS 2.0]].
+Das `title`-Feld gibt den Titel des Inhalts an (z. B. Titel des Videos), gemäß [[RSS 2.0]].
 
 - Der Titel SOLL eine Länge zwischen 1 und 150 Zeichen aufweisen.
 
@@ -448,6 +459,11 @@ Das `title`-Feld gibt den Titel des Inhalts an (z. B. Titel des Videos) gemäß 
   <dd>ja</dd>
   <dt>Mehrfachwerte</dt>
   <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/title">dct:title</a>, 
+    <a href="https://schema.org/name">sdo:name</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (CDATA) [[XML 1.1]]</dd>
 </dl>
@@ -458,13 +474,17 @@ Das `title`-Feld gibt den Titel des Inhalts an (z. B. Titel des Videos) gemäß 
 
 #### &#9679; Link <code>&lt;link&gt;</code>
 
-Das `link`-Feld definiert die URL zum Inhalt beim Anbieter gemäß [[RSS 2.0]].
+Das `link`-Feld definiert die URL zum Inhalt beim Anbieter, gemäß [[RSS 2.0]].
 
 <dl>
   <dt>Pflichtfeld</dt>
   <dd>ja</dd>
   <dt>Mehrfachwerte</dt>
   <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="https://schema.org/url">sdo:url</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (URL), Schema: http(s) [[RFC3986]]</dd>
 </dl>
@@ -479,7 +499,10 @@ Das `id`-Feld ist die permanente und eindeutige Kennung des Inhalts (z. B. Video
   <dt>Mehrfachwerte</dt>
   <dd>nein</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:identifier](http://purl.org/dc/terms/identifier), [sdo:identifier](https://schema.org/identifier)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/identifier">dct:identifier</a>, 
+    <a href="https://schema.org/identifier">sdo:identifier</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` [max. 150 Zeichen]</dd>
 </dl>
@@ -512,7 +535,9 @@ Das `image`-Feld enthält die URL zu einem Vorschaubild des Videos.
   <dt>Mehrfachwerte</dt>
   <dd>nein</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:image](http://purl.org/dc/dcmitype/Image), [sdo:image](https://schema.org/image)</dd>
+  <dd>
+    <a href="https://schema.org/thumbnail">sdo:thumbnail</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (URL), Schema: https [[RFC3986]]</dd>
 </dl>
@@ -531,7 +556,10 @@ Das `resource_type`-Feld gibt den primären Ressourcentyp eines Inhalts an.
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:type](http://purl.org/dc/terms/type), [sdo:learningResourceType](https://schema.org/learningResourceType)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/type">dct:type</a>, 
+    <a href="https://schema.org/learningResourceType">sdo:learningResourceType</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
@@ -553,6 +581,11 @@ Das `description`-Feld im `description`-Element dient zur Angabe einer Kurzbesch
   <dd>ja</dd>
   <dt>Mehrfachwerte</dt>
   <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/description">dct:description</a>, 
+    <a href="https://schema.org/description">sdo:description</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (CDATA) [[XML 1.1]]</dd>
 </dl>
@@ -573,7 +606,10 @@ Das `abstract`-Feld dient der Kurzbeschreibung des Inhalts.
   <dt>Mehrfachwerte</dt>
   <dd>nein</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:abstract](http://purl.org/dc/terms/abstract), [sdo:abstract](https://schema.org/abstract)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/abstract">dct:abstract</a>, 
+    <a href="https://schema.org/abstract">sdo:abstract</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (CDATA)</dd>
 </dl>
@@ -592,7 +628,10 @@ Das `language`-Feld kennzeichnet die verfügbaren Sprachen des Inhalts.
   <dt>Mehrfachwerte</dt>
   <dd>nein</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:language](http://purl.org/dc/terms/language), [sdo:inLanguage](https://schema.org/inLanguage)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/language">dct:language</a>,
+    <a href="https://schema.org/inLanguage">sdo:inLanguage</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
@@ -622,7 +661,10 @@ Das `date_created`-Feld beschreibt das Datum der Erstellung des Inhalts.
   <dt>Mehrfachwerte</dt>
   <dd>nein</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:created](http://purl.org/dc/terms/created), [sdo:dateCreated](https://schema.org/dateCreated)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/created">dct:created</a>,
+    <a href="https://schema.org/dateCreated">sdo:dateCreated</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string`</dd>
   <dt>Wertebereich</dt>
@@ -643,7 +685,10 @@ Das `license`-Feld gibt Auskunft über die vorliegende Lizenz zur Nutzung und Ve
   <dt>Mehrfachwerte</dt>
   <dd>nein</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:license](http://purl.org/dc/terms/license), [sdo:license](https://schema.org/license)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/license">dct:license</a>,
+    <a href="https://schema.org/license">sdo:license</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string`</dd>
   <dt>Wertebereich</dt>
@@ -666,7 +711,10 @@ _und_
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:audience](http://purl.org/dc/terms/audience), [sdo:audience](https://schema.org/audience)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/audience">dct:audience</a>,
+    <a href="https://schema.org/audience">sdo:audience</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit |)</dd>
   <dt>Wertebereich</dt>
@@ -687,7 +735,10 @@ Das `use_restrictions_label`-Feld definiert mögliche Einschränkungen bei der N
   <dt>Mehrfachwerte</dt>
   <dd>nein</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:accessRights](http://purl.org/dc/terms/accessRights), [sdo:conditionsOfAccess](https://schema.org/conditionsOfAccess)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/accessRights">dct:accessRights</a>,
+    <a href="https://schema.org/conditionsOfAccess">sdo:conditionsOfAccess</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string`(CDATA) [[XML 1.1]]</dd>
 </dl>
@@ -705,7 +756,10 @@ Das `pubDate`-Feld gibt das Datum der ersten Veröffentlichung an gemäß [[RSS 
   <dt>Mehrfachwerte</dt>
   <dd>nein</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:date](http://purl.org/dc/terms/date), [sdo:datePublished](https://schema.org/datePublished)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/date">dct:date</a>,
+    <a href="https://schema.org/datePublished">sdo:datePublished</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`dateTime` [[RSS 2.0]] / [[RFC822]]</dd>
 </dl>
@@ -728,7 +782,10 @@ Organisationen: GND, ROR, WIKIDATA
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:creator](http://purl.org/dc/terms/creator), [sdo:creator](https://schema.org/creator)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/creator">dct:creator</a>, 
+    <a href="https://schema.org/creator">sdo:creator</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
@@ -752,7 +809,10 @@ Die Reihenfolge der Werte ist bedeutsam.
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:hasPart](http://purl.org/dc/terms/hasPart), [sdo:hasPart](https://schema.org/hasPart)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a>, 
+    <a href="https://schema.org/hasPart">sdo:hasPart</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
@@ -799,7 +859,10 @@ Die Reihenfolge der Werte ist bedeutsam.
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:isPartOf](http://purl.org/dc/terms/isPartOf), [sdo:isPartOf](https://schema.org/isPartOf)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/isPartOf">dct:isPartOf</a>, 
+    <a href="https://schema.org/isPartOf">sdo:isPartOf</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
@@ -850,7 +913,10 @@ Das `school_type`-Feld beschreibt die Schulart.
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:educationLevel](http://purl.org/dc/terms/educationLevel), [sdo:educationalLevel](https://schema.org/educationalLevel)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/educationLevel">dct:educationLevel</a>,
+    <a href="https://schema.org/educationalLevel">sdo:educationalLevel</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
@@ -867,7 +933,10 @@ Das `grade`-Feld beschreibt die Jahrgangsstufe.
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:educationLevel](http://purl.org/dc/terms/educationLevel), [sdo:educationalLevel](https://schema.org/educationalLevel)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/educationLevel">dct:educationLevel</a>,
+    <a href="https://schema.org/educationalLevel">sdo:educationalLevel</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
@@ -884,6 +953,11 @@ Das `educational_level`-Feld beschreibt die Bildungsstufe der Lernenden.
   <dd>ja</dd>
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/educationLevel">dct:educationLevel</a>,
+    <a href="https://schema.org/educationalLevel">sdo:educationalLevel</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
@@ -903,7 +977,10 @@ Das `subject`-Feld definiert das Schulfach.
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:subject](http://purl.org/dc/terms/subject), [sdo:about](https://schema.org/about)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/subject">dct:subject</a>, 
+    <a href="https://schema.org/about">sdo:about</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
@@ -942,7 +1019,9 @@ Das `time_required`-Feld gibt die (Beschäftigungs-)Dauer des Inhalts an, z. B. 
   <dt>Mehrfachwerte</dt>
   <dd>nein</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[sdo:timeRequired](https://schema.org/timeRequired)</dd>
+  <dd>
+    <a href="https://schema.org/timeRequired">sdo:timeRequired</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` der Form `P(n)Y(n)M(n)W(n)DT(n)H(n)M(n)S` [[ISO8601]]</dd>
 </dl>
@@ -965,7 +1044,10 @@ Das `material_type`-Feld gibt eine Liste mit mit verfügbaren Begleitmaterialien
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:type](http://purl.org/dc/terms/type), [sdo:learningResourceType](https://schema.org/learningResourceType)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/type">dct:type</a>,
+    <a href="https://schema.org/learningResourceType">sdo:learningResourceType</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
@@ -982,7 +1064,10 @@ Das `learning_format`-Feld kennzeichnet die vorherschende Lehr-/Lernform des Inh
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:instructionalMethod](http://purl.org/dc/terms/instructionalMethod), [sdo:interactivityType](https://schema.org/interactivityType)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/instructionalMethod">dct:instructionalMethod</a>,
+    <a href="https://schema.org/interactivityType">sdo:interactivityType</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
@@ -999,7 +1084,10 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:subject](http://purl.org/dc/terms/subject), [sdo:about](https://schema.org/about)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/subject">dct:subject</a>,
+    <a href="https://schema.org/about">sdo:about</a>
+  </dd>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
   <dd>Werte aus [[Lehrplanthemen]]</dd>
@@ -1007,7 +1095,7 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
 
 #### &#9675; Kameraperspektive <code>&lt;camera_perspective&gt;</code>
 
-Das `camera_perspective`-Feld beschreibt die Perspektive der Kamera bzw. den Point of Interest, sofern das Item ein Video enthält. 
+Das `camera_perspective`-Feld beschreibt die Kameraperspektive bzw. den Point of Interest, sofern der Inhalt ein Video enthält. 
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -1015,7 +1103,9 @@ Das `camera_perspective`-Feld beschreibt die Perspektive der Kamera bzw. den Poi
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[XMP/EBUcore:videoShotTypes](https://iptc.org/std/videometadatahub/userguide/#Shot-Type)</dd>
+  <dd>
+    <a href="https://iptc.org/std/videometadatahub/userguide/#Shot-Type">XMP/EBUcore:videoShotTypes</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
@@ -1033,7 +1123,10 @@ Inhalte können dabei sowohl positive Beispiele, als auch potenzielle Lerngelege
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:relation](	http://purl.org/dc/terms/relation), [sdo:teaches](https://schema.org/teaches)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/relation">dct:relation</a>,
+    <a href="https://schema.org/teaches">sdo:teaches</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )`</dd>
   <dt>Wertebereich</dt>
@@ -1051,7 +1144,10 @@ Inhalte können dabei sowohl positive Beispiele, als auch potenzielle Lerngelege
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Verwandte Felder</dt>
-  <dd>[dct:relation](	http://purl.org/dc/terms/relation), [sdo:teaches](https://schema.org/teaches)</dd>
+  <dd>
+    <a href="http://purl.org/dc/terms/relation">dct:relation</a>,
+    <a href="https://schema.org/teaches">sdo:teaches</a>
+  </dd>
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )`</dd>
   <dt>Wertebereich</dt>
@@ -1087,7 +1183,7 @@ So können beispielsweise Ergänzungen zum Analysefokus angegeben werden.
 
 
 <section class="informative">
-## Beispiel XML-Feed
+## Beispiel XML-Feed (alte Spezifikationen, in Überabeitung)
 
 <pre class="example" title="Channel mit zwei Items">
   &lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -1151,6 +1247,41 @@ So können beispielsweise Ergänzungen zum Analysefokus angegeben werden.
     &lt;/channel&gt;
   &lt;/rss&gt;
 </pre>
+</section>
+
+<section id="glossary" class="appendix">
+  ## Glossar
+
+  <dl>
+    <dt><abbr title="Extensible Markup Language">XML</abbr></dt>
+    <dd>Extensible Markup Language</dd>
+    <dt><abbr title="XML Schema Definition">XSD</abbr></dt>
+    <dd>XML Schema Definition</dd>
+    <dt><abbr title="Uniform Resource Identifier">URI</abbr></dt>
+    <dd>Uniform Resource Identifier</dd>
+    <dt><abbr title="Uniform Resource Locator">URL</abbr></dt>
+    <dd>Uniform Resource Locator</dd>
+    <dt><abbr title="Character Data">CDATA</abbr></dt>
+    <dd>Character Data (in <abbr title="Extensible Markup Language">XML</abbr>, ein Bereich, in dem Zeichen nicht als Markup interpretiert werden)</dd>
+    <dt><abbr title="Multipurpose Internet Mail Extensions">MIME</abbr></dt>
+    <dd>Multipurpose Internet Mail Extensions</dd>
+    <dt><abbr title="International Organization for Standardization">ISO</abbr></dt>
+    <dd>International Organization for Standardization</dd>
+    <dt><abbr title="Gemeinsame Normdatei">GND</abbr></dt>
+    <dd>Gemeinsame Normdatei</dd>
+    <dt><abbr title="Research Organization Registry">ROR</abbr></dt>
+    <dd>Research Organization Registry</dd>
+    <dt><abbr title="Open Researcher and Contributor ID">ORCID</abbr></dt>
+    <dd>Open Researcher and Contributor ID</dd>
+    <dt><abbr title="Extensible Metadata Platform">XMP</abbr></dt>
+    <dd>Extensible Metadata Platform</dd>
+    <dt><abbr title="EBU Core Metadata Set">EBUcore</abbr></dt>
+    <dd>EBU Core Metadata Set (Metadatenstandard der European Broadcasting Union)</dd>
+    <dt><abbr title="Really Simple Syndication">RSS</abbr></dt>
+    <dd>Really Simple Syndication (Web-Feed-Format)</dd>
+    <dt><abbr title="Freie Wissensdatenbank, die strukturierte Daten bereitstellt">WIKIDATA</abbr></dt>
+    <dd>Freie Wissensdatenbank, die strukturierte Daten bereitstellt</dd>
+  </dl>
 </section>
 
 <!-- Hypothesis for draft specifications -->
