@@ -72,18 +72,18 @@
             href: "https://orcid.org/",
             publisher: "",
           },
-          "WIKIDATA": {
-            title: "WIKIDATA",
+          "Wikidata": {
+            title: "Wikidata",
             href: "https://www.wikidata.org/wiki/",
             publisher: "",
           },
           "MAIN-Teach-Modell": {
-            title: "multi-layered and integrated in conceptualizing the quality of teaching",
+            title: "MAIN-Teach-Modell zur Unterrichtsqualität",
             href: "https://zenodo.org/records/8280389",
             publisher: "Praetorius, A.-K., Charalambous, C., Wemmer-Rogh, W., Gossner, L., Herrmann, C., Ufer, S., Gräsel, C., & Keller, S. (2023)",
           },
           "DigCompEduObserve": {
-            title: "DigCompEduObserve ",
+            title: "DigCompEduObserve: Beobachtungsinstrument zur Förderung digitaler Kompetenzen von Lehrenden",
             href: "https://w3id.org/unterrichtsvideos.net/vocabs/digcompeduobserve/", 
             // https://epub.ub.uni-muenchen.de/115621/1/TechnicalReportDigCompEduObserveVersion1_0_20240418.pdf
             publisher: "Oezsoy, M.; Murbök, J.; Schultz-Pernice, F.; Gräsel, C.; Sailer, M. & Fischer, F. (2024)",
@@ -138,6 +138,11 @@
             href: "https://www.rssboard.org/rss-2-0-11",
             publisher: "RSS Advisory Board. March 2009."
           },
+          "XML 1.0": {
+            title: "Extensible Markup Language (XML) 1.0 (Fifth Edition)",
+            href: "https://www.w3.org/TR/xml/",
+            publisher: "W3C Recommendation. November 2008."
+          },
           "XML 1.1": {
             title: "Extensible Markup Language (XML) 1.1 (Second Edition)",
             href: "https://www.w3.org/TR/2006/REC-xml11-20060816/",
@@ -169,7 +174,7 @@
 ## Zusammenfassung
 Das Dokument stellt ein **Anwendungsprofil** zur Bereitstellung von Metadaten in XML-Feeds im Kontext des Meta-Videoportals [unterrichtsvideos.net](https://unterrichtsvideos.net/metaportal/) dar.  
 
-Das Anwendungsprofil ist angelehnt an die Spezifikationen von [[RSS 2.0]] und [[XML 1.1]] zur Strukturierung des Datenaustauschs.
+Das Anwendungsprofil ist angelehnt an die Spezifikationen von [[RSS 2.0]] und [[XML 1.0]] zur Strukturierung des Datenaustauschs.
 Der Feed dient dem Austausch der Metadaten von Inhalten zwischen den Portalen/Anbietern (wie bspw. dem Videoportal [ProVision](https://www.uni-muenster.de/ProVision/)) und dem Meta-Videoportal [unterrichtsvideos.net](https://unterrichtsvideos.net/metaportal/).
 
 <div class="copyright" style="display: flex; flex-direction: row; justify-content: space-between;">
@@ -185,10 +190,15 @@ Der Feed dient dem Austausch der Metadaten von Inhalten zwischen den Portalen/An
 <section id="conformance">
 ## Technische Anforderungen
 
-Die Metadaten von Inhalten werden in einem XML-Dokument repräsentiert.
+Die Metadaten der Inhalte werden in einem XML-Dokument repräsentiert.
+Metadatenfelder entsprechen XML-Elementen, bspw. `license` zur Kennzeichnung der Lizenz eines Inhalts. 
 
-### Kodierung
-- Die Zeichenkodierung des XML-Feeds MUSS [[UTF-8]] oder eine [[XML 1.1]]-spezifikationskonforme anderweitige Kodierung sein.
+### Syntax und Semantik
+- Der Feed MUSS konform zu [[XML 1.0]] und [[RSS 2.0]] validieren.
+- Der Feed MUSS zur <abbr title="XML Schema Definition">XSD</abbr> des Meta-Videoportals unterrichtsvideos.net validieren.
+
+### Format
+- Die Zeichenkodierung des XML-Feeds MUSS [[UTF-8]] oder eine [[XML 1.0]]-spezifikationskonforme anderweitige Kodierung sein.
 - Die Zeichenkodierung SOLL zu Beginn des Feeds in der ersten Zeile deklariert werden.
 - Der bereitgestellte Feed SOLL einen der folgenden MIME-Types aufweisen:
   - `application/rss+xml`
@@ -200,14 +210,21 @@ Die Metadaten von Inhalten werden in einem XML-Dokument repräsentiert.
   &lt;?xml version="1.0" encoding="UTF-8"?>
 </pre>
 
-### Syntax
-- Der Feed MUSS konform zu [[XML 1.1]] und [[RSS 2.0]] validieren.
-- Der Feed MUSS zur <abbr title="XML Schema Definition">XSD</abbr> des Meta-Videoportals unterrichtsvideos.net validieren.
+### Mehrwertigkeit
+- Alle Elemente, die nicht Bestandteil dieser Spezifikation sind, werden ignoriert.
+- Elemente dieser Spezifikation DÜRFEN nur einmal pro Inhalt (`item`) vorkommen (z.B. `abstract`).
+- Das Zeichen `|` MUSS zum Trennen von mehreren Werten in den Feldern verwendet werden.
+  - Technisch: `U+007C` (Unicode) (= "pipe", "vertical line", "senkrechter Strich")
+
+### Links
+- Links MÜSSEN absolute URLs (insbesondere keine relativen URLs) darstellen.
+- Links SOLLEN das Schema *https* verwenden.
 
 ## XML-Basisstruktur
 
 - Die XML-Basisstruktur MUSS das `rss`-Element enthalten.
-- Die XML-Basissstruktur SOLL den XML-Namensraum `https://w3id.org/unterrichtsvideos.net/specs/` deklarieren.
+- Die XML-Basissstruktur SOLL den XML-Namensraum des Meta-Videoportals deklarieren:
+`https://w3id.org/unterrichtsvideos.net/specs/` 
 
 <dl>
   <dt>Pflichtelement &lt;rss&gt;</dt>
@@ -215,12 +232,12 @@ Die Metadaten von Inhalten werden in einem XML-Dokument repräsentiert.
   <dt>Typ</dt>
   <dd>`element` [[RSS 2.0]]</dd>
   <dt>Attribute</dt>
-  <dd>`xmlns` - benennt den durch diese XML Schema Description deklarierten Namensraum und SOLL folgenden Wert haben: `https://w3id.org/unterrichtsvideos.net/specs/` [[RSS 2.0]]</dd>
+  <dd>`xmlns` - benennt den deklarierten Namensraum und SOLL folgenden Wert haben: `https://w3id.org/unterrichtsvideos.net/specs/` [[RSS 2.0]]</dd>
 </dl>
 
 <pre class="example" title="Grundstruktur des XML-Feeds">
   &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-  &lt;rss xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot; version=&quot;2.0&quot;&gt;
+  &lt;rss version=&quot;2.0&quot; xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot;&gt;
     &lt;!-- Metadaten zum Anbieter und den Inhalten gemäß Anwendungsprofil --&gt;
   &lt;/rss&gt;
 </pre>
@@ -244,7 +261,7 @@ Das `channel`-Element im XML-Feed definiert allgemeine Informationen über den A
 
 <pre class="example" title="Grundstruktur des XML-Feeds">
   &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-  &lt;rss xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot; version=&quot;2.0&quot;&gt;
+  &lt;rss version=&quot;2.0&quot; xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot;&gt;
   &lt;channel&gt;
     &lt;!-- Metadaten zum Anbieter gemäß Anwendungsprofil [...] --&gt;
   &lt;/channel&gt;
@@ -262,16 +279,16 @@ Das `title`-Feld innerhalb des `channel`-Elements definiert den Titel des Anbiet
   <dt>Mehrfachwerte</dt>
   <dd>nein</dd>
   <dt>Typ</dt>
-  <dd>`string` (CDATA) [[XML 1.1]]</dd>
+  <dd>`string` (CDATA) [[XML 1.0]]</dd>
 </dl>
 
 <pre class="example" title="Titel des Portals als Wert des Feldes in CDATA-Sektion">
-  &lt;![CDATA[Videoportal ProVision der Universität Münster]]&gt;
+&lt;title&gt;&lt;![CDATA[Videoportal ProVision der Universität Münster]]&gt;&lt;/title&gt;
 </pre>
 
 ### &#9679; Link <code>&lt;link&gt;</code>
 
-Das `link`-Feld innerhalb des `channel`-Elements definiert die absolute URL des Anbieters, gemäß [[RSS 2.0]].
+Das `link`-Feld innerhalb des `channel`-Elements definiert die URL des Anbieters, gemäß [[RSS 2.0]].
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -291,11 +308,11 @@ Das `description`-Feld innerhalb des `channel`-Elements dient der Beschreibung d
   <dt>Mehrfachwerte</dt>
   <dd>nein</dd>
   <dt>Typ</dt>
-  <dd>`string` (CDATA) [[XML 1.1]]</dd>
+  <dd>`string` (CDATA) [[XML 1.0]]</dd>
 </dl>
 
 <pre class="example" title="Beschreibung des Portals als CDATA-Sektion">
-  &lt;![CDATA[Videoportal ProVision der Universität Münster]]&gt;
+&lt;description&gt;&lt;![CDATA[Videoportal ProVision der Universität Münster]]&gt;&lt;/description&gt;
 </pre>
 
 ### &#9679; Logo <code>&lt;image&gt;</code>
@@ -341,8 +358,8 @@ Das `docs`-Feld gibt die verwendete Version der XML-Feed Spezifikationen des Met
   <dd>URI der Version des Anwendungsprofils</dd>
 </dl>
 
-<pre class="example" title="Wertebeispiel für Version 2.0">
-  https://w3id.org/unterrichtsvideos.net/specs/version/2.0
+<pre class="example html" title="Wertebeispiel für Version 2.0 der Meta-Videoportal Spezifikationen">
+&lt;docs&gt;https://w3id.org/unterrichtsvideos.net/specs/version/2.0&lt;/docs&gt;
 </pre>
 
 <!--
@@ -362,7 +379,7 @@ Das `language`-Feld kennzeichnet die verfügbaren Sprachen des Anbieters an.
 </dl>
 
 ```html "example": "Verwendung"
-de-de
+de
 ```
 -->
 
@@ -433,7 +450,7 @@ Jeder Inhalt (z. B. ein Unterrichtsvideo) wird durch ein eindeutiges `item`-Elem
 
 <pre class="example" title="Grundstruktur des XML-Feeds">
   &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-  &lt;rss xmlns:videos=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot; version=&quot;2.0&quot;&gt;
+  &lt;rss version=&quot;2.0&quot; xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot;&gt;
   &lt;channel&gt;
     &lt;!-- Metadaten zum Anbieter gemäß Anwendungsprofil --&gt;
   &lt;/channel&gt;
@@ -465,16 +482,16 @@ Das `title`-Feld gibt den Titel des Inhalts an (z. B. Titel des Videos), gemäß
     <a href="https://schema.org/name">sdo:name</a>
   </dd>
   <dt>Typ</dt>
-  <dd>`string` (CDATA) [[XML 1.1]]</dd>
+  <dd>`string` (CDATA) [[XML 1.0]]</dd>
 </dl>
 
 <pre class="example" title="Wert des Titel-Feldes">
-  &lt;![CDATA[Satz des Pythagoras – 3. Doppelstunde]]&gt;
+&lt;title&gt;&lt;![CDATA[Satz des Pythagoras – 3. Doppelstunde]]&gt;&lt;/title&gt;
 </pre>
 
 #### &#9679; Link <code>&lt;link&gt;</code>
 
-Das `link`-Feld definiert die URL zum Inhalt beim Anbieter, gemäß [[RSS 2.0]].
+Das `link`-Feld definiert die absolute URL zum Inhalt beim Anbieter, gemäß [[RSS 2.0]].
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -504,19 +521,35 @@ Das `id`-Feld ist die permanente und eindeutige Kennung des Inhalts (z. B. Video
     <a href="https://schema.org/identifier">sdo:identifier</a>
   </dd>
   <dt>Typ</dt>
-  <dd>`string` [max. 150 Zeichen]</dd>
+  <dd>`string`, max. 150 Zeichen, SOLL alphanumerisch und KANN `- . _` [[RFC3986]] (2.3)</dd>
 </dl>
 
-<div class="note">
-- DARF nicht mehrfach im jeweiligen Feed eines Anbieters verwendet werden
-- DARF nicht an einen anderen Inhalt im jeweiligen Feed eines Anbieters vergeben werden
+Die Werte des Feldes MÜSSEN folgende Bedingungen erfüllen:
+
+<div class="note" title="Bedingungen für den Wert des Feldes">
 - MUSS dauerhaft einzigartig im jeweiligen Feed eines Anbieters sein
-- DARF NICHT typographischen Freiraum / Leerzeichen (Whitespaces) enthalten
-- DARF NICHT folgende (Sonder-)Zeichen enthalten: `: / ? # [] @ ! $ & ' () " * + , ; = | < >`
+- DARF NICHT wiederverwendet oder neu an einen anderen Inhalt im jeweiligen Feed eines Anbieters vergeben werden
+- DARF NICHT mehr als 150 Zeichen aufweisen
+- DARF NICHT folgende Sonderzeichen enthalten: `: / ? # [] @ ! $ & ' () " * + , ; = | `<` `> `
+- SOLL NICHT mit Sonderzeichen beginnen oder enden.
+- DARF NICHT typographischen Freiraum / Leerzeichen (Whitespaces) enthaltenhttps://www.labvanced.com/
 - DARF folgende alphanumerische Zeichen enthalten: `A-Z`, `a-z`, `0-9`
 - DARF folgende (Sonder-)Zeichen enthalten: `- . _`
-- DARF NICHT mehr als 150 Zeichen aufweisen
+- MUSS case-insensitiv interpretiert gleichbedeutend sein
 </div>
+
+<pre class="example" title="Empfohlener regulärer Ausdruck zur Validierung des id-Feldes">
+^[A-Za-z0-9](?:[A-Za-z0-9._-]{0,148}[A-Za-z0-9])?$
+</pre>
+
+<pre class="example" title="Beispiel-ID für einen Inhalt. Die Werte des Feldes sind case-insensitiv zu interpretieren, d.h. `video-12345` und `VIDEO-12345` und `Video-12345` sind als identische IDs zu betrachten.">
+  &lt;id&gt;video-12345&lt;/id&gt;
+</pre>
+
+Feldalternative:
+- Alternativ zum `id`-Feld KANN auch das `guid`-Element aus [[RSS 2.0]] genutzt werden, sofern die oben genannten Bedingungen für den Wert erfüllt sind.
+- Beide Elemente KÖNNEN parallel verwendet werden.
+- Die Wahl MUSS konsistent für jedes `item`-Element im gesamten Feed eines Anbieters sein.
 
 #### &#9679; Vorschaubild <code>&lt;image&gt;</code>
 
@@ -539,12 +572,23 @@ Das `image`-Feld enthält die URL zu einem Vorschaubild des Videos.
     <a href="https://schema.org/thumbnail">sdo:thumbnail</a>
   </dd>
   <dt>Typ</dt>
-  <dd>`string` (URL), Schema: https [[RFC3986]]</dd>
+  <dd>`string` (URL), Schema: https [[RFC3986]] (2.3)</dd>
 </dl>
 
-```html "example": "Verwendung"
-https://www.uni-muenster.de/ProVision/img/video-teaserbild.png
-```
+<pre class="example xml" title="Vorschaubild als Wert für das image-Feld des Inhalts">
+&lt;image&gt;https://www.uni-muenster.de/ProVision/img/video-teaserbild.png&lt;/image&gt;
+</pre>
+ 
+Feldalternative:
+- Alternativ zum `image`-Feld KANN auch das `enclosure`-Element aus [[RSS 2.0]] mit dem Attribut `type` und einem der o.g. MIME-Types genutzt werden.
+- Beide Elemente KÖNNEN parallel verwendet werden.
+- Die Wahl MUSS konsistent für jedes `item`-Element im gesamten Feed eines Anbieters sein.
+
+<pre class="example" title="Alternatives enclosure-Element mit dem MIME-Type image/jpeg">
+&lt;enclosure type="image/jpeg" length="883133"
+  url="https://www.uni-muenster.de/ProVision/img/video-teaserbild.png"
+/&gt;
+</pre>
 
 #### &#9679; Ressourcentyp <code>&lt;resource_type&gt;</code>
 
@@ -566,13 +610,13 @@ Das `resource_type`-Feld gibt den primären Ressourcentyp eines Inhalts an.
   <dd>Werte aus [[Ressourcentypen]]</dd>
 </dl>
 
-```html "example": "Bei dem Inhalt handelt es sich um ein authentisches Unterrichtsvideo"
-https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt005
-```
+<pre class="example" title="Bei dem Inhalt handelt es sich um ein authentisches Unterrichtsvideo">
+&lt;resource_type&gt;https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt005&lt;/resource_type&gt;
+</pre>
 
 #### &#9679; Beschreibung <code>&lt;description&gt;</code>
 
-Das `description`-Feld im `description`-Element dient zur Angabe einer Kurzbeschreibung des Inhalts, gemäß [[RSS 2.0]].
+Das `description`-Feld dient zur Angabe einer Kurzbeschreibung des Inhalts, gemäß [[RSS 2.0]].
 
 - Die Kurzbeschreibung SOLL eine maximale Länge von ca. 15.000 Zeichen aufweisen.
 
@@ -587,12 +631,13 @@ Das `description`-Feld im `description`-Element dient zur Angabe einer Kurzbesch
     <a href="https://schema.org/description">sdo:description</a>
   </dd>
   <dt>Typ</dt>
-  <dd>`string` (CDATA) [[XML 1.1]]</dd>
+  <dd>`string` (CDATA) [[XML 1.0]]</dd>
 </dl>
 
 <pre class="example" title="Verwendung">
-  &lt;![CDATA[In dieser Doppelstunde wird eine Unterrichtsreihe zum Thema...]]&gt;
+&lt;description&gt;&lt;![CDATA[In dieser Doppelstunde zum Thema...]]&gt;&lt;/description&gt;
 </pre>
+
 
 #### &#9675; Abstract <code>&lt;abstract&gt;</code>
 
@@ -615,18 +660,18 @@ Das `abstract`-Feld dient der Kurzbeschreibung des Inhalts.
 </dl>
 
 <pre class="example" title="Verwendung">
-  &lt;![CDATA[Dieser Clip enthält XY...]]&gt;
+&lt;abstract&gt;&lt;![CDATA[Dieser Clip enthält...]]&gt;&lt;/abstract&gt;
 </pre>
 
 #### &#9675; Sprache <code>&lt;language&gt;</code>
 
-Das `language`-Feld kennzeichnet die verfügbaren Sprachen des Inhalts.
+Das `language`-Feld kennzeichnet die Sprachen, in denen der Inhalt verfügbar ist.
 
 <dl>
   <dt>Pflichtfeld</dt>
   <dd>nein</dd>
   <dt>Mehrfachwerte</dt>
-  <dd>nein</dd>
+  <dd>ja</dd>
   <dt>Verwandte Felder</dt>
   <dd>
     <a href="http://purl.org/dc/terms/language">dct:language</a>,
@@ -638,9 +683,9 @@ Das `language`-Feld kennzeichnet die verfügbaren Sprachen des Inhalts.
   <dd>[[RFC5646]]</dd>
 </dl>
 
-```html "example": "Verwendung"
-de-de
-```
+<pre class="example" title="Verwendung">
+&lt;language&gt;de | en&lt;/language&gt;
+</pre>
 
 ### Administrative Metadaten
 
@@ -648,7 +693,7 @@ de-de
 
 Das `date_created`-Feld beschreibt das Datum der Erstellung des Inhalts.
 
-- Ein möglichst präzise Angabe wird empfohlen.
+- SOLL eine möglichst präzise Angabe enthalten.
 
 **Varianten**
 - Angabe als Jahr (JJJJ)
@@ -671,9 +716,13 @@ Das `date_created`-Feld beschreibt das Datum der Erstellung des Inhalts.
   <dd>JJJJ(-MM(-TT)) [[ISO8601]]</dd>
 </dl>
 
-```html "example": "Aufnahmejahr des Unterrichtsvideos"
-2026
-```
+<pre class="example" title="Aufnahmejahr des Unterrichtsvideos">
+&lt;date_created&gt;2025&lt;/date_created&gt;
+</pre>
+
+<pre class="example" title="Aufnahmedatum des Interviews">
+&lt;date_created&gt;2025-12-31&lt;/date_created&gt;
+</pre>
 
 #### &#9679; Lizenz <code>&lt;license&gt;</code>
 
@@ -694,6 +743,10 @@ Das `license`-Feld gibt Auskunft über die vorliegende Lizenz zur Nutzung und Ve
   <dt>Wertebereich</dt>
   <dd>Wert aus [[Lizenzen]]</dd>
 </dl>
+
+```html "example": "Aufnahmejahr des Unterrichtsvideos"
+https://w3id.org/unterrichtsvideos.net/vocabs/license/cc-by-sa
+```
 
 #### &#9679; Nutzungsbeschränkungen <code>&lt;use_restrictions&gt;</code>
 
@@ -740,7 +793,7 @@ Das `use_restrictions_label`-Feld definiert mögliche Einschränkungen bei der N
     <a href="https://schema.org/conditionsOfAccess">sdo:conditionsOfAccess</a>
   </dd>
   <dt>Typ</dt>
-  <dd>`string`(CDATA) [[XML 1.1]]</dd>
+  <dd>`string` (CDATA) [[XML 1.0]]</dd>
 </dl>
 
 <pre class="example" title="use_restrictions_label">
@@ -749,7 +802,7 @@ Das `use_restrictions_label`-Feld definiert mögliche Einschränkungen bei der N
 
 #### &#9675; Veröffentlichungsdatum <code>&lt;pubDate&gt;</code>
 
-Das `pubDate`-Feld gibt das Datum der ersten Veröffentlichung an gemäß [[RSS 2.0]].
+Das `pubDate`-Feld gibt das Datum der ersten Veröffentlichung an, gemäß [[RSS 2.0]].
 <dl>
   <dt>Pflichtfeld</dt>
   <dd>nein</dd>
@@ -789,7 +842,7 @@ Organisationen: GND, ROR, WIKIDATA
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
-  <dd>Werte aus [[GND]] [[ORCID]] [[ROR]] [[WIKIDATA]]</dd>
+  <dd>Werte aus [[GND]] [[ORCID]] [[ROR]] [[Wikidata]]</dd>
 </dl>
 
 ```html "example": "Verwendung (hier: GND-ID der Universität Münster)"
@@ -1036,7 +1089,7 @@ P2W
 
 #### &#9675; Begleitmaterialtypen <code>&lt;material_type&gt;</code>
 
-Das `material_type`-Feld gibt eine Liste mit mit verfügbaren Begleitmaterialien zu einem spezifischen Inhalt an.
+Das `material_type`-Feld gibt eine Liste mit verfügbaren Begleitmaterialien zu einem spezifischen Inhalt an.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -1053,6 +1106,10 @@ Das `material_type`-Feld gibt eine Liste mit mit verfügbaren Begleitmaterialien
   <dt>Wertebereich</dt>
   <dd>Werte aus [[Materialtypen]]</dd>
 </dl>
+
+```html "example": "Zu dem Inhalt gibt es einen Unterrichtsverlaufsplan und ein Transkript."
+https://w3id.org/unterrichtsvideos.net/vocabs/material_type/mt1000 | https://w3id.org/unterrichtsvideos.net/vocabs/material_type/mt1003
+```
 
 #### &#9675; Lernformat <code>&lt;learning_format&gt;</code>
 
@@ -1152,6 +1209,7 @@ Inhalte können dabei sowohl positive Beispiele, als auch potenzielle Lerngelege
   <dd>`string` (Mehrfachwerte, getrennt mit | )`</dd>
   <dt>Wertebereich</dt>
   <dd>Werte aus [[DigCompEduObserve]]</dd>
+  <dd>Werte aus [[DigCompEduObserve]]</dd>
 </dl>
 
 #### &#9675; Schlagworte <code>&lt;keywords&gt;</code>
@@ -1170,82 +1228,51 @@ So können beispielsweise Ergänzungen zum Analysefokus angegeben werden.
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
 </dl>
 
-## Allgemeine Vorgaben für Werte
-
-### Mehrwertigkeit
-- Gleichnamige Elemente DÜRFEN NICHT mehrfach pro Inhalt (`item`) vorkommen.
-- Das Zeichen `|` MUSS zum Trennen von mehreren Werten in den Feldern verwendet werden.
-  - Technisch: `U+007C` (Unicode) (= "pipe", "vertical line", "senkrechter Strich")
-
-### Links
-- Links MÜSSEN absolute URLs (insbesondere keine relativen URLs) darstellen.
-- Links SOLLEN das Schema *https* verwenden.
-
-
 <section class="informative">
-## Beispiel XML-Feed (alte Spezifikationen, in Überabeitung)
+## Beispiel RSS-/XML-Feed
 
-<pre class="example" title="Channel mit zwei Items">
-  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-  &lt;rss xmlns:mvp="https://w3id.org/unterrichtsvideos.net/specs/" version="2.0"&gt;
-    &lt;channel&gt;
-      &lt;title&gt;Videos | Videoportal ProVision der Universität Münster | learning professional vision&lt;/title&gt;
-      &lt;link&gt;https://www.uni-muenster.de/ProVision/video/&lt;/link&gt;
-      &lt;description&gt;Videoportal ProVision der Universität Münster | learning professional vision&lt;/description&gt;
-      &lt;language&gt;de-de&lt;/language&gt;
-      &lt;copyright&gt;Copyright © 2021 Videoportal ProVision&lt;/copyright&gt;
-      &lt;pubDate&gt;Fri, 05 Mar 2021 11:05:28 +0100&lt;/pubDate&gt;
-      &lt;lastBuildDate&gt;Fri, 05 Mar 2021 11:05:28 +0100&lt;/lastBuildDate&gt;
-      &lt;image&gt;
-        &lt;title&gt;Videos | Videoportal ProVision der Universität Münster | learning professional vision&lt;/title&gt;
-        &lt;url&gt;https://www.uni-muenster.de/imperia/md/images/provision/_v/projektlogo.png&lt;/url&gt;
-        &lt;link&gt;https://www.uni-muenster.de/ProVision/video/&lt;/link&gt;
-      &lt;/image&gt;
-      &lt;channel_version&gt;1.0&lt;/channel_version&gt;
-      &lt;item&gt;
-        &lt;title&gt;&lt;![CDATA[Deutsch - 5. Klasse Lesestrategietraining. Stunde 8 - Clip 7: Lesestrategiesong]]&gt;&lt;/title&gt;
-        &lt;link&gt;https://www.uni-muenster.de/ProVision/video/#DEU_K5_LK2_2DS_LF_Clip7&lt;/link&gt;
-        &lt;description&gt;&lt;![CDATA[Zum Abschluss der Unterrichtsstunde singen die Schülerinnen und Schüler gemeinsam mit der Lehrkraft den sogenannten Lesestrategiesong. Dies ist eine Methode zur Festigung des metakognitiven Wissens über die Lesestrategien des Trainingsprogramms „Lesen(d) lernen“.&lt;br /&gt;]]&gt;&lt;/description&gt;
-        &lt;pubDate&gt;Thu, 24 Dec 2020 13:06:58 +0100&lt;/pubDate&gt;
-        &lt;copyright&gt;Copyright © 2021 Videoportal ProVision&lt;/copyright&gt;
-        &lt;language&gt;de-de&lt;/language&gt;
-        &lt;use_restrictions&gt;G0 | G1 | G2 | G3 | G4 | G5 | G6 | G7&lt;/use_restrictions&gt;
-        &lt;use_restrictions_label&gt;Abrufbar für tätige Personen im pädagogischen Bereich, in Aus- und Weiterbildung von pädagogischem Personal, (angehende) Lehrpersonen oder Studierende mit Bezug zu schulischen oder außerschulischen Lehr-Lern-Prozessen.&lt;/use_restrictions_label&gt;
-        &lt;focus_of_analysis&gt;Lernunterstützung im Lesestrategietraining&lt;/focus_of_analysis&gt;
-        &lt;lecture_activities&gt;Schülerdemonstration&lt;/lecture_activities&gt;
-        &lt;lecture_phase&gt;Reflexionsphase&lt;/lecture_phase&gt;
-        &lt;subject&gt;Deutsch&lt;/subject&gt;
-        &lt;grade&gt;5&lt;/grade&gt;
-        &lt;school_type&gt;Gesamtschule&lt;/school_type&gt;
-        &lt;lecture_type&gt;Unterrichtsausschnitt&lt;/lecture_type&gt;
-        &lt;video_duration&gt;00:03:08.740&lt;/video_duration&gt;
-        &lt;video_resolution&gt;1280x720&lt;/video_resolution&gt;
-        &lt;video_image&gt;https://www.uni-muenster.de/imperia/md/images/ProVision/videos/02_Deutsch/fittosize_1140_642_3d0342597d2a5a8454cb93f5c4769a99_deu_k5_lk2_2ds_lf_clip7_strategiesong_teaserbild.jpeg&lt;/video_image&gt;
-        &lt;id&gt;DEU_K5_LK2_2DS_LF_Clip7&lt;/id&gt;
-      &lt;/item&gt;
-      &lt;item&gt;
-        &lt;title&gt;&lt;![CDATA[Geographie - 7. Klasse In den Savannen. Doppelstunde 1 - Clip 1: Einführung in das Thema Savannentypen]]&gt;&lt;/title&gt;
-        &lt;link&gt;https://www.uni-muenster.de/ProVision/video/#GEO_K7_LK2_1DS_SAV_Clip1&lt;/link&gt;
-        &lt;description&gt;&lt;![CDATA[Savanne ist nicht gleich Savanne.  Stummer Impuls mit Bildern von Savannentypen zum Unterrichtseinstieg.]]&gt;&lt;/description&gt;
-        &lt;pubDate&gt;Tue, 29 Dec 2020 17:38:33 +0100&lt;/pubDate&gt;
-        &lt;copyright&gt;Copyright © 2021 Videoportal ProVision&lt;/copyright&gt;
-        &lt;language&gt;de-de&lt;/language&gt;
-        &lt;use_restrictions&gt;G0:3 | G1:3 | G2:3 | G3:3 | G4:3 | G5:3 | G6:3 | G7:3&lt;/use_restrictions&gt;
-        &lt;use_restrictions_label&gt;Abrufbar für tätige Personen im pädagogischen Bereich, in Aus- und Weiterbildung von pädagogischem Personal, (angehende) Lehrpersonen oder Studierende mit Bezug zu schulischen oder außerschulischen Lehr-Lern-Prozessen.&lt;/use_restrictions_label&gt;
-        &lt;focus_of_analysis&gt;Allgemeine Lernunterstützung&lt;/focus_of_analysis&gt;
-        &lt;lecture_activities&gt;Unterrichtsgespräch&lt;/lecture_activities&gt;
-        &lt;lecture_phase&gt;Einstiegsphase&lt;/lecture_phase&gt;
-        &lt;subject&gt;Geografie&lt;/subject&gt;
-        &lt;grade&gt;7&lt;/grade&gt;
-        &lt;school_type&gt;Gymnasium&lt;/school_type&gt;
-        &lt;lecture_type&gt;Unterrichtsausschnitt&lt;/lecture_type&gt;
-        &lt;video_duration&gt;00:04:40.340&lt;/video_duration&gt;
-        &lt;video_resolution&gt;1280x720&lt;/video_resolution&gt;
-        &lt;video_image&gt;https://www.uni-muenster.de/imperia/md/images/ProVision/videos/03_Geographie/fittosize_1140_642_7addebc5f4ec833d8fb770c276d1745f_geo_k7_lk2_1ds_clip1_teaser.jpeg&lt;/video_image&gt;
-        &lt;id&gt;GEO_K7_LK2_1DS_SAV_Clip1&lt;/id&gt;
-      &lt;/item&gt;
-    &lt;/channel&gt;
-  &lt;/rss&gt;
+<pre class="example" title="Channel mit einem Item">
+  &#60;?xml version="1.0" encoding="UTF-8"?&#62;
+  &#60;rss version="2.0" xmlns:mvp="https://w3id.org/unterrichtsvideos.net/specs/"&#62;
+    &#60;channel&#62;
+      &#60;title&#62;&#60;![CDATA[ProVision]]&#62;&#60;/title&#62;
+      &#60;link&#62;https://www.uni-muenster.de/ProVision/&#60;/link&#62;
+      &#60;description&#62;&#60;![CDATA[ProVision | learning professional vision]]&#62;&#60;/description&#62;
+      &#60;image&#62;
+        &#60;url&#62;https://www.uni-muenster.de/ProVision/img/logo.png&#60;/url&#62;
+        &#60;title&#62;&#60;![CDATA[ProVision]]&#62;&#60;/title&#62;
+        &#60;link&#62;https://www.uni-muenster.de/ProVision/&#60;/link&#62;
+      &#60;/image&#62;
+      &#60;docs&#62;https://w3id.org/unterrichtsvideos.net/specs/version/2.0&#60;/docs&#62;
+      &#60;item&#62;
+        &#60;title&#62;&#60;![CDATA[Partnerpuzzle im Lesestrategietraining: Austausch von Steckbriefen]]&#62;&#60;/title&#62;
+        &#60;link&#62;https://www.uni-muenster.de/ProVision/video/#DEU_K5_LK2_2DS_LF_Clip5&#60;/link&#62;
+        &#60;description&#62;&#60;![CDATA[In der Vermittlungsphase des Partnerpuzzles tauschen sich die Sch&#252;lerinnen und Sch&#252;ler innerhalb der Tischgruppen &#252;ber die Inhalte der gelesenen Texte aus und vergleichen diese anhand der angefertigten Steckbriefe miteinander. Ziel ist es, dass alle Sch&#252;lerinnen und Sch&#252;ler, die sich jeweils nur mit einem der beiden Texte zu den Superhelden-Figuren auseinandergesetzt haben, am Ende &#252;ber beide Figuren gleicherma&#223;en informiert sind.]]&#62;&#60;/description&#62;
+        &#60;abstract&#62;&#60;![CDATA[Dieser Clip aus einer Unterrichtsstunde, in der die ersten drei Lesestrategien des Trainingsprogramms &#8222;Lesen(d) lernen&#8220; trainiert werden, zeigt die Austausch- bzw. Vermittlungsphase im Rahmen des Partnerpuzzles. ]]&#62;&#60;/abstract&#62;
+        &#60;id&#62;DEU_K5_LK2_2DS_LF_Clip5&#60;/id&#62;
+        &#60;resource_type&#62;https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt005 | https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt001&#60;/resource_type&#62;
+        &#60;image&#62;https://www.uni-muenster.de/imperia/md/images/ProVision/videos/02_Deutsch/fittosize_1140_641_fae1dab1f2a1f67ed848fd84ade1c892_deu_k5_lk2_2ds_lf_clip5_partnerpuzzle_ga_teaserbild.jpeg&#60;/image&#62;
+        &#60;language&#62;de&#60;/language&#62;
+        &#60;date_created&#62;2025-12-31&#60;/date_created&#62;
+        &#60;license&#62;Copyright&#60;/license&#62;
+        &#60;creator&#62;Universita&#776;t Mu&#776;nster&#60;/creator&#62;
+        &#60;pubDate&#62;Mo, 01 Dez 2025 00:00:00 GMT&#60;/pubDate&#62;
+        &#60;time_required&#62;PT2H15M30S&#60;/time_required&#62;
+        &#60;use_restrictions&#62;https://w3id.org/unterrichtsvideos.net/vocabs/audience/g6 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g3 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g1 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g4 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g7&#60;/use_restrictions&#62;
+        &#60;use_restrictions_label&#62;&#60;![CDATA[Abrufbar im Rahmen eines aktiven Kurses.]]&#62;&#60;/use_restrictions_label&#62;
+        &#60;focus_instructional_quality&#62;https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/1 | https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/4&#60;/focus_instructional_quality&#62;
+        &#60;focus_digital_competence&#62;https://w3id.org/unterrichtsvideos.net/vocabs/digcompeduobserve/2.4&#60;/focus_digital_competence&#62;
+        &#60;material_type&#62;https://w3id.org/unterrichtsvideos.net/vocabs/material_type/mt1002&#60;/material_type&#62;
+        &#60;camera_perspective&#62;https://w3id.org/unterrichtsvideos.net/vocabs/camera_perspective/c05&#60;/camera_perspective&#62;
+        &#60;learning_format&#62;https://w3id.org/unterrichtsvideos.net/vocabs/learning_format/lf2&#60;/learning_format&#62;
+        &#60;school_type&#62;https://w3id.org/unterrichtsvideos.net/vocabs/school_type/st04&#60;/school_type&#62;
+        &#60;grade&#62;https://w3id.org/unterrichtsvideos.net/vocabs/grade/7&#60;/grade&#62;
+        &#60;subject&#62;https://w3id.org/unterrichtsvideos.net/vocabs/subject/s1005&#60;/subject&#62;
+        &#60;topic&#62;https://w3id.org/unterrichtsvideos.net/vocabs/topic/81dbdf0e-c20d-481e-a0f9-ebbbb0abc2bd&#60;/topic&#62;
+        &#60;keywords&#62;Binnendifferenzierung | Lernstrategien&#60;/keywords&#62;
+      &#60;/item&#62;
+    &#60;/channel&#62;
+  &#60;/rss&#62;
 </pre>
 </section>
 
@@ -1259,7 +1286,7 @@ So können beispielsweise Ergänzungen zum Analysefokus angegeben werden.
     <dd>XML Schema Definition</dd>
     <dt><abbr title="Uniform Resource Identifier">URI</abbr></dt>
     <dd>Uniform Resource Identifier</dd>
-    <dt><abbr title="Uniform Resource Locator">URL</abbr></dt>
+    <dt><abbr title="Uniform Resource Locator">URL</abbr>, <abbr title="Uniform Resource Locators">URLs</abbr></dt>
     <dd>Uniform Resource Locator</dd>
     <dt><abbr title="Character Data">CDATA</abbr></dt>
     <dd>Character Data (in <abbr title="Extensible Markup Language">XML</abbr>, ein Bereich, in dem Zeichen nicht als Markup interpretiert werden)</dd>
