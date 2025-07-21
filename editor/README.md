@@ -21,7 +21,7 @@ Die Datei nutzt Makros und externe Datenverbindungen zur Vereinfachung und Autom
         * [ORC-ID](https://orcid.org) → Spalte `ORCID`
         * [Wikidata-ID](https://wikidata.org) → Spalte `WIKIDATA`
         * Alternativ dazu: Name/Beschreibung in Spalte `COMMON_NAME`
-3. Tabellenblatt "Anbieter" erfasst einige grundlegende Informationen über den Anbieter.
+3. Tabellenblatt "Anbieter" ermöglicht die Erfassung einiger grundlegender Informationen über den Anbieter.
 4. Tabellenblatt „Stichwörter“ ermöglicht die Eingabe von Stichwörtern für eine strukturierte Auswahl von Inhalten.
-5. Tabellenblatt „Metadaten“ ermöglicht die Erfassung von Metadaten zum Inhalt.
+5. Tabellenblatt „Metadaten“ ermöglicht die Erfassung von Metadaten zu Inhalten (z.B. Unterrichtsvideos, Bildungsangeboten).
 

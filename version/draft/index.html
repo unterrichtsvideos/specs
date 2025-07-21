@@ -533,7 +533,7 @@ Das `id`-Feld ist die permanente und eindeutige Kennung des Inhalts (z. B. Video
     <a href="https://schema.org/identifier">sdo:identifier</a>
   </dd>
   <dt>Typ</dt>
-  <dd>`string`, max. 150 Zeichen, SOLL alphanumerisch und KANN `- . _` [[RFC3986]] (2.3)</dd>
+  <dd>`string`</dd>
 </dl>
 
 Die Werte des Feldes MÜSSEN folgende Bedingungen erfüllen:
@@ -544,9 +544,9 @@ Die Werte des Feldes MÜSSEN folgende Bedingungen erfüllen:
 - DARF NICHT mehr als 150 Zeichen aufweisen
 - DARF NICHT folgende Sonderzeichen enthalten: `: / ? # [] @ ! $ & ' () " * + , ; = | `<` `> `
 - SOLL NICHT mit Sonderzeichen beginnen oder enden.
-- DARF NICHT typographischen Freiraum / Leerzeichen (Whitespaces) enthaltenhttps://www.labvanced.com/
+- DARF NICHT typographischen Freiraum / Leerzeichen (Whitespaces) enthalten
 - DARF folgende alphanumerische Zeichen enthalten: `A-Z`, `a-z`, `0-9`
-- DARF folgende (Sonder-)Zeichen enthalten: `- . _`
+- DARF folgende (Sonder-)Zeichen enthalten: `- . _` (vgl. auch [[RFC3986]], Sektion 2.3)
 - MUSS case-insensitiv interpretiert gleichbedeutend sein
 </div>
 
