@@ -730,6 +730,12 @@ Das `date_created`-Feld beschreibt das Datum der Erstellung des Inhalts.
   <dd>JJJJ(-MM(-TT)) [[ISO8601]]</dd>
 </dl>
 
+<pre class="example" title="Möglicher regulärer Ausdruck zur Validierung des Erstelldatums">
+^\d{4}(?:-(0[1-9]|1[0-2])(?:-(0[1-9]|[12]\d|3[01]))?)?$
+</pre>
+
+##### Beispiele zu
+
 <pre class="example" title="Aufnahmejahr des Unterrichtsvideos">
 &lt;date_created&gt;2025&lt;/date_created&gt;
 </pre>
@@ -1107,10 +1113,6 @@ Das `time_required`-Feld gibt die (Beschäftigungs-)Dauer des Inhalts an, z. B. 
     - `nM` Minuten
     - `nS` Sekunden
 
-<pre class="example" title="Regulärer Ausdruck zur Validierung des time_required-Feldes">
-^(-?)P(?=\d|T\d)(?:(\d+)Y(?:(\d+)M)?(?:(\d+)D)?|(?:(\d+)W))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$
-</pre>
-
 <dl>
   <dt>Pflichtfeld</dt>
   <dd>nein</dd>
@@ -1123,6 +1125,12 @@ Das `time_required`-Feld gibt die (Beschäftigungs-)Dauer des Inhalts an, z. B. 
   <dt>Typ</dt>
   <dd>`string` der Form `P(n)Y(n)M(n)W(n)DT(n)H(n)M(n)S` [[ISO8601]]</dd>
 </dl>
+
+<pre class="example" title="Möglicher regulärer Ausdruck zur Validierung der Dauer">
+^(-?)P(?=\d|T\d)(?:(\d+)Y(?:(\d+)M)?(?:(\d+)D)?|(?:(\d+)W))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$
+</pre>
+
+##### Beispiele zur Verwendung der Angaben zur Dauer
 
 <pre class="example" title="Dauer des Unterrichtsvideos: 1 Stunde, 12 Minuten und 23 Sekunden">
   &lt;time_required&gt;PT1H12M23S&lt;/time_required&gt;
