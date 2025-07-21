@@ -1,11 +1,9 @@
-Sprache: [Deutsch](README.md), [Englisch](README_EN.md)
-
 # Bereitstellung von Metadaten
-Für die Bereitstellung von Metadaten können beliebige Datenbanken/Datenquellen verwendet werden.
+Für die Bereitstellung von Metadaten können beliebige Quellen verwendet werden.
 Ein unterstütztes Exportformat sind RSS/XML-Feeds in Übereinstimmung mit den [Spezifikationen](../README.md).
 
 ## Excel Editor
-Die Metadaten-Editor-Vorlage für Microsoft Office kann zur Erfassung von Metadaten verwendet werden.
+Eine Metadaten-Editor-Vorlage für Microsoft Office kann zur Erfassung und zum Export von Metadaten verwendet werden.
 
 - [Metadaten-Editor (XLSM) herunterladen](Metadata-Editor.xlsm)
 - Empfohlene App-Version: 
