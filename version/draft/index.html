@@ -622,8 +622,10 @@ Das `resource_type`-Feld gibt den primären Ressourcentyp eines Inhalts an.
   <dd>Werte aus [[Ressourcentypen]]</dd>
 </dl>
 
-<pre class="example" title="Bei dem Inhalt handelt es sich um ein authentisches Unterrichtsvideo">
-&lt;resource_type&gt;https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt005&lt;/resource_type&gt;
+<pre class="example xml" title="Bei dem Inhalt handelt es sich um ein authentisches Unterrichtsvideo">
+&lt;resource_type&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt005
+&lt;/resource_type&gt;
 </pre>
 
 #### &#9679; Beschreibung <code>&lt;description&gt;</code>
@@ -740,6 +742,8 @@ Das `date_created`-Feld beschreibt das Datum der Erstellung des Inhalts.
 
 Das `license`-Feld gibt Auskunft über die vorliegende Lizenz zur Nutzung und Verwertung des Inhalts.
 
+<!-- TODO: Mehrfachwerte? -->
+
 <dl>
   <dt>Pflichtfeld</dt>
   <dd>ja</dd>
@@ -756,9 +760,9 @@ Das `license`-Feld gibt Auskunft über die vorliegende Lizenz zur Nutzung und Ve
   <dd>Wert aus [[Lizenzen]]</dd>
 </dl>
 
-```html "example": "Aufnahmejahr des Unterrichtsvideos"
-https://w3id.org/unterrichtsvideos.net/vocabs/license/cc-by-sa
-```
+<pre class="example" title="Inhalt mit CC-BY-SA Lizenz">
+&lt;license&gt;https://w3id.org/unterrichtsvideos.net/vocabs/license/cc-by-sa&lt;/license&gt;
+</pre>
 
 #### &#9679; Nutzungsbeschränkungen <code>&lt;use_restrictions&gt;</code>
 
@@ -786,9 +790,12 @@ _und_
   <dd>Werte aus [[Zielgruppen]]</dd>
 </dl>
 
-```html "example": "Studierende und Hochschullehrende haben Zugriff und der Inhalt ist für diese Zielgruppen relevant."
-https://w3id.org/unterrichtsvideos.net/vocabs/audience/g1 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g3
-```
+<pre class="example xml" title="Studierende und Hochschullehrende haben Zugriff und der Inhalt ist für diese Zielgruppen relevant.">
+&lt;use_restrictions&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/audience/g1 | 
+  https://w3id.org/unterrichtsvideos.net/vocabs/audience/g3
+&lt;/use_restrictions&gt;
+</pre>
 
 #### &#9675; Nutzungsbeschränkungen (Beschreibung) <code>&lt;use_restrictions_label&gt;</code>
 
@@ -808,8 +815,10 @@ Das `use_restrictions_label`-Feld definiert mögliche Einschränkungen bei der N
   <dd>`string` (CDATA) [[XML 1.0]]</dd>
 </dl>
 
-<pre class="example" title="use_restrictions_label">
+<pre class="example xml" title="Nutzungsbeschränkungen eines spezifischen Inhalts.">
+&lt;use_restrictions_label&gt;
   &lt;![CDATA[Zugriff für Studierende nur innerhalb eines Kurses an einer Hochschule.]]&gt;
+&lt;/use_restrictions_label&gt;
 </pre>
 
 #### &#9675; Veröffentlichungsdatum <code>&lt;pubDate&gt;</code>
@@ -829,9 +838,10 @@ Das `pubDate`-Feld gibt das Datum der ersten Veröffentlichung an, gemäß [[RSS
   <dd>`dateTime` [[RSS 2.0]] / [[RFC822]]</dd>
 </dl>
 
-```html "example": "Verwendung"
-Wed, 26 Sep 2018 10:34:44 +0200
-```
+<pre class="example xml" title="Inhalt wurde am 26.09.2025 veröffentlicht.">
+&lt;pubDate&gt;Wed, 26 Sep 2025 10:34:44 +0200&lt;/pubDate&gt;
+</pre>
+
 
 #### &#9675; Urheber/-innen <code>&lt;creator&gt;</code>
 
@@ -857,9 +867,9 @@ Organisationen: GND, ROR, WIKIDATA
   <dd>Werte aus [[GND]] [[ORCID]] [[ROR]] [[Wikidata]]</dd>
 </dl>
 
-```html "example": "Verwendung (hier: GND-ID der Universität Münster)"
-https://d-nb.info/gnd/1194191657
-```
+<pre class="example xml" title="Einrichtung als Urheber (hier: GND-ID der Universität Münster)">
+&lt;creator&gt;https://d-nb.info/gnd/1194191657&lt;/creator&gt;
+</pre>
 
 ### Strukturelle Metadaten
 
@@ -892,7 +902,7 @@ Die Reihenfolge der Werte ist bedeutsam.
     - {ID_2} *hasPart* {ID_2_1} | {ID_2_2}
 
 <pre class="example" title="Der beschriebene Inhalt ID_2 hat dazugehörige Inhalte ID_2_1 und ID_2_2">
-  ID_2_1 | ID_2_2
+  &lt;hasPart&gt;ID_2_1 | ID_2_2&lt;/hasPart&gt;
 </pre>
 
 <strong>Heterarchische Nebenordnung</strong>
@@ -901,7 +911,7 @@ Die Reihenfolge der Werte ist bedeutsam.
       - {ID_4} *hasPart* {ID_5}
 
 <pre class="example" title="Der beschriebene Inhalt ID_4 hat einen dazugehörigen Inhalt ID_5">
-  ID_5
+  &lt;hasPart&gt;ID_5&lt;/hasPart&gt;
 </pre>
 
 <strong>Assoziative Relation</strong>
@@ -910,7 +920,7 @@ Die Reihenfolge der Werte ist bedeutsam.
     - {ID_1} *hasPart* {ID_2} | {ID_3}
 
 <pre class="example" title="Der beschriebene Inhalt ID_1 hat dazugehörige Inhalte ID_2 und ID_3">
-  ID_2 | ID_3
+  &lt;hasPart&gt;ID_2 | ID_3&lt;/hasPart&gt;
 </pre>
 
 #### &#9675; ist Teil <code>&lt;isPartOf&gt;</code>
@@ -944,7 +954,7 @@ Die Reihenfolge der Werte ist bedeutsam.
     - {ID_2_2} *isPartOf* {ID_2}
 
 <pre class="example" title="Der beschriebene Inhalt ID_2_1 ist Teil von ID_2">
-  ID_2
+  &lt;isPartOf&gt;ID_2&lt;/isPartOf&gt;
 </pre>
 
 <strong>Hierarchische Relation: Nebenordnung</strong>
@@ -954,7 +964,7 @@ Die Reihenfolge der Werte ist bedeutsam.
       - {ID_5} *isPartOf* {ID_4}
 
 <pre class="example" title="Der beschriebene Inhalt ID_5 ist Teil von ID_4">
-  ID_4
+  &lt;isPartOf&gt;ID_4&lt;/isPartOf&gt;
 </pre>
 
 <strong>Assoziative Relation</strong>
@@ -963,7 +973,7 @@ Die Reihenfolge der Werte ist bedeutsam.
     - {ID_2} *isPartOf* {ID_1}
 
 <pre class="example" title="Der beschriebene Inhalt ID_2 ist Teil von ID_1">
-  ID_1
+  &lt;isPartOf&gt;ID_1&lt;/isPartOf&gt;
 </pre>
 
 ### Didaktische Metadaten
@@ -988,6 +998,18 @@ Das `school_type`-Feld beschreibt die Schulart.
   <dd>Werte aus [[Schularten]]</dd>
 </dl>
 
+<pre class="example" title="Das Unterrichtsvideo wurde an einer Grundschule aufgenommen.">
+  &lt;school_type&gt;https://w3id.org/unterrichtsvideos.net/vocabs/school_type/st02&lt;/school_type&gt;
+</pre>
+
+<pre class="example" title="Der Inhalt ist für das Lehramt an Grundschulen relevant.">
+  &lt;school_type&gt;https://w3id.org/unterrichtsvideos.net/vocabs/school_type/st02&lt;/school_type&gt;
+</pre>
+
+<pre class="example" title="Der Inhalt ist für schulartübergreifend relevant.">
+  &lt;school_type&gt;https://w3id.org/unterrichtsvideos.net/vocabs/school_type/st1&lt;/school_type&gt;
+</pre>
+
 #### &#9679; Jahrgangsstufe <code>&lt;grade&gt;</code>
 
 Das `grade`-Feld beschreibt die Jahrgangsstufe.
@@ -1007,6 +1029,14 @@ Das `grade`-Feld beschreibt die Jahrgangsstufe.
   <dt>Wertebereich</dt>
   <dd>Werte aus [[Jahrgangsstufen]]</dd>
 </dl>
+
+<pre class="example" title="Das Unterrichtsvideo wurde in einer 4. Klasse aufgenommen.">
+  &lt;grade&gt;https://w3id.org/unterrichtsvideos.net/vocabs/grade/4&lt;/grade&gt;
+</pre>
+
+<pre class="example" title="Der Inhalt ist für die Ausübung eines Lehramts in der Jahrgangsstufe 5 relevant.">
+  &lt;grade&gt;https://w3id.org/unterrichtsvideos.net/vocabs/grade/5&lt;/grade&gt;
+</pre>
 
 <!--
 #### Bildungsstufe <code>&lt;educational_level&gt;</code>
@@ -1034,8 +1064,6 @@ Das `educational_level`-Feld beschreibt die Bildungsstufe der Lernenden.
 
 Das `subject`-Feld definiert das Schulfach.
 
-- Fachübergreifender Unterricht: Bei mehreren Fächern SOLL mindestens "Fachübergreifender Unterricht" enthalten sein.
-
 <dl>
   <dt>Pflichtfeld</dt>
   <dd>ja</dd>
@@ -1052,16 +1080,17 @@ Das `subject`-Feld definiert das Schulfach.
   <dd>Werte aus [[Schulfächer]]</dd>
 </dl>
 
-```html "example": "Verwendung"
-Deutsch | Chemie | Fachübergreifender Unterricht
-oder
-Fachübergreifender Unterricht
-oder
-Mathematik
-```
+<pre class="example xml" title="Das Video zeigt einen fächerübergreifenden Informatik- und Geografieunterricht.">
+&lt;subject&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/subject/se1010 |
+  https://w3id.org/unterrichtsvideos.net/vocabs/subject/s1013 |
+  https://w3id.org/unterrichtsvideos.net/vocabs/subject/s1010
+&lt;/subject&gt;
+</pre>
 
-<div class="note"><p>Wenn es mehr als ein Fach zutreffend ist, werden diese aufgelistet, aber ebenfalls "Fachübergreifender Unterricht". Es muss der Term aus dem geschlossenen Vokabular genommen werden, der das Fach am besten beschreibt.</p><p>Freiarbeit = "Sonstiges"; Energie und Umwelt (Maschinenbau) = "Berufliche Fachrichtungen"; Naturwissenschaften = "Fachübergreifender Unterricht"</p></div>
-
+<pre class="example" title="Der Inhalt ist für das Fach Mathematik relevant/konzipiert.">
+  &lt;subject&gt;https://w3id.org/unterrichtsvideos.net/vocabs/subject/s1017&lt;/subject&gt;
+</pre>
 
 #### &#9675; Dauer <code>&lt;time_required&gt;</code>
 
@@ -1091,14 +1120,14 @@ Das `time_required`-Feld gibt die (Beschäftigungs-)Dauer des Inhalts an, z. B. 
   <dd>`string` der Form `P(n)Y(n)M(n)W(n)DT(n)H(n)M(n)S` [[ISO8601]]</dd>
 </dl>
 
-```html "example": "Dauer des Unterrichtsvideos: 1 Stunde, 12 Minuten und 23 Sekunden"
-PT1H12M23S 
-```
+<pre class="example" title="Dauer des Unterrichtsvideos: 1 Stunde, 12 Minuten und 23 Sekunden">
+  &lt;time_required&gt;PT1H12M23S&lt;/time_required&gt;
+</pre>
 
-```html "example": "Beschäftigungsdauer für ein Lernmodul: 2 Wochen"
-P2W 
-```
-
+<pre class="example" title="Beschäftigungsdauer für ein Lernmodul: 2 Wochen">
+  &lt;time_required&gt;P2W&lt;/time_required&gt;
+</pre>
+ 
 #### &#9675; Begleitmaterialtypen <code>&lt;material_type&gt;</code>
 
 Das `material_type`-Feld gibt eine Liste mit verfügbaren Begleitmaterialien zu einem spezifischen Inhalt an.
@@ -1119,9 +1148,12 @@ Das `material_type`-Feld gibt eine Liste mit verfügbaren Begleitmaterialien zu 
   <dd>Werte aus [[Materialtypen]]</dd>
 </dl>
 
-```html "example": "Zu dem Inhalt gibt es einen Unterrichtsverlaufsplan und ein Transkript."
-https://w3id.org/unterrichtsvideos.net/vocabs/material_type/mt1000 | https://w3id.org/unterrichtsvideos.net/vocabs/material_type/mt1003
-```
+<pre class="example xml" title="Zu dem Inhalt gibt es einen Unterrichtsverlaufsplan und ein Transkript.">
+&lt;material_type&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/material_type/mt1000 |
+  https://w3id.org/unterrichtsvideos.net/vocabs/material_type/mt1003
+&lt;/material_type&gt;
+</pre>
 
 #### &#9675; Lernformat <code>&lt;learning_format&gt;</code>
 
@@ -1143,6 +1175,12 @@ Das `learning_format`-Feld kennzeichnet die vorherschende Lehr-/Lernform des Inh
   <dd>Werte aus [[Lernformate]]</dd>
 </dl>
 
+<pre class="example xml" title="Der Inhalt kann als Online (Selbstlernangebot) genutzt werden.">
+&lt;learning_format&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/learning_format/lf2
+&lt;/learning_format&gt;
+</pre>
+
 #### &#9675; Lehrplanthema <code>&lt;topic&gt;</code>
 
 Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts. 
@@ -1161,6 +1199,12 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
   <dt>Wertebereich</dt>
   <dd>Werte aus [[Lehrplanthemen]]</dd>
 </dl>
+
+<pre class="example xml" title="Der Inhalt gehört zum Thema Physik > Akustik">
+&lt;topic&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/topic/a37552ec-78c4-44f2-8564-8e84e4ca26b3
+&lt;/topic&gt;
+</pre>
 
 #### &#9675; Kameraperspektive <code>&lt;camera_perspective&gt;</code>
 
@@ -1181,10 +1225,23 @@ Das `camera_perspective`-Feld beschreibt die Kameraperspektive bzw. den Point of
   <dd>Werte aus [[Kameraperspektiven]]</dd>
 </dl>
 
+<pre class="example xml" title="Das Video wurde aus der Perspektive der Lehrkraft aufgenommen.">
+&lt;camera_perspective&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/camera_perspective/c01
+&lt;/camera_perspective&gt;
+</pre>
+
+<pre class="example xml" title="Der Inhalt verwendet ein 360° Unterrichtsvideo.">
+&lt;camera_perspective&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/camera_perspective/c09
+&lt;/camera_perspective&gt;
+</pre>
+
 #### &#9675; Analysefokus: Unterrichtsqualität <code>&lt;focus_instructional_quality&gt;</code>
 
 Das `focus_instructional_quality`-Feld benennt die Eignung des Inhalts für einen spezifischen Analysefokus mit Bezug zum [[MAIN-TEACH-Modell]].
 Inhalte können dabei sowohl positive Beispiele, als auch potenzielle Lerngelegenheiten beinhalten.
+Nur eine besonders prägnante Stellvertretung für den Beobachtungsschwerpunkt sollte hier erfasst werden.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -1202,10 +1259,24 @@ Inhalte können dabei sowohl positive Beispiele, als auch potenzielle Lerngelege
   <dd>Werte aus [[MAIN-TEACH-Modell]]</dd>
 </dl>
 
+<pre class="example xml" title="Das Unterrichtsvideo hat einen besonders prägnanten Fokus auf die Unterstützung der kognitiven Aktivierung von Lernenden.">
+&lt;focus_instructional_quality&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/3.2
+&lt;/focus_instructional_quality&gt;
+</pre>
+
+<pre class="example xml" title="Der Inhalt adressiert im Besonderen qualtiativ hochwertiges Feedback im Unterricht (z.B. als Thema/Lernziel/Lerngegenstand).">
+&lt;focus_instructional_quality&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/5.3
+&lt;/focus_instructional_quality&gt;
+</pre>
+
+
 #### &#9675; Analysefokus: Digitale Kompetenzen <code>&lt;focus_digital_competence&gt;</code>
 
 Das `focus_digital_competence`-Feld benennt die Eignung des Inhalts für einen spezifischen Analysefokus mit Bezug zum [[DigCompEduObserve]].
 Inhalte können dabei sowohl positive Beispiele, als auch potenzielle Lerngelegenheiten beinhalten.
+Nur eine besonders prägnante Stellvertretung für den Beobachtungsschwerpunkt sollte hier erfasst werden.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -1224,12 +1295,25 @@ Inhalte können dabei sowohl positive Beispiele, als auch potenzielle Lerngelege
   <dd>Werte aus [[DigCompEduObserve]]</dd>
 </dl>
 
+<pre class="example xml" title="Das Unterrichtsvideo zeigt besonders prägnant selbstgesteuerte Lernprozesse mit digitalen Medien.">
+&lt;focus_digital_competence&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/digcompedu/3.4
+&lt;/focus_digital_competence&gt;
+</pre>
+
+<pre class="example xml" title="Der Inhalt adressiert im Besonderen die Vermittlung digitaler Problemlösekompetenz.">
+&lt;focus_digital_competence&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/digcompedu/6.5
+&lt;/focus_digital_competence&gt;
+</pre>
+
+
 #### &#9675; Schlagworte <code>&lt;keywords&gt;</code>
 
 Das `keywords`-Feld stellt eine Liste von Schlagworten zur Beschreibung des Inhalts dar.
 So können beispielsweise Ergänzungen zum Analysefokus angegeben werden.
 
-Liste von Schlagwortvorschlägen: [[Schlagwörter]]
+Es wird bei der Erfassung eine Orientierung an der Liste von Schlagwortvorschlägen empfohlen: [[Schlagwörter]]
 
 <!-- TODO: Definition: Hierarchische Schlagworte -->
 
