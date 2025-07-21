@@ -23,7 +23,7 @@ Um ein Angebot/Portal an das Meta-Videoportal anzubinden, kontaktieren Sie uns u
     [info@unterrichtsvideos.net](mailto:info@unterrichtsvideos.net)
 
 Sofern der Anbindungswunsch der Ausrichtung des Meta-Videoportal entspricht, müssen Metadaten bereitgestellt werden, um Inhalte listen zu können. Es gibt verschiedene Möglichkeiten Metadaten bereitzustellen:
-- [Anleitung zur bereistellung von Metadaten](editor/README.md)
+- [Anleitung zur Bereitstellung von Metadaten](editor/README.md)
 
 ### Vokabulare
 - Erstellen Sie "Github Issues" im [Repositorium für Vokabulare](https://github.com/unterrichtsvideos/vocabs), um Änderungen vorzuschlagen
