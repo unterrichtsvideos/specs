@@ -1107,6 +1107,10 @@ Das `time_required`-Feld gibt die (Beschäftigungs-)Dauer des Inhalts an, z. B. 
     - `nM` Minuten
     - `nS` Sekunden
 
+<pre class="example" title="Regulärer Ausdruck zur Validierung des time_required-Feldes">
+^(-?)P(?=\d|T\d)(?:(\d+)Y(?:(\d+)M)?(?:(\d+)D)?|(?:(\d+)W))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$
+</pre>
+
 <dl>
   <dt>Pflichtfeld</dt>
   <dd>nein</dd>
