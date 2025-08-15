@@ -5,7 +5,7 @@ Ein unterstütztes Exportformat sind RSS/XML-Feeds in Übereinstimmung mit den [
 ## Excel Editor
 Eine Metadaten-Editor-Vorlage für Microsoft Office kann zur Erfassung und zum Export von Metadaten verwendet werden.
 
-- [Metadaten-Editor (XLSM) herunterladen](Metadata-Editor.xlsm)
+- [Metadaten-Editor (XLSM) herunterladen](Metadaten-Editor.xlsm)
 - Empfohlene App-Version: 
     - Desktop-Version von Excel aus den Office 365 (Business) / Microsoft 365 (Business) Plänen
 
