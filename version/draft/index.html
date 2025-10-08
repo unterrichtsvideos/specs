@@ -32,6 +32,11 @@
             href: "https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/",
             publisher: "unterrichtsvideos.net",
           },
+          "KMK-Bildungsstandards für die Lehrkräftebildung": {
+            title: "KMK-Standards für die Lehrerbildung: Bildungswissenschaften",
+            href: "http://w3id.org/kim/kmk-vocabs/bildungswissenschaften/",
+            publisher: "DINI-AG-KIM",
+          },
           "Granularität": {
             title: "Granularität",
             href: "https://w3id.org/unterrichtsvideos.net/vocabs/granularity/",
@@ -57,8 +62,8 @@
             href: "https://w3id.org/unterrichtsvideos.net/vocabs/audience/",
             publisher: "unterrichtsvideos.net",
           },
-          "Schlagwörter": {
-            title: "Schlagwortvorschläge",
+          "Schlagwortsystematisierung": {
+            title: "Schlagwortsystematisierung",
             href: "https://w3id.org/unterrichtsvideos.net/vocabs/keyword/",
             publisher: "unterrichtsvideos.net",
           },
@@ -1218,6 +1223,7 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
 &lt;/topic&gt;
 </pre>
 
+
 #### &#9675; Kameraperspektive <code>&lt;camera_perspective&gt;</code>
 
 Das `camera_perspective`-Feld beschreibt die Kameraperspektive bzw. den Point of Interest, sofern der Inhalt ein Video enthält. 
@@ -1318,6 +1324,32 @@ Nur eine besonders prägnante Stellvertretung für den Beobachtungsschwerpunkt s
 &lt;/focus_digital_competence&gt;
 </pre>
 
+#### &#9675; Lernziele <code>&lt;teaches&gt;</code>
+Das `teaches`-Feld beschreibt das Lernziel des Inhalts als Freitext.
+
+**Hinweise**
+- Mit diesem Feld KANN das Lernziel des Inhalts formuliert werden.
+- Lernzielformulierungen KÖNNEN sich an der <a target="_blank" href="https://www.orghandbuch.de/Webs/OHB/DE/OrganisationshandbuchNEU/4_MethodenUndTechniken/Methoden_A_bis_Z/SMART_Regel_Methode/SMART_Regel_Methode_node.html">SMART-Methode</a> orientieren.
+- Lernzielformulierungen KÖNNEN sich an Kompetenzrahmen, wie den [[KMK-Bildungsstandards für die Lehrkräftebildung]] (Bildungswissenschaften), orientieren.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="https://schema.org/teaches">sdo:teaches</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (Mehrfachwerte, getrennt mit | )`</dd>
+</dl>
+
+<pre class="example xml" title="Der Inhalt adressiert das Erkennen und Interpretieren klassenführungsrelevanter Unterrichtsereignisse.">
+&lt;teaches&gt;
+  Die Teilnehmenden können bis zum Ende des Lernmoduls verschiedene Facetten des Monitorings in Unterrichtssituationen theoriegestützt erkennen und deren Wirkung auf ein lernförderliches Klassenklima erläutern.
+&lt;/teaches&gt;
+</pre>
 
 #### &#9675; Schlagworte <code>&lt;keywords&gt;</code>
 
@@ -1325,7 +1357,7 @@ Das `keywords`-Feld stellt eine Liste von Schlagworten zur Beschreibung des Inha
 Mit diesem Feld KÖNNEN beispielsweise Ergänzungen zum Analysefokus angegeben werden.
 
 **Hinweise**
-- Es SOLLTE eine Orientierung an der Systematisierung der [[Schlagwörter]] erfolgen.
+- Es SOLLTE eine Orientierung an der [[Schlagwortsystematisierung]] erfolgen.
 - Es KANN auch eine freie Verschlagwortung genutzt werden.
 - Es SOLLTEN nur ein paar der wesentlichsten Schlagwörter genutzt werden.
 
@@ -1343,7 +1375,7 @@ Mit diesem Feld KÖNNEN beispielsweise Ergänzungen zum Analysefokus angegeben w
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
-  <dd>Werte aus [[Schlagwörter]], oder Freitext, jedoch ohne das Trennzeichen `|` und Schrägstrich `/`</dd>
+  <dd>Werte aus [[Schlagwortsystematisierung]]; oder Freitext (falls nicht in Schlagwortsystematisierung), jedoch ohne das Trennzeichen `|` und Schrägstrich `/`</dd>
 </dl>
 
 <pre class="example xml" title="Das Unterrichtsvideo zeigt besonders prägnant den Umgang mit Heterogenität in der interdisziplinären Bildung durch Klassenführung und -organisation.">
@@ -1354,7 +1386,7 @@ Mit diesem Feld KÖNNEN beispielsweise Ergänzungen zum Analysefokus angegeben w
 
 <pre class="example xml" title="Der Inhalt adressiert im Besonderen einen sonderpädagogischen Förderschwerpunkt und ein lernförderliches Unterrichtsklima.">
 &lt;keywords&gt;
-  https://w3id.org/unterrichtsvideos.net/vocabs/keyword/k60030 | Lernförderliches Unterrichtsklima
+  Lernförderliches Unterrichtsklima | https://w3id.org/unterrichtsvideos.net/vocabs/keyword/k60030
 &lt;/keywords&gt;
 </pre>
 
