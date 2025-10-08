@@ -796,7 +796,7 @@ _und_
   <dd>Werte aus [[Zielgruppen]]</dd>
 </dl>
 
-<pre class="example xml" title="Studierende und Hochschullehrende haben Zugriff und der Inhalt ist für diese Zielgruppen relevant.">
+<pre class="example xml" title="Studierende und Hochschullehrende mit Bezug zur Lehrkräftebildung haben Zugriff und der Inhalt ist für diese Zielgruppen relevant.">
 &lt;use_restrictions&gt;
   https://w3id.org/unterrichtsvideos.net/vocabs/audience/g1 | 
   https://w3id.org/unterrichtsvideos.net/vocabs/audience/g3
@@ -1169,7 +1169,7 @@ Das `material_type`-Feld gibt eine Liste mit verfügbaren Begleitmaterialien zu 
 
 #### &#9675; Lernformat <code>&lt;learning_format&gt;</code>
 
-Das `learning_format`-Feld kennzeichnet die vorherschende Lehr-/Lernform des Inhalts.
+Das `learning_format`-Feld kennzeichnet das primär vorherschende Lehr-/Lernformat des Inhalts.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -1286,7 +1286,7 @@ Nur eine besonders prägnante Stellvertretung für den Beobachtungsschwerpunkt s
 
 #### &#9675; Analysefokus: Digitale Kompetenzen <code>&lt;focus_digital_competence&gt;</code>
 
-Das `focus_digital_competence`-Feld benennt die Eignung des Inhalts für einen spezifischen Analysefokus mit Bezug zum [[DigCompEduObserve]].
+Das `focus_digital_competence`-Feld benennt die Eignung des Inhalts für einen spezifischen Analysefokus mit Bezug zum [[DigCompEduObserve]], einem Beobachtungsinstrument zur Förderung digitaler Kompetenzen von Lehrenden.
 Inhalte können dabei sowohl positive Beispiele, als auch potenzielle Lerngelegenheiten beinhalten.
 Nur eine besonders prägnante Stellvertretung für den Beobachtungsschwerpunkt sollte hier erfasst werden.
 
@@ -1304,18 +1304,17 @@ Nur eine besonders prägnante Stellvertretung für den Beobachtungsschwerpunkt s
   <dd>`string` (Mehrfachwerte, getrennt mit | )`</dd>
   <dt>Wertebereich</dt>
   <dd>Werte aus [[DigCompEduObserve]]</dd>
-  <dd>Werte aus [[DigCompEduObserve]]</dd>
 </dl>
 
 <pre class="example xml" title="Das Unterrichtsvideo zeigt besonders prägnant selbstgesteuerte Lernprozesse mit digitalen Medien.">
 &lt;focus_digital_competence&gt;
-  https://w3id.org/unterrichtsvideos.net/vocabs/digcompedu/3.4
+  https://w3id.org/unterrichtsvideos.net/vocabs/digcompeduobserve/3.6
 &lt;/focus_digital_competence&gt;
 </pre>
 
 <pre class="example xml" title="Der Inhalt adressiert im Besonderen die Vermittlung digitaler Problemlösekompetenz.">
 &lt;focus_digital_competence&gt;
-  https://w3id.org/unterrichtsvideos.net/vocabs/digcompedu/6.5
+  https://w3id.org/unterrichtsvideos.net/vocabs/digcompeduobserve/6.5
 &lt;/focus_digital_competence&gt;
 </pre>
 
