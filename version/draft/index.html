@@ -1050,7 +1050,7 @@ Das `grade`-Feld beschreibt die Jahrgangsstufe.
 </pre>
 
 <!-- (Wird automatisch über Schulart und Jahrgangsstufe ermittelt)
- 
+
 #### Bildungsstufe <code>&lt;educational_level&gt;</code>
 
 Das `educational_level`-Feld beschreibt die Bildungsstufe der Lernenden.
@@ -1348,7 +1348,13 @@ Das `teaches`-Feld beschreibt das Lernziel des Inhalts als Freitext.
 
 <pre class="example xml" title="Der Inhalt adressiert das Erkennen und Interpretieren klassenführungsrelevanter Unterrichtsereignisse.">
 &lt;teaches&gt;
-  Die Teilnehmenden können bis zum Ende des Lernmoduls verschiedene Facetten des Monitorings in Unterrichtssituationen theoriegestützt erkennen und deren Wirkung auf ein lernförderliches Klassenklima erläutern.
+  Die Teilnehmenden können verschiedene Facetten des Monitorings in Unterrichtssituationen theoriegestützt erkennen und deren Wirkung auf ein lernförderliches Klassenklima erläutern.
+&lt;/teaches&gt;
+</pre>
+
+<pre class="example xml" title="Der Inhalt adressiert Regeln, Routinen und Rituale im Unterricht.">
+&lt;teaches&gt;
+  Die Lernenden kennen Regeln und Maßnahmen zur Etablierung dieser im Unterricht | Die Lernenden kennen Routinen und Rituale zur Strukturierung des Unterrichts
 &lt;/teaches&gt;
 </pre>
 
@@ -1376,7 +1382,7 @@ Mit diesem Feld KÖNNEN beispielsweise Ergänzungen zum Analysefokus angegeben w
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
-  <dd>Werte aus [[Schlagwortsystematisierung]]; oder Freitext, jedoch ohne das Trennzeichen `|` und den Schrägstrich `/`</dd>
+  <dd>Werte aus [[Schlagwortsystematisierung]] und Freitext, jedoch ohne Trennzeichen `|` und Schrägstrich `/`</dd>
 </dl>
 
 <pre class="example xml" title="Das Unterrichtsvideo zeigt besonders prägnant den Umgang mit Heterogenität in der interdisziplinären Bildung durch Klassenführung und -organisation.">
