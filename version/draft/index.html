@@ -1363,9 +1363,9 @@ Mit diesem Feld KÖNNEN beispielsweise Ergänzungen zum Analysefokus angegeben w
 
 **Hierarchische Schlagwörter**
 - Eine hierarchische Struktur der Schlagworte ist möglich und SOLL bereits bestehende Systematisierungen des Portals berücksichtigen.
-- Es DARF maximal eine Tiefe von zwei Ebenen genutzt werden.
-- Für Hierarchien MUSS der Schrägstrich `/`[Slash] als Trennzeichen zwischen Oberkategorie und Schlagwort als Unterkategorie genutzt werden.
-- Der Schrägstrich `/` [Slash] als Trennzeichen für Hierarchien DARF NICHT in den Schlagwörter selbst enthalten sein.
+- Es DÜRFEN NICHT mehr als zwei Hierarchieebenen genutzt werden.
+- Für Hierarchien MUSS der Schrägstrich `/`[Slash] als Trennzeichen zwischen Oberkategorie (erste Ebene) und Schlagwort als Unterkategorie (zweite Ebene) genutzt werden.
+- Der Schrägstrich `/` [Slash] als Trennzeichen für Hierarchien DARF NICHT in den Schlagwörtern selbst enthalten sein.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -1375,12 +1375,18 @@ Mit diesem Feld KÖNNEN beispielsweise Ergänzungen zum Analysefokus angegeben w
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
-  <dd>Werte aus [[Schlagwortsystematisierung]]; oder Freitext (falls nicht in Schlagwortsystematisierung), jedoch ohne das Trennzeichen `|` und Schrägstrich `/`</dd>
+  <dd>Werte aus [[Schlagwortsystematisierung]]; oder Freitext, jedoch ohne das Trennzeichen `|` und den Schrägstrich `/`</dd>
 </dl>
 
 <pre class="example xml" title="Das Unterrichtsvideo zeigt besonders prägnant den Umgang mit Heterogenität in der interdisziplinären Bildung durch Klassenführung und -organisation.">
 &lt;keywords&gt;
  https://w3id.org/unterrichtsvideos.net/vocabs/keyword/k50010 | https://w3id.org/unterrichtsvideos.net/vocabs/keyword/kc10 | https://w3id.org/unterrichtsvideos.net/vocabs/keyword/kc90
+&lt;/keywords&gt;
+</pre>
+
+<pre class="example xml" title="Der Inhalt adressiert im Besonderen die Kommunikation bei Elterngespräche in einer kollegialen Fallberatung.">
+&lt;keywords&gt;
+  Kommunikation & Kooperation/Elterngespräche | Kollegiale Fallberatung
 &lt;/keywords&gt;
 </pre>
 
