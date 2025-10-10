@@ -686,6 +686,8 @@ Das `abstract`-Feld dient der Kurzbeschreibung des Inhalts.
 
 Das `language`-Feld kennzeichnet die Sprachen, in denen der Inhalt verfügbar ist.
 
+Es SOLLTE ein zweistelliger ISO 639-1 (alpha-2) Sprachcode verwendet werden (z.B. `de` für Deutsch, `en` für Englisch).
+
 <dl>
   <dt>Pflichtfeld</dt>
   <dd>nein</dd>
@@ -699,7 +701,7 @@ Das `language`-Feld kennzeichnet die Sprachen, in denen der Inhalt verfügbar is
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
   <dt>Wertebereich</dt>
-  <dd>[[RFC5646]]</dd>
+  <dd>[[ISO-639-1]]</dd>
 </dl>
 
 <pre class="example" title="Verwendung">
@@ -1202,6 +1204,10 @@ Das `learning_format`-Feld kennzeichnet das primär vorherschende Lehr-/Lernform
 #### &#9675; Lehrplanthema <code>&lt;topic&gt;</code>
 
 Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts. 
+
+**Hinweise**
+- Sofern das Feld verwendet wird, MUSS mindestens die zweite Ebene eines Themas angegeben werden (z. B. Physik > Akustik).
+- Es KANN auch eine tiefere Ebene angegeben werden (z. B. Physik > Akustik > Akustische Schwingungen & Wellen > Quellen & Empfänger).
 
 <dl>
   <dt>Pflichtfeld</dt>
