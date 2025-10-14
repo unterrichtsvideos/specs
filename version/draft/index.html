@@ -835,9 +835,35 @@ Das `use_restrictions_label`-Feld definiert mögliche Einschränkungen bei der N
 &lt;/use_restrictions_label&gt;
 </pre>
 
-#### &#9675; Veröffentlichungsdatum <code>&lt;pubDate&gt;</code>
+#### &#9675; Veröffentlichungsdatum <code>&lt;date_published&gt;</code>
+Das `date_published`-Feld gibt das Datum der ersten Veröffentlichung an.
 
-Das `pubDate`-Feld gibt das Datum der ersten Veröffentlichung an, gemäß [[RSS 2.0]].
+**Varianten**
+- Angabe als Jahr (JJJJ)
+- optional: Monat additiv zu Jahr: (JJJJ-MM)
+- optional: Tag additiv zu Jahr und Monat: (JJJJ-MM-TT)
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>ja</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/date">dct:date</a>,
+    <a href="https://schema.org/datePublished">sdo:datePublished</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string`</dd>
+  <dt>Wertebereich</dt>
+  <dd>JJJJ(-MM(-TT)) [[ISO8601]]</dd>
+</dl>
+
+<pre class="example" title="Möglicher regulärer Ausdruck zur Validierung des Veröffentlichungsdatums">
+^\d{4}(?:-(0[1-9]|1[0-2])(?:-(0[1-9]|[12]\d|3[01]))?)?$
+</pre>
+
+
 <dl>
   <dt>Pflichtfeld</dt>
   <dd>nein</dd>
@@ -853,7 +879,7 @@ Das `pubDate`-Feld gibt das Datum der ersten Veröffentlichung an, gemäß [[RSS
 </dl>
 
 <pre class="example xml" title="Inhalt wurde am 26.09.2025 veröffentlicht.">
-&lt;pubDate&gt;Wed, 26 Sep 2025 10:34:44 +0200&lt;/pubDate&gt;
+&lt;date_published&gt;Wed, 26 Sep 2025 10:34:44 +0200&lt;/date_published&gt;
 </pre>
 
 
