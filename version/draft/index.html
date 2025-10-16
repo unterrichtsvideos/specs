@@ -211,8 +211,10 @@ Die Metadaten der Inhalte werden in einem XML-Dokument repräsentiert.
 Metadatenfelder entsprechen XML-Elementen, bspw. `license` zur Kennzeichnung der Lizenz eines Inhalts. 
 
 ### Syntax und Semantik
-- Der Feed MUSS konform zu [[XML 1.0]] und [[RSS 2.0]] validieren.
+- Der Feed MUSS konform zu [[XML 1.0]] und SOLL konform zu [[RSS 2.0]] validieren.
 - Der Feed MUSS zur <abbr title="XML Schema Definition">XSD</abbr> des Meta-Videoportals unterrichtsvideos.net validieren.
+- Felder mit freien Textinhalten MÜSSEN zur Kennzeichnung CDATA verwenden: &lt;![CDATA[...]]&gt;.
+- Felder mit Formatvorgaben oder geschlossenen Wertebereichen KÖNNEN zur Kennzeichnung CDATA verwenden.
 
 ### Format
 - Die Zeichenkodierung des XML-Feeds MUSS [[UTF-8]] oder eine [[XML 1.0]]-spezifikationskonforme anderweitige Kodierung sein.
@@ -686,7 +688,7 @@ Das `abstract`-Feld dient der Kurzbeschreibung des Inhalts.
 
 Das `language`-Feld kennzeichnet die Sprachen, in denen der Inhalt verfügbar ist.
 
-Es SOLLTE ein zweistelliger ISO 639-1 (alpha-2) Sprachcode verwendet werden (z.B. `de` für Deutsch, `en` für Englisch).
+Es SOLL ein zweistelliger ISO 639-1 (alpha-2) Sprachcode verwendet werden (z.B. `de` für Deutsch, `en` für Englisch).
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -1233,8 +1235,10 @@ Das `learning_format`-Feld kennzeichnet das primär vorherschende Lehr-/Lernform
 Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts. 
 
 **Hinweise**
-- Sofern das Feld verwendet wird, MUSS mindestens die zweite Ebene eines Themas angegeben werden (z. B. Physik > Akustik).
+- Sofern das Feld verwendet wird, SOLL mindestens die zweite Ebene eines Themas angegeben werden (z. B. Physik > Akustik).
 - Es KANN auch eine tiefere Ebene angegeben werden (z. B. Physik > Akustik > Akustische Schwingungen & Wellen > Quellen & Empfänger).
+- Es SOLLEN nur primäre Themen angegeben werden, welche den Inhalt am besten beschreiben.
+- Es SOLLEN keine Themen angegeben werden, die von der Bezeichnung lediglich einem Schulfach ähneln.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -1251,9 +1255,9 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
   <dd>Werte aus [[Lehrplanthemen]]</dd>
 </dl>
 
-<pre class="example xml" title="Der Inhalt gehört zum Thema Physik > Akustik">
+<pre class="example xml" title="Der Inhalt gehört zum Thema 'Astronomie > Planetensystem' aus dem Fach 'Physik'.">
 &lt;topic&gt;
-  https://w3id.org/unterrichtsvideos.net/vocabs/topic/a37552ec-78c4-44f2-8564-8e84e4ca26b3
+  https://w3id.org/unterrichtsvideos.net/vocabs/topic/df13c01a-dd5e-4fb5-b570-845fed00fbd0
 &lt;/topic&gt;
 </pre>
 
@@ -1293,7 +1297,9 @@ Das `camera_perspective`-Feld beschreibt die Kameraperspektive bzw. den Point of
 
 Das `focus_instructional_quality`-Feld benennt die Eignung des Inhalts für einen spezifischen Analysefokus mit Bezug zum [[MAIN-TEACH-Modell]].
 Inhalte können dabei sowohl positive Beispiele, als auch potenzielle Lerngelegenheiten beinhalten.
-Nur eine besonders prägnante Stellvertretung für den Beobachtungsschwerpunkt sollte hier erfasst werden.
+
+**Hinweise**
+- Es SOLL nur eine besonders prägnante Stellvertretung für den Beobachtungsschwerpunkt hier erfasst werden.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -1327,8 +1333,10 @@ Nur eine besonders prägnante Stellvertretung für den Beobachtungsschwerpunkt s
 #### &#9675; Analysefokus: Digitale Kompetenzen <code>&lt;focus_digital_competence&gt;</code>
 
 Das `focus_digital_competence`-Feld benennt die Eignung des Inhalts für einen spezifischen Analysefokus mit Bezug zum [[DigCompEduObserve]], einem Beobachtungsinstrument zur Förderung digitaler Kompetenzen von Lehrenden.
-Inhalte können dabei sowohl positive Beispiele, als auch potenzielle Lerngelegenheiten beinhalten.
-Nur eine besonders prägnante Stellvertretung für den Beobachtungsschwerpunkt sollte hier erfasst werden.
+Inhalte können dabei sowohl positive Beispiele, als auch potenzielle Lerngelegenheiten beinhalten. 
+
+**Hinweise**
+- Es SOLL nur eine besonders prägnante Stellvertretung für den Beobachtungsschwerpunkt hier erfasst werden.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -1376,18 +1384,18 @@ Das `teaches`-Feld beschreibt das Lernziel des Inhalts als Freitext.
     <a href="https://schema.org/teaches">sdo:teaches</a>
   </dd>
   <dt>Typ</dt>
-  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dd>`string` (CDATA) [[XML 1.0]] (Mehrfachwerte, getrennt mit | )</dd>
 </dl>
 
 <pre class="example xml" title="Der Inhalt adressiert das Erkennen und Interpretieren klassenführungsrelevanter Unterrichtsereignisse.">
 &lt;teaches&gt;
-  Die Teilnehmenden können verschiedene Facetten des Monitorings in Unterrichtssituationen theoriegestützt erkennen und deren Wirkung auf ein lernförderliches Klassenklima erläutern.
+  &lt;![CDATA[Die Teilnehmenden können verschiedene Facetten des Monitorings in Unterrichtssituationen theoriegestützt erkennen und deren Wirkung auf ein lernförderliches Klassenklima erläutern.]]&gt;
 &lt;/teaches&gt;
 </pre>
 
 <pre class="example xml" title="Der Inhalt adressiert Regeln, Routinen und Rituale im Unterricht.">
 &lt;teaches&gt;
-  Die Lernenden kennen Regeln und Maßnahmen zur Etablierung dieser im Unterricht | Die Lernenden kennen Routinen und Rituale zur Strukturierung des Unterrichts
+  &lt;![CDATA[Die Lernenden kennen Regeln und Maßnahmen zur Etablierung dieser im Unterricht | Die Lernenden kennen Routinen und Rituale zur Strukturierung des Unterrichts]]&gt;
 &lt;/teaches&gt;
 </pre>
 
@@ -1414,75 +1422,42 @@ Mit diesem Feld KÖNNEN beispielsweise Ergänzungen zum Analysefokus angegeben w
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Typ</dt>
-  <dd>`string` (Mehrfachwerte, getrennt mit | )</dd>
+  <dd>`string` (CDATA) [[XML 1.0]] (Mehrfachwerte, getrennt mit | ) </dd>
   <dt>Wertebereich</dt>
-  <dd>Werte aus [[Schlagwortsystematisierung]] und Freitext, jedoch ohne Trennzeichen `|` und Schrägstrich `/`</dd>
+  <dd>Werte aus [[Schlagwortsystematisierung]] und Freitext</dd>
+  <dt>Reservierte Zeichen</dt>
+  <dd>Schrägstrich `/` zur Kennzeichnung der Hierarchieebene</dd>
 </dl>
 
 <pre class="example xml" title="Das Unterrichtsvideo zeigt besonders prägnant den Umgang mit Heterogenität in der interdisziplinären Bildung durch Klassenführung und -organisation.">
 &lt;keywords&gt;
- https://w3id.org/unterrichtsvideos.net/vocabs/keyword/k50010 | https://w3id.org/unterrichtsvideos.net/vocabs/keyword/kc10 | https://w3id.org/unterrichtsvideos.net/vocabs/keyword/kc90
+ &lt;![CDATA[https://w3id.org/unterrichtsvideos.net/vocabs/keyword/k50010 | https://w3id.org/unterrichtsvideos.net/vocabs/keyword/kc10 | https://w3id.org/unterrichtsvideos.net/vocabs/keyword/kc90]]&gt;
 &lt;/keywords&gt;
 </pre>
 
 <pre class="example xml" title="Der Inhalt adressiert im Besonderen die Kommunikation bei Elterngespräche in einer kollegialen Fallberatung.">
 &lt;keywords&gt;
-  Kommunikation & Kooperation/Elterngespräche | Kollegiale Fallberatung
+  &lt;![CDATA[Kommunikation & Kooperation/Elterngespräche | Kollegiale Fallberatung]]&gt;
 &lt;/keywords&gt;
 </pre>
 
 <pre class="example xml" title="Der Inhalt adressiert im Besonderen einen sonderpädagogischen Förderschwerpunkt und ein lernförderliches Unterrichtsklima.">
 &lt;keywords&gt;
-  Lernförderliches Unterrichtsklima | https://w3id.org/unterrichtsvideos.net/vocabs/keyword/k60030
+  &lt;![CDATA[https://w3id.org/unterrichtsvideos.net/vocabs/keyword/k60030 | https://w3id.org/unterrichtsvideos.net/vocabs/keyword/k10050]]&gt;
 &lt;/keywords&gt;
 </pre>
 
 <section class="informative">
-## Beispiel: RSS-/XML-Feed
+## Sonstiges
 
-<pre class="example" title="Channel mit einem Item">
-  &#60;?xml version="1.0" encoding="UTF-8"?&#62;
-  &#60;rss version="2.0" xmlns:mvp="https://w3id.org/unterrichtsvideos.net/specs/"&#62;
-    &#60;channel&#62;
-      &#60;title&#62;&#60;![CDATA[ProVision]]&#62;&#60;/title&#62;
-      &#60;link&#62;https://www.uni-muenster.de/ProVision/&#60;/link&#62;
-      &#60;description&#62;&#60;![CDATA[ProVision | learning professional vision]]&#62;&#60;/description&#62;
-      &#60;image&#62;
-        &#60;url&#62;https://www.uni-muenster.de/ProVision/img/logo.png&#60;/url&#62;
-        &#60;title&#62;&#60;![CDATA[ProVision]]&#62;&#60;/title&#62;
-        &#60;link&#62;https://www.uni-muenster.de/ProVision/&#60;/link&#62;
-      &#60;/image&#62;
-      &#60;docs&#62;https://w3id.org/unterrichtsvideos.net/specs/version/2.0&#60;/docs&#62;
-      &#60;item&#62;
-        &#60;title&#62;&#60;![CDATA[Partnerpuzzle im Lesestrategietraining: Austausch von Steckbriefen]]&#62;&#60;/title&#62;
-        &#60;link&#62;https://www.uni-muenster.de/ProVision/video/#DEU_K5_LK2_2DS_LF_Clip5&#60;/link&#62;
-        &#60;description&#62;&#60;![CDATA[In der Vermittlungsphase des Partnerpuzzles tauschen sich die Sch&#252;lerinnen und Sch&#252;ler innerhalb der Tischgruppen &#252;ber die Inhalte der gelesenen Texte aus und vergleichen diese anhand der angefertigten Steckbriefe miteinander. Ziel ist es, dass alle Sch&#252;lerinnen und Sch&#252;ler, die sich jeweils nur mit einem der beiden Texte zu den Superhelden-Figuren auseinandergesetzt haben, am Ende &#252;ber beide Figuren gleicherma&#223;en informiert sind.]]&#62;&#60;/description&#62;
-        &#60;abstract&#62;&#60;![CDATA[Dieser Clip aus einer Unterrichtsstunde, in der die ersten drei Lesestrategien des Trainingsprogramms &#8222;Lesen(d) lernen&#8220; trainiert werden, zeigt die Austausch- bzw. Vermittlungsphase im Rahmen des Partnerpuzzles. ]]&#62;&#60;/abstract&#62;
-        &#60;id&#62;DEU_K5_LK2_2DS_LF_Clip5&#60;/id&#62;
-        &#60;resource_type&#62;https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt005 | https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt001&#60;/resource_type&#62;
-        &#60;image&#62;https://www.uni-muenster.de/imperia/md/images/ProVision/videos/02_Deutsch/fittosize_1140_641_fae1dab1f2a1f67ed848fd84ade1c892_deu_k5_lk2_2ds_lf_clip5_partnerpuzzle_ga_teaserbild.jpeg&#60;/image&#62;
-        &#60;language&#62;de&#60;/language&#62;
-        &#60;date_created&#62;2025-12-31&#60;/date_created&#62;
-        &#60;license&#62;https://w3id.org/unterrichtsvideos.net/vocabs/license/copyright&#60;/license&#62;
-        &#60;creator&#62;https://d-nb.info/gnd/1194191657&#60;/creator&#62;
-        &#60;pubDate&#62;Mo, 01 Dez 2025 00:00:00 GMT&#60;/pubDate&#62;
-        &#60;time_required&#62;PT2H15M30S&#60;/time_required&#62;
-        &#60;use_restrictions&#62;https://w3id.org/unterrichtsvideos.net/vocabs/audience/g6 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g3 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g1 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g4 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g7&#60;/use_restrictions&#62;
-        &#60;use_restrictions_label&#62;&#60;![CDATA[Abrufbar im Rahmen eines aktiven Kurses.]]&#62;&#60;/use_restrictions_label&#62;
-        &#60;focus_instructional_quality&#62;https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/1 | https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/4&#60;/focus_instructional_quality&#62;
-        &#60;focus_digital_competence&#62;https://w3id.org/unterrichtsvideos.net/vocabs/digcompeduobserve/2.4&#60;/focus_digital_competence&#62;
-        &#60;material_type&#62;https://w3id.org/unterrichtsvideos.net/vocabs/material_type/mt1002&#60;/material_type&#62;
-        &#60;camera_perspective&#62;https://w3id.org/unterrichtsvideos.net/vocabs/camera_perspective/c05&#60;/camera_perspective&#62;
-        &#60;learning_format&#62;https://w3id.org/unterrichtsvideos.net/vocabs/learning_format/lf2&#60;/learning_format&#62;
-        &#60;school_type&#62;https://w3id.org/unterrichtsvideos.net/vocabs/school_type/st04&#60;/school_type&#62;
-        &#60;grade&#62;https://w3id.org/unterrichtsvideos.net/vocabs/grade/7&#60;/grade&#62;
-        &#60;subject&#62;https://w3id.org/unterrichtsvideos.net/vocabs/subject/s1005&#60;/subject&#62;
-        &#60;topic&#62;https://w3id.org/unterrichtsvideos.net/vocabs/topic/81dbdf0e-c20d-481e-a0f9-ebbbb0abc2bd&#60;/topic&#62;
-        &#60;keywords&#62;Binnendifferenzierung | Lernstrategien&#60;/keywords&#62;
-      &#60;/item&#62;
-    &#60;/channel&#62;
-  &#60;/rss&#62;
-</pre>
+<section id="feed-example">
+  <h3>Beispiel: RSS-/XML-Feed</h3>
+  <pre data-include="./examples/valid/feedExample.xml" data-include-format="text"></pre>
+  <a href="./examples/valid/feedExample.xml">Link zum RSS-/XML-Feed-Beispiel</a>
+</section>
+
+</section>
+
 </section>
 
 <section id="glossary" class="appendix">
