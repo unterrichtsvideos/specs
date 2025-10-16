@@ -35,7 +35,7 @@
       <grade>https://w3id.org/unterrichtsvideos.net/vocabs/grade/7</grade>
       <subject>https://w3id.org/unterrichtsvideos.net/vocabs/subject/s1005</subject>
       <topic>https://w3id.org/unterrichtsvideos.net/vocabs/topic/81dbdf0e-c20d-481e-a0f9-ebbbb0abc2bd</topic>
-      <keywords><![CDATA[Binnendifferenzierung | Lernstrategien]]></keywords>
+      <keywords><![CDATA[https://w3id.org/unterrichtsvideos.net/vocabs/keyword/k40030 | https://w3id.org/unterrichtsvideos.net/vocabs/keyword/k40050]]></keywords>
     </item>
   </channel>
 </rss>
