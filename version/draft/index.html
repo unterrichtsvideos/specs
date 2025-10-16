@@ -890,8 +890,13 @@ Das `date_published`-Feld gibt das Datum der ersten Veröffentlichung an.
 Im `creator`-Feld kann eine Organisation oder eine Einzelperson angegeben werden, die bei der Erstellung des Inhalts beteilgt war. 
 
 Empfohlen wird dabei die Angabe eines Wertes nach folgender Präferenz: 
-Personen: GND, ORCID, WIKIDATA
-Organisationen: GND, ROR, WIKIDATA
+- Personen: GND, ORCID, WIKIDATA
+- Organisationen: GND, ROR, WIKIDATA
+
+_und/oder als Freitext in der Form_
+
+- Personen: Vorname Nachname
+- Organisationen: Deutschsprachiger Name der Organisation.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -906,11 +911,18 @@ Organisationen: GND, ROR, WIKIDATA
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit `|` )</dd>
   <dt>Wertebereich</dt>
-  <dd>Werte aus [[GND]] [[ORCID]] [[ROR]] [[Wikidata]]</dd>
+  <dd>Werte aus [[GND]] [[ORCID]] [[ROR]] [[Wikidata]] oder als Freitext in der Form `Vorname Nachname`</dd>
 </dl>
 
-<pre class="example xml" title="Einrichtung als Urheber (hier: GND-ID der Universität Münster)">
+**Beispiele**
+- Organisation als Urheber (hier: GND-ID der [Universität Münster](https://d-nb.info/gnd/1194191657))
+<pre class="example xml" title="Einrichtung als Urheber">
 &lt;creator&gt;https://d-nb.info/gnd/1194191657&lt;/creator&gt;
+</pre>
+
+- Einzelpersonen als Urheber
+<pre class="example xml" title="Personen als Urheber">
+&lt;creator&gt;https://d-nb.info/gnd/1143543866 | Erika Musterfrau&lt;/creator&gt;
 </pre>
 
 ### Strukturelle Metadaten
