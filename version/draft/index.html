@@ -1277,7 +1277,7 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
 - Es KANN in geschlossenen Vokabularen auch eine tiefere Ebene angegeben werden,
   z. B. <a href="https://w3id.org/unterrichtsvideos.net/vocabs/topic/3e025be8-88ef-4b14-b991-16211d36eefa" target="_blank">Physik > Akustik > Akustische Schwingungen & Wellen > Quellen & Empfänger</a>.
 - Es SOLLEN keine Themen angegeben werden, die von der Bezeichnung lediglich einem Schulfach ähneln.
-- Es KANN alternativ auf Themen aus der [[Sachgebietssystematik]] oder <u><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a></u> der [[GND]] referenziert werden, wenn kein passendes Thema in den [[Lehrplanthemen]] vorhanden ist.
+- Wenn _kein_ passendes Thema in den [[Lehrplanthemen]] vorhanden ist, KANN alternativ auf Themen aus der [[Sachgebietssystematik]] oder <u><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a></u> der [[GND]] referenziert werden.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -1291,7 +1291,12 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
   </dd>
   <dd>`string` (Mehrfachwerte, getrennt mit `|` )</dd>
   <dt>Wertebereich</dt>
-  <dd>Werte aus [[Lehrplanthemen]] (primär, präferiert) oder [[Sachgebietssystematik]] (sekundär) oder [[GND]] (tertiär)</dd>
+  <dd>
+    <ul>
+      <li>[[Lehrplanthemen]] (primär, präferiert)</li>
+      <li>[[Sachgebietssystematik]] (sekundär)</li>
+      <li><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a> der [[GND]] (tertiär)</li>
+    </ul>
 </dl>
 
 <pre class="example xml" title="Der Inhalt gehört zum Thema 'Astronomie > Planetensystem' aus dem Fach 'Physik'.">
@@ -1470,7 +1475,13 @@ Reservierte Zeichen DÜRFEN NICHT als Zeichen innerhalb der freien Schlagworten 
   <dt>Typ</dt>
   <dd>`string` (CDATA) [[XML 1.0]] (Mehrfachwerte, getrennt mit `|` ) </dd>
   <dt>Wertebereich</dt>
-  <dd>Geschlossene Werte aus [[Schlagwortsystematisierung]] (primär), [[GND]] (sekundär) und/oder Freitext ohne reservierte Zeichen (tertiär)</dd>
+  <dd>
+    <ul>
+      <li>Geschlossene Werte aus [[Schlagwortsystematisierung]] (primär)</li>
+      <li><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a> der [[GND]] (sekundär)</li>
+      <li>Freitext ohne reservierte Zeichen (tertiär)</li>
+    </ul>
+  </dd>
 </dl>
 
 **Beispiele**
