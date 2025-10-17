@@ -133,6 +133,11 @@
             href: "https://w3id.org/unterrichtsvideos.net/vocabs/topic/",
             publisher: "unterrichtsvideos.net",
           },
+          "Sachgebietssystematik": {
+            title: "Sachgebietssystematik der AGMuD",
+            href: "https://vocabs.sodix.de/sodix/educational/sachgebietssystematik/sachgebietssystematik",
+            publisher: "SODIX/FWU",
+          },
           "BCP47": {
             title: "Tags for Identifying Languages.",
             href: "https://www.rfc-editor.org/rfc/rfc5646",
@@ -911,7 +916,26 @@ _und/oder als Freitext in der Form_
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit `|` )</dd>
   <dt>Wertebereich</dt>
-  <dd>Werte aus [[GND]] [[ORCID]] [[ROR]] [[Wikidata]] oder als Freitext in der Form `Vorname Nachname`</dd>
+  <dd>
+    <ul>
+      <li>Personen:
+        <ul>
+          <li>Werte aus [[GND]] für <a href="https://explore.gnd.network/search?f.satzart=Person" target="_blank">Personen</a></li>
+          <li>Werte aus [[ORCID]] für <a href="https://orcid.org/orcid-search/search" target="_blank">Personen</a></li>
+          <li>Werte aus [[Wikidata]] für <a href="https://www.wikidata.org/w/index.php?search=&title=Special%3ASearch&profile=advanced&fulltext=1&ns0=1" target="_blank">Personen</a></li>
+          <li>Freitext in der Form: `Vorname Nachname`</li>
+        </ul>
+      </li>
+      <li>Organisationen
+        <ul>
+          <li>Werte aus [[GND]] für <a href="https://explore.gnd.network/search?f.satzart=Organisation" target="_blank">Organisationen</a></li>
+          <li>Werte aus [[ROR]] für <a href="https://ror.org/search" target="_blank">Organisationen</a></li>
+          <li>Werte aus [[Wikidata]] für <a href="https://www.wikidata.org/w/index.php?search=&title=Special%3ASearch&profile=advanced&fulltext=1&ns0=1" target="_blank">Organisationen</a></li>
+          <li>Freitext in der Form: `Deutschsprachiger Name der Organisation`</li>
+        </ul>
+      </li>
+    </ul>
+    </dd>
 </dl>
 
 **Beispiele**
@@ -1247,10 +1271,13 @@ Das `learning_format`-Feld kennzeichnet das primär vorherschende Lehr-/Lernform
 Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts. 
 
 **Hinweise**
-- Sofern das Feld verwendet wird, SOLL mindestens die zweite Ebene eines Themas angegeben werden (z. B. Physik > Akustik).
-- Es KANN auch eine tiefere Ebene angegeben werden (z. B. Physik > Akustik > Akustische Schwingungen & Wellen > Quellen & Empfänger).
-- Es SOLLEN nur primäre Themen angegeben werden, welche den Inhalt am besten beschreiben.
+- Es SOLLEN nur Themen angegeben werden, welche den Inhalt primär am besten beschreiben.
+- Sofern das Feld verwendet wird, SOLL mindestens die zweite Ebene eines Themas aus den [[Lehrplanthemen]] angegeben werden,
+  z. B. <a href="https://w3id.org/unterrichtsvideos.net/vocabs/topic/c0a79a8d-9f29-4056-8e1e-c0cec3f41f34" target="_blank">Physik > Akustik</a>, nicht bspw. nur Physik.
+- Es KANN in geschlossenen Vokabularen auch eine tiefere Ebene angegeben werden,
+  z. B. <a href="https://w3id.org/unterrichtsvideos.net/vocabs/topic/3e025be8-88ef-4b14-b991-16211d36eefa" target="_blank">Physik > Akustik > Akustische Schwingungen & Wellen > Quellen & Empfänger</a>.
 - Es SOLLEN keine Themen angegeben werden, die von der Bezeichnung lediglich einem Schulfach ähneln.
+- Es KANN alternativ auf Themen aus der [[Sachgebietssystematik]] oder <u><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a></u> der [[GND]] referenziert werden, wenn kein passendes Thema in den [[Lehrplanthemen]] vorhanden ist.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -1264,7 +1291,7 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
   </dd>
   <dd>`string` (Mehrfachwerte, getrennt mit `|` )</dd>
   <dt>Wertebereich</dt>
-  <dd>Werte aus [[Lehrplanthemen]]</dd>
+  <dd>Werte aus [[Lehrplanthemen]] (primär, präferiert) oder [[Sachgebietssystematik]] (sekundär) oder [[GND]] (tertiär)</dd>
 </dl>
 
 <pre class="example xml" title="Der Inhalt gehört zum Thema 'Astronomie > Planetensystem' aus dem Fach 'Physik'.">
@@ -1272,7 +1299,6 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
   https://w3id.org/unterrichtsvideos.net/vocabs/topic/df13c01a-dd5e-4fb5-b570-845fed00fbd0
 &lt;/topic&gt;
 </pre>
-
 
 #### &#9675; Kameraperspektive <code>&lt;camera_perspective&gt;</code>
 
@@ -1417,12 +1443,12 @@ Das `keywords`-Feld stellt eine Liste von Schlagworten zur Beschreibung des Inha
 Mit diesem Feld KÖNNEN beispielsweise Ergänzungen zum Analysefokus angegeben werden.
 
 **Hinweise**
-- Es SOLLTE eine Orientierung an der [[Schlagwortsystematisierung]] erfolgen.
-- Es KANN auch eine freie Verschlagwortung genutzt werden.
+- Es SOLLTE primär eine Orientierung an der [[Schlagwortsystematisierung]] erfolgen (die gemeinsam erweitert werden kann), alternativ können auch <u><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a></u> aus der [[GND]] verwendet werden.
+- Es KANN eine freie Verschlagwortung als Freitext genutzt werden.
 - Es SOLLTEN nur die wesentlichsten Schlagwörter genutzt werden.
-- Unter Umständen werden Schlagwörter gefiltert, automatisch generiert oder anderweitig zugeordnet.
 - Es SOLLTEN keine redundanten Schlagwörter verwendet werden, insbesondere nicht aus verschiedenen Systematisierungen.
 - Es SOLLTEN keine Schlagwörter genutzt werden, die bereits durch andere Metadatenfelder beschrieben werden (z. B. Schulfach, Schulart, Jahrgangsstufe, Lehrplanthema).
+- Unter Umständen werden Schlagwörter perspektivisch gefiltert, automatisch generiert oder anderweitig zugeordnet.
 
 **Hierarchische Schlagwörter**
 - Eine hierarchische Struktur der Schlagworte ist möglich und SOLL bereits bestehende Systematisierungen des Portals berücksichtigen.
@@ -1444,7 +1470,7 @@ Reservierte Zeichen DÜRFEN NICHT als Zeichen innerhalb der freien Schlagworten 
   <dt>Typ</dt>
   <dd>`string` (CDATA) [[XML 1.0]] (Mehrfachwerte, getrennt mit `|` ) </dd>
   <dt>Wertebereich</dt>
-  <dd>Geschlossene Werte aus [[Schlagwortsystematisierung]], [[GND]] und/oder Freitext ohne reservierte Zeichen</dd>
+  <dd>Geschlossene Werte aus [[Schlagwortsystematisierung]] (primär), [[GND]] (sekundär) und/oder Freitext ohne reservierte Zeichen (tertiär)</dd>
 </dl>
 
 **Beispiele**
