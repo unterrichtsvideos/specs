@@ -1277,6 +1277,7 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
 - Es KANN in geschlossenen Vokabularen auch eine tiefere Ebene angegeben werden,
   z. B. <a href="https://w3id.org/unterrichtsvideos.net/vocabs/topic/3e025be8-88ef-4b14-b991-16211d36eefa" target="_blank">Physik > Akustik > Akustische Schwingungen & Wellen > Quellen & Empfänger</a>.
 - Es SOLLEN keine Themen angegeben werden, die von der Bezeichnung lediglich einem Schulfach ähneln.
+- Es SOLLTEN keine Themen angegeben werden, die bereits durch andere Metadatenfelder beschrieben werden (z. B. Analysefokus).
 - Wenn _kein_ passendes Thema in den [[Lehrplanthemen]] vorhanden ist, KANN alternativ auf Themen aus der [[Sachgebietssystematik]] oder <u><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a></u> der [[GND]] referenziert werden.
 
 <dl>
@@ -1302,6 +1303,18 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
 <pre class="example xml" title="Der Inhalt gehört zum Thema 'Astronomie > Planetensystem' aus dem Fach 'Physik'.">
 &lt;topic&gt;
   https://w3id.org/unterrichtsvideos.net/vocabs/topic/df13c01a-dd5e-4fb5-b570-845fed00fbd0
+&lt;/topic&gt;
+</pre>
+
+<pre class="example xml" title="Der Inhalt ist relevant für die Schulsozialarbeit zum Thema 'Grundprinzipien, Ursachen und Lösungen bei Konflikten, Streit und Mobbing'.">
+&lt;topic&gt;
+  https://d-nb.info/gnd/4136324-3 | https://w3id.org/unterrichtsvideos.net/vocabs/topic/e2a6b355-bfbd-4a3b-b9ad-4d367a927743
+&lt;/topic&gt;
+</pre>
+
+<pre class="example xml" title="Der Inhalt behandelt 'Mediennutzung, Medienwirkung' zur Kompetenz 'Medien in der digitalen Welt verstehen und reflektieren' von Schülerinnen und Schülern.">
+&lt;topic&gt;
+ https://w3id.org/unterrichtsvideos.net/vocabs/topic/34561f6b-7493-4692-b43d-3e1e012cffd2 | https://vocabs.sodix.de/sodix/educational/sachgebietssystematik/4000102
 &lt;/topic&gt;
 </pre>
 
@@ -1465,7 +1478,6 @@ Mit diesem Feld KÖNNEN beispielsweise Ergänzungen zum Analysefokus angegeben w
 Reservierte Zeichen DÜRFEN NICHT als Zeichen innerhalb der freien Schlagworten selbst genutzt werden:
 - Der senkrechte Strich `|` (da dieses Zeichen zur Trennung von Mehrfachwerten reserviert ist)
 - Der Schrägstrich `/` (da dieses Zeichen zur Trennung von Hierarchieebenen reserviert ist) [nur bei freien Schlagwörtern]
-- Das Komma `,` (da dieses Zeichen zur internen Verarbeitung reserviert ist) [bei freien und geschlossenen Schlagwörtern]
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -1528,16 +1540,7 @@ Reservierte Zeichen DÜRFEN NICHT als Zeichen innerhalb der freien Schlagworten 
 &lt;/keywords&gt;
 </pre>
 
-
-
 **Ungültige Schlagwörter**
-
-- Falsche Schlagwörter, da das Komma als Zeichen innerhalb eines Schlagworts genutzt wird: 
-<pre class="example xml" title="Fehlerhaftes Schlagwort: Kommunikation & Kooperation, Elterngespräche">
-&lt;keywords&gt;
-  &lt;![CDATA[Kommunikation & Kooperation, Elterngespräche | Kollegiale Fallberatung]]&gt;
-&lt;/keywords&gt;
-</pre>
 
 - Falsche Schlagwörter, da mehr als zwei Hierarchieebenen genutzt werden:
 <pre class="example xml" title="Fehlerhaftes Schlagwort: Kommunikation/Kooperation/Elterngespräche">
@@ -1545,9 +1548,6 @@ Reservierte Zeichen DÜRFEN NICHT als Zeichen innerhalb der freien Schlagworten 
   &lt;![CDATA[Kommunikation/Kooperation/Elterngespräche | Kollegiale Fallberatung]]&gt;
 &lt;/keywords&gt;
 </pre>
-
-
-
 
 <section class="informative">
 ## Sonstiges
