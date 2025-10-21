@@ -198,6 +198,7 @@ Das Dokument stellt ein **Anwendungsprofil** zur Bereitstellung von Metadaten in
 
 Das Anwendungsprofil ist angelehnt an die Spezifikationen von [[RSS 2.0]] und [[XML 1.0]] zur Strukturierung des Datenaustauschs.
 Der Feed dient dem Austausch der Metadaten von Inhalten zwischen den Portalen/Anbietern (wie bspw. dem Videoportal [ProVision](https://www.uni-muenster.de/ProVision/)) und dem Meta-Videoportal [unterrichtsvideos.net](https://unterrichtsvideos.net/metaportal/).
+Es können Metadaten zu verschiedenen Inhalten (z. B. Unterrichtsvideos, Lernangebote) in einem XML-Feed (alle Typen) oder auch in zwei separaten Feeds (Unterrichtsvideos, Lernangebote) bereitgestellt werden.
 
 <div class="copyright" style="display: flex; flex-direction: row; justify-content: space-between;">
     <div>
@@ -466,7 +467,7 @@ Thu, 01 Jan 2026 10:15:45 +0200
 
 ## Metadaten des Inhalts <code>&lt;item&gt;</code>
 
-Jeder Inhalt (z. B. ein Unterrichtsvideo) wird durch ein eindeutiges `item`-Element repräsentiert, gemäß [[RSS 2.0]].
+Jeder Inhalt (z. B. ein Unterrichtsvideo oder Lernangebot) wird durch ein eindeutiges `item`-Element repräsentiert, gemäß [[RSS 2.0]].
 
 - Ein Feed MUSS mindestens ein `item`-Element aufweisen.
 - Ein Feed KANN mehrere `item`-Elemente aufweisen.
@@ -532,7 +533,7 @@ Das `link`-Feld definiert die absolute URL zum Inhalt beim Anbieter, gemäß [[R
 
 #### &#9679; Identifier <code>&lt;id&gt;</code>
 
-Das `id`-Feld ist die permanente und eindeutige Kennung des Inhalts (z. B. Videos) in einem XML-Feed eines Anbieters.
+Das `id`-Feld ist die permanente und eindeutige Kennung des Inhalts (z. B. Videos) in allen vom Anbieter bereitgestellten XML-Feeds.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -551,8 +552,8 @@ Das `id`-Feld ist die permanente und eindeutige Kennung des Inhalts (z. B. Video
 Die Werte des Feldes MÜSSEN folgende Bedingungen erfüllen:
 
 <div class="note" title="Bedingungen für den Wert des Feldes">
-- MUSS dauerhaft einzigartig im jeweiligen Feed eines Anbieters sein
-- DARF NICHT wiederverwendet oder neu an einen anderen Inhalt im jeweiligen Feed eines Anbieters vergeben werden
+- MUSS dauerhaft einzigartig im allen bereitgestellten Feeds eines Anbieters sein
+- DARF NICHT wiederverwendet oder neu an einen anderen Inhalt in allen bereitgestellten Feeds eines Anbieters vergeben werden
 - DARF NICHT mehr als 150 Zeichen aufweisen
 - DARF NICHT folgende Sonderzeichen enthalten: `: / ? # [] @ ! $ & ' () " * + , ; = | `<` `> `
 - SOLL NICHT mit Sonderzeichen beginnen oder enden.
@@ -894,14 +895,22 @@ Das `date_published`-Feld gibt das Datum der ersten Veröffentlichung an.
 
 Im `creator`-Feld kann eine Organisation oder eine Einzelperson angegeben werden, die bei der Erstellung des Inhalts beteilgt war. 
 
-Empfohlen wird dabei die Angabe eines Wertes nach folgender Präferenz: 
+Empfohlen wird dabei die Angabe eines Wertes aus folgenden Quellen nach folgender Präferenz: 
 - Personen: GND, ORCID, WIKIDATA
 - Organisationen: GND, ROR, WIKIDATA
 
 _und/oder als Freitext in der Form_
 
-- Personen: Vorname Nachname
-- Organisationen: Deutschsprachiger Name der Organisation.
+- Personen: 
+  - Vorname Nachname (z. B. "Erika Musterfrau")
+  _oder_  
+  - Nachname, Vorname (z. B. "Musterfrau, Erika")
+- Organisationen: 
+  - Deutschsprachiger Name der Organisation (z. B. "Universität Münster")
+
+**Hinweise**
+- Es sollten Vorzugsbezeichnungen der Organisationen und Personen verwendet werden. Diese sind den o.g. Quellen zu entnehmen.
+- Bei der Angabe von mehreren Urhebern SOLLTE die Reihenfolge der Werte die Reihenfolge der Urheberschaft widerspiegeln (Primärurheber zuerst).
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -923,7 +932,10 @@ _und/oder als Freitext in der Form_
           <li>Werte aus [[GND]] für <a href="https://explore.gnd.network/search?f.satzart=Person" target="_blank">Personen</a></li>
           <li>Werte aus [[ORCID]] für <a href="https://orcid.org/orcid-search/search" target="_blank">Personen</a></li>
           <li>Werte aus [[Wikidata]] für <a href="https://www.wikidata.org/w/index.php?search=&title=Special%3ASearch&profile=advanced&fulltext=1&ns0=1" target="_blank">Personen</a></li>
-          <li>Freitext in der Form: `Vorname Nachname`</li>
+          <li>Freitext in der Form:<br/>
+            Vorname Nachname<br/>
+            Nachname, Vorname<br/>
+          </li>
         </ul>
       </li>
       <li>Organisationen
@@ -947,6 +959,11 @@ _und/oder als Freitext in der Form_
 - Einzelpersonen als Urheber
 <pre class="example xml" title="Personen als Urheber">
 &lt;creator&gt;https://d-nb.info/gnd/1143543866 | Erika Musterfrau&lt;/creator&gt;
+</pre>
+
+- Organistation und Einzelperson (alternatives Format) als Urheber
+<pre class="example xml" title="Einrichtung als Urheber">
+&lt;creator&gt;https://d-nb.info/gnd/1194191657 | Musterfrau, Erika&lt;/creator&gt;
 </pre>
 
 ### Strukturelle Metadaten
