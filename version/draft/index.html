@@ -910,7 +910,6 @@ _und/oder als Freitext in der Form_
 
 **Hinweise**
 - Es sollten Vorzugsbezeichnungen der Organisationen und Personen verwendet werden. Diese sind den o.g. Quellen zu entnehmen.
-- Bei der Angabe von mehreren Urhebern SOLLTE die Reihenfolge der Werte die Reihenfolge der Urheberschaft widerspiegeln (Primärurheber zuerst).
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -986,7 +985,7 @@ Die Reihenfolge der Werte ist bedeutsam.
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit `|` )</dd>
   <dt>Wertebereich</dt>
-  <dd>Jeder Wert MUSS dem Wert einer ID desselben XML-Feeds entsprechen (siehe: [[[#identifier-id]]]).</dd>
+  <dd>Jeder Wert MUSS dem Wert einer ID eines XML-Feeds des jeweiligen Anbieters entsprechen (siehe: [[[#identifier-id]]]).</dd>
 </dl>
 
 ##### Beispiele für die Verwendung des `hasPart`-Feldes
@@ -1036,7 +1035,7 @@ Die Reihenfolge der Werte ist bedeutsam.
   <dt>Typ</dt>
   <dd>`string` (Mehrfachwerte, getrennt mit `|` )</dd>
   <dt>Wertebereich</dt>
-  <dd>Jeder Wert MUSS dem Wert einer ID desselben XML-Feeds entsprechen (siehe: [[[#identifier-id]]]).</dd>
+  <dd>Jeder Wert MUSS dem Wert einer ID eines XML-Feeds des jeweiligen Anbieters entsprechen (siehe: [[[#identifier-id]]]).</dd>
 </dl>
 
 ##### Beispiele für die Verwendung des `isPartOf`-Feldes
@@ -1283,58 +1282,6 @@ Das `learning_format`-Feld kennzeichnet das primär vorherschende Lehr-/Lernform
 &lt;/learning_format&gt;
 </pre>
 
-#### &#9675; Lehrplanthema <code>&lt;topic&gt;</code>
-
-Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts. 
-
-**Hinweise**
-- Es SOLLEN nur Themen angegeben werden, welche den Inhalt primär am besten beschreiben.
-- Sofern das Feld verwendet wird, SOLL mindestens die zweite Ebene eines Themas aus den [[Lehrplanthemen]] angegeben werden,
-  z. B. <a href="https://w3id.org/unterrichtsvideos.net/vocabs/topic/c0a79a8d-9f29-4056-8e1e-c0cec3f41f34" target="_blank">Physik > Akustik</a>, nicht bspw. nur Physik.
-- Es KANN in geschlossenen Vokabularen auch eine tiefere Ebene angegeben werden,
-  z. B. <a href="https://w3id.org/unterrichtsvideos.net/vocabs/topic/3e025be8-88ef-4b14-b991-16211d36eefa" target="_blank">Physik > Akustik > Akustische Schwingungen & Wellen > Quellen & Empfänger</a>.
-- Es SOLLEN keine Themen angegeben werden, die von der Bezeichnung lediglich einem Schulfach ähneln.
-- Es SOLLTEN keine Themen angegeben werden, die bereits durch andere Metadatenfelder beschrieben werden (z. B. Analysefokus).
-- Wenn _kein_ passendes Thema in den [[Lehrplanthemen]] vorhanden ist, KANN alternativ auf Themen aus der [[Sachgebietssystematik]] oder <u><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a></u> der [[GND]] referenziert werden.
-
-<dl>
-  <dt>Pflichtfeld</dt>
-  <dd>nein</dd>
-  <dt>Mehrfachwerte</dt>
-  <dd>ja</dd>
-  <dt>Verwandte Felder</dt>
-  <dd>
-    <a href="http://purl.org/dc/terms/subject">dct:subject</a>,
-    <a href="https://schema.org/about">sdo:about</a>
-  </dd>
-  <dd>`string` (Mehrfachwerte, getrennt mit `|` )</dd>
-  <dt>Wertebereich</dt>
-  <dd>
-    <ul>
-      <li>[[Lehrplanthemen]] (primär, präferiert)</li>
-      <li>[[Sachgebietssystematik]] (sekundär)</li>
-      <li><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a> der [[GND]] (tertiär)</li>
-    </ul>
-</dl>
-
-<pre class="example xml" title="Der Inhalt gehört zum Thema 'Astronomie > Planetensystem' aus dem Fach 'Physik'.">
-&lt;topic&gt;
-  https://w3id.org/unterrichtsvideos.net/vocabs/topic/df13c01a-dd5e-4fb5-b570-845fed00fbd0
-&lt;/topic&gt;
-</pre>
-
-<pre class="example xml" title="Der Inhalt ist relevant für die Schulsozialarbeit zum Thema 'Grundprinzipien, Ursachen und Lösungen bei Konflikten, Streit und Mobbing'.">
-&lt;topic&gt;
-  https://d-nb.info/gnd/4136324-3 | https://w3id.org/unterrichtsvideos.net/vocabs/topic/e2a6b355-bfbd-4a3b-b9ad-4d367a927743
-&lt;/topic&gt;
-</pre>
-
-<pre class="example xml" title="Der Inhalt behandelt 'Mediennutzung, Medienwirkung' zur Kompetenz 'Medien in der digitalen Welt verstehen und reflektieren' von Schülerinnen und Schülern.">
-&lt;topic&gt;
- https://w3id.org/unterrichtsvideos.net/vocabs/topic/34561f6b-7493-4692-b43d-3e1e012cffd2 | https://vocabs.sodix.de/sodix/educational/sachgebietssystematik/4000102
-&lt;/topic&gt;
-</pre>
-
 #### &#9675; Kameraperspektive <code>&lt;camera_perspective&gt;</code>
 
 Das `camera_perspective`-Feld beschreibt die Kameraperspektive bzw. den Point of Interest, sofern der Inhalt ein Video enthält. 
@@ -1472,10 +1419,72 @@ Das `teaches`-Feld beschreibt das Lernziel des Inhalts als Freitext.
 &lt;/teaches&gt;
 </pre>
 
+#### &#9675; (Lehrplan-)Thema <code>&lt;topic&gt;</code>
+
+Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts. 
+
+**Nutzungsszenarien**
+- Das Feld KANN zur Kategorisierung von Inhalten in thematische Kollektionen genutzt werden.
+
+**Hinweise**
+- Es SOLLEN nur Themen angegeben werden, welche den Inhalt primär am besten beschreiben.
+- Sofern das Feld verwendet wird, SOLL mindestens die zweite Ebene eines Themas aus den [[Lehrplanthemen]] angegeben werden,
+  z. B. <a href="https://w3id.org/unterrichtsvideos.net/vocabs/topic/c0a79a8d-9f29-4056-8e1e-c0cec3f41f34" target="_blank">Physik > Akustik</a>, nicht bspw. nur Physik.
+- Es KANN in geschlossenen Vokabularen auch eine tiefere Ebene angegeben werden,
+  z. B. <a href="https://w3id.org/unterrichtsvideos.net/vocabs/topic/3e025be8-88ef-4b14-b991-16211d36eefa" target="_blank">Physik > Akustik > Akustische Schwingungen & Wellen > Quellen & Empfänger</a>.
+- Es SOLLEN keine Themen angegeben werden, die von der Bezeichnung lediglich einem Schulfach ähneln.
+- Es SOLLTEN keine Themen angegeben werden, die bereits durch andere Metadatenfelder beschrieben werden (z. B. Analysefokus).
+- Wenn _kein_ passendes Thema in den [[Lehrplanthemen]] vorhanden ist, KANN alternativ auf Themen aus der [[Sachgebietssystematik]] oder <u><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a></u> der [[GND]] referenziert werden.
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>ja</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="http://purl.org/dc/terms/subject">dct:subject</a>,
+    <a href="https://schema.org/about">sdo:about</a>
+  </dd>
+  <dd>`string` (Mehrfachwerte, getrennt mit `|` )</dd>
+  <dt>Wertebereich</dt>
+  <dd>
+    <ul>
+      <li>[[Lehrplanthemen]] (primär, präferiert)</li>
+      <li>[[Sachgebietssystematik]] (sekundär)</li>
+      <li><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a> der [[GND]] (tertiär)</li>
+    </ul>
+</dl>
+
+**Beispiele**
+
+<pre class="example xml" title="Der Inhalt gehört zum Thema 'Astronomie > Planetensystem' aus dem Fach 'Physik'.">
+&lt;topic&gt;
+  https://w3id.org/unterrichtsvideos.net/vocabs/topic/df13c01a-dd5e-4fb5-b570-845fed00fbd0
+&lt;/topic&gt;
+</pre>
+
+<pre class="example xml" title="Der Inhalt ist relevant für die Schulsozialarbeit zum Thema 'Grundprinzipien, Ursachen und Lösungen bei Konflikten, Streit und Mobbing'.">
+&lt;topic&gt;
+  https://d-nb.info/gnd/4136324-3 | https://w3id.org/unterrichtsvideos.net/vocabs/topic/e2a6b355-bfbd-4a3b-b9ad-4d367a927743
+&lt;/topic&gt;
+</pre>
+
+<pre class="example xml" title="Der Inhalt behandelt 'Mediennutzung, Medienwirkung' zur Kompetenz 'Medien in der digitalen Welt verstehen und reflektieren' von Schülerinnen und Schülern.">
+&lt;topic&gt;
+ https://w3id.org/unterrichtsvideos.net/vocabs/topic/34561f6b-7493-4692-b43d-3e1e012cffd2 | https://vocabs.sodix.de/sodix/educational/sachgebietssystematik/4000102
+&lt;/topic&gt;
+</pre>
+
+
 #### &#9675; Schlagworte <code>&lt;keywords&gt;</code>
 
 Das `keywords`-Feld stellt eine Liste von Schlagworten zur Beschreibung des Inhalts dar.
-Mit diesem Feld KÖNNEN beispielsweise Ergänzungen zum Analysefokus angegeben werden.
+
+**Nutzungsszenarien**
+- Mit diesem Feld KÖNNEN beispielsweise Ergänzungen zum Analysefokus angegeben werden.
+- Mit diesem Feld KÖNNEN auch spezifische Merkmale des Inhalts beschrieben werden, die in anderen Metadatenfeldern nicht abgebildet werden können.
+- Das Feld KANN zur Kategorisierung von Inhalten in schlagwortbasierte Kollektionen genutzt werden.
 
 **Hinweise**
 - Es SOLLTE primär eine Orientierung an der [[Schlagwortsystematisierung]] erfolgen (die gemeinsam erweitert werden kann), alternativ können auch <u><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a></u> aus der [[GND]] verwendet werden.
