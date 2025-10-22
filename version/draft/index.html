@@ -1435,6 +1435,19 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
 - Es SOLLEN keine Themen angegeben werden, die von der Bezeichnung lediglich einem Schulfach ähneln.
 - Es SOLLTEN keine Themen angegeben werden, die bereits durch andere Metadatenfelder beschrieben werden (z. B. Analysefokus).
 - Wenn _kein_ passendes Thema in den [[Lehrplanthemen]] vorhanden ist, KANN alternativ auf Themen aus der [[Sachgebietssystematik]] oder <u><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a></u> der [[GND]] referenziert werden.
+- Es SOLLTEN keine redundanten Themen verwendet werden, insbesondere nicht aus verschiedenen Systematisierungen.
+- Unter Umständen werden Themen perspektivisch gefiltert, automatisch generiert oder anderweitig zugeordnet.
+
+**Hierarchische Themen**
+- Eine hierarchische Struktur der Themen ist möglich und SOLL bereits bestehende Systematisierungen des Portals berücksichtigen.
+- Es SOLLTEN nicht mehr als zwei bis drei Hierarchieebenen genutzt werden.
+- Für Hierarchien MUSS der Schrägstrich `/`[Slash] als Trennzeichen zwischen der thematischen Oberkategorie und dem Thema als Unterkategorie genutzt werden.
+
+**Reservierte Zeichen**
+
+Reservierte Zeichen DÜRFEN NICHT als Zeichen innerhalb der freien Themen selbst genutzt werden:
+- Der senkrechte Strich `|` (da dieses Zeichen zur Trennung von Mehrfachwerten reserviert ist)
+- Der Schrägstrich `/` (da dieses Zeichen zur Trennung von Hierarchieebenen reserviert ist) [nur bei freien Themen]
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -1450,9 +1463,10 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
   <dt>Wertebereich</dt>
   <dd>
     <ul>
-      <li>[[Lehrplanthemen]] (primär, präferiert)</li>
+      <li>[[Lehrplanthemen]] (primär)</li>
       <li>[[Sachgebietssystematik]] (sekundär)</li>
       <li><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a> der [[GND]] (tertiär)</li>
+      <li>Freie Themen als Freitext ohne reservierte Zeichen (tertiär, Alternative)</li>
     </ul>
 </dl>
 
@@ -1476,6 +1490,19 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
 &lt;/topic&gt;
 </pre>
 
+**Weitere Beispiele**
+- Bei Vokabular der GND wird automatisch, sofern verfügbar, um eine nächsthöhere Hierarchieebene ergänzt. 
+<pre class="example xml" title="Der Inhalt behandelt 'Propaganda > Desinformation' sowie 'Politische Bildung > Digitalisierung > Künstliche Intelligenz'.">
+&lt;topic&gt;
+  https://d-nb.info/gnd/4252093-9 | https://w3id.org/unterrichtsvideos.net/vocabs/topic/f29e9c89-7822-4d4a-90e4-316bc7e8e200
+&lt;/topic&gt;
+</pre>
+- Um eine neue thematische Hierarchie zu bilden oder eine bestehende Taxonomie zu ergänzen, KÖNNEN auch freie Themen in hierarchischer Form angegeben werden.
+<pre class="example xml" title="Der Inhalt behandelt 'Politische Bildung > Propaganda > Desinformation' sowie 'Politische Bildung > Digitalisierung > Künstliche Intelligenz'.">
+&lt;topic&gt;
+  Politische Bildung/Propaganda/Desinformation | https://w3id.org/unterrichtsvideos.net/vocabs/topic/f29e9c89-7822-4d4a-90e4-316bc7e8e200
+&lt;/topic&gt;
+</pre>
 
 #### &#9675; Schlagworte <code>&lt;keywords&gt;</code>
 
@@ -1496,8 +1523,8 @@ Das `keywords`-Feld stellt eine Liste von Schlagworten zur Beschreibung des Inha
 
 **Hierarchische Schlagwörter**
 - Eine hierarchische Struktur der Schlagworte ist möglich und SOLL bereits bestehende Systematisierungen des Portals berücksichtigen.
-- Vorerst DÜRFEN NICHT mehr als zwei Hierarchieebenen genutzt werden.
-- Für Hierarchien MUSS der Schrägstrich `/`[Slash] als Trennzeichen zwischen Oberkategorie (erste Ebene) und Schlagwort als Unterkategorie (zweite Ebene) genutzt werden.
+- Es SOLLTEN nicht mehr als zwei bis drei Hierarchieebenen genutzt werden.
+- Für Hierarchien MUSS der Schrägstrich `/`[Slash] als Trennzeichen zwischen Oberkategorie und Schlagwort als Unterkategorie genutzt werden.
 
 **Reservierte Zeichen**
 
@@ -1511,13 +1538,13 @@ Reservierte Zeichen DÜRFEN NICHT als Zeichen innerhalb der freien Schlagworten 
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Typ</dt>
-  <dd>`string` (CDATA) [[XML 1.0]] (Mehrfachwerte, getrennt mit `|` ) </dd>
+  <dd>`string` (CDATA) [[XML 1.0]] (Mehrfachwerte, getrennt mit `|`) </dd>
   <dt>Wertebereich</dt>
   <dd>
     <ul>
       <li>Geschlossene Werte aus [[Schlagwortsystematisierung]] (primär)</li>
       <li><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a> der [[GND]] (sekundär)</li>
-      <li>Freitext ohne reservierte Zeichen (tertiär)</li>
+      <li>Freie Schlagwörter als Freitext ohne reservierte Zeichen (tertiär)</li>
     </ul>
   </dd>
 </dl>
@@ -1563,15 +1590,6 @@ Reservierte Zeichen DÜRFEN NICHT als Zeichen innerhalb der freien Schlagworten 
 <pre class="example xml" title="Der Inhalt adressiert im Besonderen den außerschulischen Lernort 'Allwetterzoo Münster'.">
 &lt;keywords&gt;
   &lt;![CDATA[https://d-nb.info/gnd/1104713659 | https://w3id.org/unterrichtsvideos.net/vocabs/keyword/k30170]]&gt;
-&lt;/keywords&gt;
-</pre>
-
-**Ungültige Schlagwörter**
-
-- Falsche Schlagwörter, da mehr als zwei Hierarchieebenen genutzt werden:
-<pre class="example xml" title="Fehlerhaftes Schlagwort: Kommunikation/Kooperation/Elterngespräche">
-&lt;keywords&gt;
-  &lt;![CDATA[Kommunikation/Kooperation/Elterngespräche | Kollegiale Fallberatung]]&gt;
 &lt;/keywords&gt;
 </pre>
 
