@@ -1428,15 +1428,15 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
 
 **Hinweise**
 - Es SOLLEN nur Themen angegeben werden, welche den Inhalt primär am besten beschreiben.
-- Sofern das Feld verwendet wird, SOLL mindestens die zweite Ebene eines Themas aus den [[Lehrplanthemen]] angegeben werden,
+- Sofern ein Thema aus den [[Lehrplanthemen]] angegeben wird, SOLL mindestens die zweite Ebene angegeben werden.
   z. B. <a href="https://w3id.org/unterrichtsvideos.net/vocabs/topic/c0a79a8d-9f29-4056-8e1e-c0cec3f41f34" target="_blank">Physik > Akustik</a>, nicht bspw. nur Physik.
 - Es KANN in geschlossenen Vokabularen auch eine tiefere Ebene angegeben werden,
   z. B. <a href="https://w3id.org/unterrichtsvideos.net/vocabs/topic/3e025be8-88ef-4b14-b991-16211d36eefa" target="_blank">Physik > Akustik > Akustische Schwingungen & Wellen > Quellen & Empfänger</a>.
 - Es SOLLEN keine Themen angegeben werden, die von der Bezeichnung lediglich einem Schulfach ähneln.
-- Es SOLLTEN keine Themen angegeben werden, die bereits durch andere Metadatenfelder beschrieben werden (z. B. Analysefokus).
+- Es SOLLEN keine Themen angegeben werden, die bereits durch andere Metadatenfelder beschrieben werden (z. B. Analysefokus).
 - Wenn _kein_ passendes Thema in den [[Lehrplanthemen]] vorhanden ist, KANN alternativ auf Themen aus der [[Sachgebietssystematik]] oder <u><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a></u> der [[GND]] referenziert werden.
-- Es SOLLTEN keine redundanten Themen verwendet werden, insbesondere nicht aus verschiedenen Systematisierungen.
-- Unter Umständen werden Themen perspektivisch gefiltert, automatisch generiert oder anderweitig zugeordnet.
+- Es SOLLEN keine redundanten Themen verwendet werden, insbesondere nicht aus verschiedenen Systematisierungen.
+- Themen KÖNNEN perspektivisch unter Umständen durch das Metaportal gefiltert, automatisch generiert oder anderweitig zugeordnet werden.
 
 **Hierarchische Themen**
 - Eine hierarchische Struktur der Themen ist möglich und SOLL bereits bestehende Systematisierungen des Portals berücksichtigen.
@@ -1472,18 +1472,21 @@ Reservierte Zeichen DÜRFEN NICHT als Zeichen innerhalb der freien Themen selbst
 
 **Beispiele**
 
+- Geschlossenes Vokabular aus [[Lehrplanthemen]]
 <pre class="example xml" title="Der Inhalt gehört zum Thema 'Astronomie > Planetensystem' aus dem Fach 'Physik'.">
 &lt;topic&gt;
   https://w3id.org/unterrichtsvideos.net/vocabs/topic/df13c01a-dd5e-4fb5-b570-845fed00fbd0
 &lt;/topic&gt;
 </pre>
 
+- Geschlossene Vokabulare aus [[GND]] und [[Lehrplanthemen]]
 <pre class="example xml" title="Der Inhalt ist relevant für die Schulsozialarbeit zum Thema 'Grundprinzipien, Ursachen und Lösungen bei Konflikten, Streit und Mobbing'.">
 &lt;topic&gt;
   https://d-nb.info/gnd/4136324-3 | https://w3id.org/unterrichtsvideos.net/vocabs/topic/e2a6b355-bfbd-4a3b-b9ad-4d367a927743
 &lt;/topic&gt;
 </pre>
 
+- Geschlossene Vokabulare aus [[Lehrplanthemen]] und [[Sachgebietssystematik]]
 <pre class="example xml" title="Der Inhalt behandelt 'Mediennutzung, Medienwirkung' zur Kompetenz 'Medien in der digitalen Welt verstehen und reflektieren' von Schülerinnen und Schülern.">
 &lt;topic&gt;
  https://w3id.org/unterrichtsvideos.net/vocabs/topic/34561f6b-7493-4692-b43d-3e1e012cffd2 | https://vocabs.sodix.de/sodix/educational/sachgebietssystematik/4000102
