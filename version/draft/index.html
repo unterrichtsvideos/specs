@@ -3,7 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <title>XML-Feed Spezifikationen – Anwendungsprofil für das Meta-Videoportal unterrichtsvideos.net</title>
-    <script src='https://unterrichtsvideos.github.io/specs/js/respec-dini.js' aync class='remove'></script>
+    <script src='https://unterrichtsvideos.github.io/specs/js/respec-dini.js' async class='remove'></script>
     <script class='remove'>
       var respecConfig = {
         shortName: "unterrichtsvideos.net/specs",
@@ -166,7 +166,7 @@
         },
         logos: [],
         otherLinks: [{
-          key: "Links zur Spezifikation",
+          key: "Links zur Spezifikation:",
           data: [{
               value: "Aktuellste Version",
               href: "https://w3id.org/unterrichtsvideos.net/specs/latest/"
@@ -177,7 +177,7 @@
             }
           ]
           }, {
-                key: "Mitwirken",
+                key: "Mitwirken:",
                 data: [{
                     value: "Partizipationsmöglichkeiten",
                     href: "https://unterrichtsvideos.github.io/specs/#mitwirken"
@@ -198,7 +198,7 @@ Das Dokument stellt ein **Anwendungsprofil** zur Bereitstellung von Metadaten in
 
 Das Anwendungsprofil ist angelehnt an die Spezifikationen von [[RSS 2.0]] und [[XML 1.0]] zur Strukturierung des Datenaustauschs.
 Der Feed dient dem Austausch der Metadaten von Inhalten zwischen den Portalen/Anbietern (wie bspw. dem Videoportal [ProVision](https://www.uni-muenster.de/ProVision/)) und dem Meta-Videoportal [unterrichtsvideos.net](https://unterrichtsvideos.net/metaportal/).
-Es können Metadaten zu verschiedenen Inhalten (z. B. Unterrichtsvideos, Lernangebote) in einem XML-Feed (alle Typen) oder auch in zwei separaten Feeds (Unterrichtsvideos, Lernangebote) bereitgestellt werden.
+Es können Metadaten zu verschiedenen Inhalten (z.B. Unterrichtsvideos, Lernangebote) in einem XML-Feed (alle Typen) oder auch in zwei separaten Feeds (Unterrichtsvideos, Lernangebote) bereitgestellt werden.
 
 <div class="copyright" style="display: flex; flex-direction: row; justify-content: space-between;">
     <div>
@@ -218,7 +218,7 @@ Metadatenfelder entsprechen XML-Elementen, bspw. `license` zur Kennzeichnung der
 
 ### Syntax und Semantik
 - Der Feed MUSS konform zu [[XML 1.0]] und SOLL konform zu [[RSS 2.0]] validieren.
-- Der Feed MUSS zur <abbr title="XML Schema Definition">XSD</abbr> des Meta-Videoportals unterrichtsvideos.net validieren.
+- Der Feed MUSS zur <a href="./schema/mvp.xsd" target="_blank"><abbr title="XML Schema Definition">XSD</abbr> von unterrichtsvideos.net</a> validieren (XML Schema) (<a href="https://unterrichtsvideos.github.io/specs/">Mehr Informationen</a>).
 - Felder mit freien Textinhalten MÜSSEN zur Kennzeichnung CDATA verwenden: &lt;![CDATA[...]]&gt;.
 - Felder mit Formatvorgaben oder geschlossenen Wertebereichen KÖNNEN zur Kennzeichnung CDATA verwenden.
 
@@ -246,31 +246,49 @@ Metadatenfelder entsprechen XML-Elementen, bspw. `license` zur Kennzeichnung der
 - Links SOLLEN das Schema *https* verwenden.
 
 ## XML-Basisstruktur
-
 - Die XML-Basisstruktur MUSS das `rss`-Element enthalten.
-- Die XML-Basissstruktur SOLL den XML-Namensraum des Meta-Videoportals deklarieren:
-`https://w3id.org/unterrichtsvideos.net/specs/` 
-
+- Die XML-Basissstruktur SOLL den Namensraum des Meta-Videoportals deklarieren.
+- Die XML-Basisstruktur SOLL das XSD-Schema des Meta-Videoportals referenzieren.
+  
 <dl>
   <dt>Pflichtelement &lt;rss&gt;</dt>
   <dd>ja</dd>
   <dt>Typ</dt>
   <dd>`element` [[RSS 2.0]]</dd>
   <dt>Attribute</dt>
-  <dd>`xmlns` - benennt den deklarierten Namensraum und SOLL folgenden Wert haben: `https://w3id.org/unterrichtsvideos.net/specs/` [[RSS 2.0]]</dd>
+  <dd>
+    <ul>
+      <li>`xmlns:mvp="https://w3id.org/unterrichtsvideos.net/specs/"` - Namensraum des Meta-Videoportals</li>
+      <li>`xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"` - Namensraum der XSI</li>
+      <li>`xsi:noNamespaceSchemaLocation="https://w3id.org/unterrichtsvideos.net/specs/version/2.0/schema/mvp.xsd"` - XSD des Meta-Videoportals</li>
+    </ul> 
+  </dd>
 </dl>
 
-<pre class="example" title="Grundstruktur des XML-Feeds">
-  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-  &lt;rss version=&quot;2.0&quot; xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot;&gt;
-    &lt;!-- Metadaten zum Anbieter und den Inhalten gemäß Anwendungsprofil --&gt;
-  &lt;/rss&gt;
-</pre>
+  <pre class="example" title="Basisstruktur des XML-Feeds">
+    &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+    &lt;rss version=&quot;2.0&quot; 
+      xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot;
+      xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+      xsi:noNamespaceSchemaLocation=&quot;https://w3id.org/unterrichtsvideos.net/specs/version/2.0/schema/mvp.xsd&quot;
+    &gt;
+    &lt;channel&gt;
+      &lt;!-- Metadaten zum Anbieter gemäß Anwendungsprofil [...] --&gt;
+      &lt;item&gt;
+        &lt;!-- Metadaten zu einem konkreten Inhalt gemäß Anwendungsprofil [...] --&gt;
+      &lt;/item&gt;
+      &lt;item&gt;
+        &lt;!-- Metadaten zu einem weiteren konkreten Inhalt gemäß Anwendungsprofil (optional) [...] --&gt;
+      &lt;/item&gt;
+      [...]
+    &lt;/channel&gt;
+    &lt;/rss&gt;
+  </pre>
 </section>
-
+  
 ## Metadaten des Anbieters <code>&lt;channel&gt;</code>
 
-Das `channel`-Element im XML-Feed definiert allgemeine Informationen über den Anbieter der Metadaten, z. B. eines Portals, gemäß [[RSS 2.0]].
+Das `channel`-Element im XML-Feed definiert allgemeine Informationen über den Anbieter der Metadaten, z.B. eines Portals, gemäß [[RSS 2.0]].
 
 - Es MUSS ein `channel`-Element enthalten sein.
 - Es DARF NICHT mehr als ein `channel`-Element enthalten sein.
@@ -283,16 +301,6 @@ Das `channel`-Element im XML-Feed definiert allgemeine Informationen über den A
   <dt>Typ</dt>
   <dd>`element` [[RSS 2.0]]</dd>
 </dl>
-
-<pre class="example" title="Grundstruktur des XML-Feeds">
-  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-  &lt;rss version=&quot;2.0&quot; xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot;&gt;
-  &lt;channel&gt;
-    &lt;!-- Metadaten zum Anbieter gemäß Anwendungsprofil [...] --&gt;
-  &lt;/channel&gt;
-    &lt;!-- Metadaten zu den Inhalten gemäß Anwendungsprofil [...] --&gt;
-  &lt;/rss&gt;
-</pre>
 
 #### &#9679; Titel <code>&lt;title&gt;</code>
 
@@ -344,7 +352,7 @@ Das `description`-Feld innerhalb des `channel`-Elements dient der Beschreibung d
 
 Das `image`-Feld innerhalb des `channel`-Elements definiert das Logo des Anbieters mit den benötigten Elementen, gemäß [[RSS 2.0]]:
 - `link` (URL), Schema: http(s) [[RFC3986]]
-- `url`  (URL zum Logo),  Schema: https [[RFC3986]]
+- `url`  (URL zum Logo),  Schema: http(s) [[RFC3986]]
   - Erlaubte MIME-Types [[RFC6838]] & [[RSS 2.0]]: 
     - `image/jpeg`
     - `image/png`
@@ -467,32 +475,17 @@ Thu, 01 Jan 2026 10:15:45 +0200
 
 ## Metadaten des Inhalts <code>&lt;item&gt;</code>
 
-Jeder Inhalt (z. B. ein Unterrichtsvideo oder Lernangebot) wird durch ein eindeutiges `item`-Element repräsentiert, gemäß [[RSS 2.0]].
+Jeder Inhalt (z.B. ein Unterrichtsvideo oder Lernangebot) wird durch ein eindeutiges `item`-Element repräsentiert, gemäß [[RSS 2.0]].
 
 - Ein Feed MUSS mindestens ein `item`-Element aufweisen.
 - Ein Feed KANN mehrere `item`-Elemente aufweisen.
 - Jedes `item`-Element MUSS mindestens die als Pflichtfelder deklarierten Metadaten enthalten.
 
-<pre class="example" title="Grundstruktur des XML-Feeds">
-  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-  &lt;rss version=&quot;2.0&quot; xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot;&gt;
-  &lt;channel&gt;
-    &lt;!-- Metadaten zum Anbieter gemäß Anwendungsprofil --&gt;
-  &lt;/channel&gt;
-  &lt;item&gt;
-    &lt;!-- Metadaten zu einem konkreten Inhalt gemäß Anwendungsprofil [...] --&gt;
-  &lt;/item&gt;
-  &lt;item&gt;
-    &lt;!-- Metadaten zu einem weiteren konkreten Inhalt gemäß Anwendungsprofil (optional) [...] --&gt;
-  &lt;/item&gt;
-  &lt;/rss&gt;
-</pre>
-
 ### Deskriptive Metadaten
 
 #### &#9679; Titel <code>&lt;title&gt;</code>
 
-Das `title`-Feld gibt den Titel des Inhalts an (z. B. Titel des Videos), gemäß [[RSS 2.0]].
+Das `title`-Feld gibt den Titel des Inhalts an (z.B. Titel des Videos), gemäß [[RSS 2.0]].
 
 - Der Titel SOLL eine Länge zwischen 1 und 150 Zeichen aufweisen.
 
@@ -533,7 +526,7 @@ Das `link`-Feld definiert die absolute URL zum Inhalt beim Anbieter, gemäß [[R
 
 #### &#9679; Identifier <code>&lt;id&gt;</code>
 
-Das `id`-Feld ist die permanente und eindeutige Kennung des Inhalts (z. B. Videos) in allen vom Anbieter bereitgestellten XML-Feeds.
+Das `id`-Feld ist die permanente und eindeutige Kennung des Inhalts (z.B. Videos) in allen vom Anbieter bereitgestellten XML-Feeds.
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -698,7 +691,8 @@ Das `abstract`-Feld dient der Kurzbeschreibung des Inhalts.
 
 Das `language`-Feld kennzeichnet die Sprachen, in denen der Inhalt verfügbar ist.
 
-Es SOLL ein zweistelliger ISO 639-1 (alpha-2) Sprachcode verwendet werden (z.B. `de` für Deutsch, `en` für Englisch).
+**Hinweise**
+- Es SOLL ein zweistelliger ISO 639-1 (alpha-2) Sprachcode verwendet werden (z.B. `de` für Deutsch, `en` für Englisch).
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -726,7 +720,8 @@ Es SOLL ein zweistelliger ISO 639-1 (alpha-2) Sprachcode verwendet werden (z.B. 
 
 Das `date_created`-Feld beschreibt das Datum der Erstellung des Inhalts.
 
-- SOLL eine möglichst präzise Angabe enthalten.
+**Hinweise**
+- Das Feld SOLL eine möglichst präzise Angabe enthalten.
 
 **Varianten**
 - Angabe als Jahr (JJJJ)
@@ -796,7 +791,7 @@ Das `use_restrictions`-Feld definiert Einschränkungen der Nutzbarkeit durch Zie
 
 Eine Zielgruppe wird nur und immer dann angegeben, wenn ...
 - die jeweilige Zielgruppe potenziell einen Zugriff auf die Ressource erlangen kann<br/>
-(z. B. direkt selbst oder indirekt über einen Kurs)<br/>
+(z.B. direkt selbst oder indirekt über einen Kurs)<br/>
 _und_
 - der Inhalt für die jeweilige Zielgruppe gemäß dem Anbieter relevant ist
 
@@ -906,11 +901,11 @@ Empfohlen wird dabei die Angabe eines Wertes aus folgenden Quellen nach folgende
 _und/oder als Freitext in der Form_
 
 - Personen: 
-  - Vorname Nachname (z. B. "Erika Musterfrau")
+  - Vorname Nachname (z.B. "Erika Musterfrau")
   _oder_  
-  - Nachname, Vorname (z. B. "Musterfrau, Erika")
+  - Nachname, Vorname (z.B. "Musterfrau, Erika")
 - Organisationen: 
-  - Deutschsprachiger Name der Organisation (z. B. "Universität Münster")
+  - Deutschsprachiger Name der Organisation (z.B. "Universität Münster")
 
 **Hinweise**
 - Es sollten Vorzugsbezeichnungen der Organisationen und Personen verwendet werden. Diese sind den o.g. Quellen zu entnehmen.
@@ -995,7 +990,7 @@ Die Reihenfolge der Werte ist bedeutsam.
 ##### Beispiele für die Verwendung des `hasPart`-Feldes
 
 <strong>Hiearchische Über-/Unterordnung</strong>
-- KANN als hierarchische Relation (Über-/Unterordnung) genutzt werden, z. B. {Inhalt} besitzt als Teile 1..n {Inhalte}.
+- KANN als hierarchische Relation (Über-/Unterordnung) genutzt werden, z.B. {Inhalt} besitzt als Teile 1..n {Inhalte}.
   - Beispiel: Ein Video {ID_2} besitzt als Teile einen Clip 1 {ID_2_1} und einen Clip 2 {ID_2_2}, somit gilt:
     - {ID_2} *hasPart* {ID_2_1} | {ID_2_2}
 
@@ -1013,7 +1008,7 @@ Die Reihenfolge der Werte ist bedeutsam.
 </pre>
 
 <strong>Assoziative Relation</strong>
-- KANN als assoziative Relation genutzt werden, z. B. {Inhalt} ist eine Reihe/Serie, bestehend aus 1..n {Inhalten}.
+- KANN als assoziative Relation genutzt werden, z.B. {Inhalt} ist eine Reihe/Serie, bestehend aus 1..n {Inhalten}.
   - Beispiel: Videos sind Teil einer Videoreihe/-serie und besitzen ggf. Vorgänger und/oder Nachfolger, somit gilt:
     - {ID_1} *hasPart* {ID_2} | {ID_3}
 
@@ -1045,7 +1040,7 @@ Die Reihenfolge der Werte ist bedeutsam.
 ##### Beispiele für die Verwendung des `isPartOf`-Feldes
 
 <strong>Hierarchische Relation: Über-/Unterordnung</strong>
-- KANN als hierarchische Relation (Über-/Unterordnung) genutzt werden, z. B. {Inhalt} besitzt als Teile 1..n {Inhalte}.
+- KANN als hierarchische Relation (Über-/Unterordnung) genutzt werden, z.B. {Inhalt} besitzt als Teile 1..n {Inhalte}.
   - Beispiel: Ein Video {ID_2} besitzt als Teile einen Clip 1 {ID_2_1} und einen Clip 2 {ID_2_2}, somit gilt:
     - {ID_2} *hasPart* {ID_2_1} | {ID_2_2}
     - {ID_2_1} *isPartOf* {ID_2}
@@ -1066,7 +1061,7 @@ Die Reihenfolge der Werte ist bedeutsam.
 </pre>
 
 <strong>Assoziative Relation</strong>
-- KANN als assoziative Relation genutzt werden, z. B. {Inhalt} ist Teil einer Reihe/Serie.
+- KANN als assoziative Relation genutzt werden, z.B. {Inhalt} ist Teil einer Reihe/Serie.
   - Beispiel: Videos sind Teil einer Videoreihe/-serie, somit gilt:
     - {ID_2} *isPartOf* {ID_1}
 
@@ -1193,7 +1188,7 @@ Das `subject`-Feld definiert das Schulfach.
 
 #### &#9675; Dauer <code>&lt;time_required&gt;</code>
 
-Das `time_required`-Feld gibt die (Beschäftigungs-)Dauer des Inhalts an, z. B. die Länge des Videos oder die durchschnittliche Bearbeitungsdauer eines Lernmoduls zum Erreichen der Lernziele. 
+Das `time_required`-Feld gibt die (Beschäftigungs-)Dauer des Inhalts an, z.B. die Länge des Videos oder die durchschnittliche Bearbeitungsdauer eines Lernmoduls zum Erreichen der Lernziele. 
 
 **Hinweis**
 - Bei (Unterrichts-)Videos wird empfohlen hier den Zeitumfang des Videos anzugeben.
@@ -1437,11 +1432,11 @@ Das `topic`-Feld beschreibt das (Lehrplan-)Thema des Inhalts.
 **Hinweise**
 - Es SOLLEN nur Themen angegeben werden, welche den Inhalt primär am besten beschreiben.
 - Sofern ein Thema aus den [[Lehrplanthemen]] angegeben wird, SOLL mindestens die zweite Ebene angegeben werden.
-  z. B. <a href="https://w3id.org/unterrichtsvideos.net/vocabs/topic/c0a79a8d-9f29-4056-8e1e-c0cec3f41f34" target="_blank">Physik > Akustik</a>, nicht bspw. nur Physik.
+  z.B. <a href="https://w3id.org/unterrichtsvideos.net/vocabs/topic/c0a79a8d-9f29-4056-8e1e-c0cec3f41f34" target="_blank">Physik > Akustik</a>, nicht bspw. nur Physik.
 - Es KANN in geschlossenen Vokabularen auch eine tiefere Ebene angegeben werden,
-  z. B. <a href="https://w3id.org/unterrichtsvideos.net/vocabs/topic/3e025be8-88ef-4b14-b991-16211d36eefa" target="_blank">Physik > Akustik > Akustische Schwingungen & Wellen > Quellen & Empfänger</a>.
+  z.B. <a href="https://w3id.org/unterrichtsvideos.net/vocabs/topic/3e025be8-88ef-4b14-b991-16211d36eefa" target="_blank">Physik > Akustik > Akustische Schwingungen & Wellen > Quellen & Empfänger</a>.
 - Es SOLLEN keine Themen angegeben werden, die von der Bezeichnung lediglich einem Schulfach ähneln.
-- Es SOLLEN keine Themen angegeben werden, die bereits durch andere Metadatenfelder beschrieben werden (z. B. Analysefokus).
+- Es SOLLEN keine Themen angegeben werden, die bereits durch andere Metadatenfelder beschrieben werden (z.B. Analysefokus).
 - Wenn _kein_ passendes Thema in den [[Lehrplanthemen]] vorhanden ist, KANN alternativ auf Themen aus der [[Sachgebietssystematik]] oder <u><a href="https://explore.gnd.network/search?f.satzart=Sachbegriff" target="_blank">Sachbegriffe</a></u> der [[GND]] referenziert werden.
 - Es SOLLEN keine redundanten Themen verwendet werden, insbesondere nicht aus verschiedenen Systematisierungen.
 - Themen KÖNNEN perspektivisch unter Umständen durch das Metaportal gefiltert, automatisch generiert oder anderweitig zugeordnet werden.
@@ -1529,7 +1524,7 @@ Das `keywords`-Feld stellt eine Liste von Schlagworten zur Beschreibung des Inha
 - Es KANN eine freie Verschlagwortung als Freitext genutzt werden.
 - Es SOLLTEN nur die wesentlichsten Schlagwörter genutzt werden.
 - Es SOLLTEN keine redundanten Schlagwörter verwendet werden, insbesondere nicht aus verschiedenen Systematisierungen.
-- Es SOLLTEN keine Schlagwörter genutzt werden, die bereits durch andere Metadatenfelder beschrieben werden (z. B. Schulfach, Schulart, Jahrgangsstufe, Lehrplanthema).
+- Es SOLLTEN keine Schlagwörter genutzt werden, die bereits durch andere Metadatenfelder beschrieben werden (z.B. Schulfach, Schulart, Jahrgangsstufe, Lehrplanthema).
 - Unter Umständen werden Schlagwörter perspektivisch gefiltert, automatisch generiert oder anderweitig zugeordnet.
 
 **Hierarchische Schlagwörter**
@@ -1609,8 +1604,8 @@ Reservierte Zeichen DÜRFEN NICHT als Zeichen innerhalb der freien Schlagworten 
 
 <section id="feed-example">
   <h3>Beispiel: RSS-/XML-Feed</h3>
-  <pre data-include="./examples/valid/feedExample.xml" data-include-format="text"></pre>
-  <a href="./examples/valid/feedExample.xml">Link zum RSS-/XML-Feed-Beispiel</a>
+  <pre data-include="./examples/valid/feed_valid_example.xml" data-include-format="text"></pre>
+  <a href="./examples/valid/feed_valid_example.xml">Link zum RSS-/XML-Feed-Beispiel</a>
 </section>
 
 </section>
@@ -1625,6 +1620,8 @@ Reservierte Zeichen DÜRFEN NICHT als Zeichen innerhalb der freien Schlagworten 
     <dd>Extensible Markup Language</dd>
     <dt><abbr title="XML Schema Definition">XSD</abbr></dt>
     <dd>XML Schema Definition</dd>
+    <dt><abbr title="XML Schema Instance">XSI</abbr></dt>
+    <dd>XML Schema Instance</dd>
     <dt><abbr title="Uniform Resource Identifier">URI</abbr></dt>
     <dd>Uniform Resource Identifier</dd>
     <dt><abbr title="Uniform Resource Locator">URL</abbr>, <abbr title="Uniform Resource Locators">URLs</abbr></dt>
@@ -1663,3 +1660,4 @@ Reservierte Zeichen DÜRFEN NICHT als Zeichen innerhalb der freien Schlagworten 
 </script>
 
 </body>
+</html>
