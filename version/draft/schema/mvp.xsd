@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation>XSD Schema for RSS-/XML Feeds of unterrichtsvideos.net (v2.0)</xs:documentation>
+  </xs:annotation>
+
+  <!-- Meta-Videoportal Types -->
+  <xs:simpleType name="TitleType">
+    <xs:restriction base="xs:token">
+      <xs:maxLength value="150" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="DescriptionType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="15000" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AbstractType">
+    <xs:restriction base="xs:token">
+      <xs:maxLength value="300" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="UseRestrictionsLabelType">
+    <xs:restriction base="xs:token">
+      <xs:maxLength value="600" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="IdentifierType">
+    <xs:restriction base="xs:token">
+      <xs:maxLength value="150" />
+      <xs:pattern value="[A-Za-z0-9]([A-Za-z0-9._-]{0,148}[A-Za-z0-9])?" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RelatedIdentifierListType">
+    <xs:restriction base="xs:token">
+      <xs:pattern
+        value="\s*[A-Za-z0-9]([A-Za-z0-9._-]{0,148}[A-Za-z0-9])?\s*(\|\s*[A-Za-z0-9]([A-Za-z0-9._-]{0,148}[A-Za-z0-9])?\s*)*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="PartialDateType">
+    <xs:restriction base="xs:token">
+      <xs:maxLength value="10" />
+      <xs:pattern value="[0-9]{4}(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01]))?)?" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="LanguageListType">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="\s*[A-Za-z]{2}(-[A-Za-z]{2})?\s*(\|\s*[A-Za-z]{2}(-[A-Za-z]{2})?\s*)*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ResourceTypeListType">
+    <xs:restriction base="xs:token">
+      <xs:pattern
+        value="\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/resource_type/[A-Za-z0-9_.-]+\s*(\|\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/resource_type/[A-Za-z0-9_.-]+\s*)*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="LicenseListType">
+    <xs:restriction base="xs:token">
+      <xs:pattern
+        value="\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/license/[A-Za-z0-9_.-]+\s*(\|\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/license/[A-Za-z0-9_.-]+\s*)*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AudienceListType">
+    <xs:restriction base="xs:token">
+      <xs:pattern
+        value="\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/audience/[A-Za-z0-9_.-]+\s*(\|\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/audience/[A-Za-z0-9_.-]+\s*)*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="SchoolTypeListType">
+    <xs:restriction base="xs:token">
+      <xs:pattern
+        value="\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/school_type/[A-Za-z0-9_.-]+\s*(\|\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/school_type/[A-Za-z0-9_.-]+\s*)*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="GradeListType">
+    <xs:restriction base="xs:token">
+      <xs:pattern
+        value="\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/grade/[A-Za-z0-9_.-]+\s*(\|\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/grade/[A-Za-z0-9_.-]+\s*)*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="SubjectListType">
+    <xs:restriction base="xs:token">
+      <xs:pattern
+        value="\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/subject/[A-Za-z0-9_.-]+\s*(\|\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/subject/[A-Za-z0-9_.-]+\s*)*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="MaterialTypeListType">
+    <xs:restriction base="xs:token">
+      <xs:pattern
+        value="\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/material_type/[A-Za-z0-9_.-]+\s*(\|\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/material_type/[A-Za-z0-9_.-]+\s*)*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="LearningFormatListType">
+    <xs:restriction base="xs:token">
+      <xs:pattern
+        value="\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/learning_format/[A-Za-z0-9_.-]+\s*(\|\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/learning_format/[A-Za-z0-9_.-]+\s*)*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CameraPerspectiveListType">
+    <xs:restriction base="xs:token">
+      <xs:pattern
+        value="\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/camera_perspective/[A-Za-z0-9_.-]+\s*(\|\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/camera_perspective/[A-Za-z0-9_.-]+\s*)*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="InstructionalQualityListType">
+    <xs:restriction base="xs:token">
+      <xs:pattern
+        value="\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/mainteach/[A-Za-z0-9_.-]+\s*(\|\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/mainteach/[A-Za-z0-9_.-]+\s*)*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="DigitalCompetenceListType">
+    <xs:restriction base="xs:token">
+      <xs:pattern
+        value="\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/digcompeduobserve/[A-Za-z0-9_.-]+\s*(\|\s*https://w3id\.org/unterrichtsvideos\.net/vocabs/digcompeduobserve/[A-Za-z0-9_.-]+\s*)*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CreatorListType">
+    <xs:restriction base="xs:token">
+      <xs:maxLength value="150" />
+      <xs:pattern
+        value="\s*(https://d-nb\.info/gnd/[0-9X-]+|https://orcid.org/([0-9]{4}-){3}[0-9]{3}[0-9X]|([^\t\r\n :/|]+( [^\t\r\n :/|]+)+|[^\t\r\n :/|]+(,\s*[^\t\r\n :/|]+)+))\s*(\|\s*(https://d-nb\.info/gnd/[0-9X-]+|https://orcid.org/([0-9]{4}-){3}[0-9]{3}[0-9X]|([^\t\r\n :/|]+( [^\t\r\n :/|]+)+|[^\t\r\n :/|]+(,\s*[^\t\r\n :/|]+)+))\s*)*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="FreeTextPipeListType">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="\s*[^|]+\s*(\|\s*[^|]+\s*)*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="FreeTextListType">
+    <xs:restriction base="xs:token">
+      <xs:pattern
+        value="\s*(([A-Za-z0-9 .,?!&amp;*()\[\];'&quot;_/-]|:([^/]|$))+)(\s*\|\s*(([A-Za-z0-9 .,?!&amp;*()\[\];'&quot;_/-]|:([^/]|$))+))*\s*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="TopicListType">
+    <xs:union>
+      <!-- (1) URL list pattern  -->
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:pattern
+            value="\s*(https://d-nb\.info/gnd/[0-9X-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/topic/[A-Za-z0-9._/-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/keyword/[A-Za-z0-9._/-]+|https://vocabs\.sodix\.de/sodix/educational/[A-Za-z0-9._/-]+)\s*(\|\s*(https://d-nb\.info/gnd/[0-9X-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/topic/[A-Za-z0-9._/-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/keyword/[A-Za-z0-9._/-]+|https://vocabs\.sodix\.de/sodix/educational/[A-Za-z0-9._/-]+)\s*)*" />
+        </xs:restriction>
+      </xs:simpleType>
+      <!-- (2) Non-URL keyword string list -->
+      <xs:simpleType>
+        <xs:restriction base="FreeTextListType" />
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+
+  <xs:simpleType name="KeywordListType">
+    <xs:union>
+      <!-- (1) URL list pattern -->
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:pattern
+            value="\s*(https://d-nb\.info/gnd/[0-9X-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/keyword/[A-Za-z0-9._/-]+)\s*(\|\s*(https://d-nb\.info/gnd/[0-9X-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/keyword/[A-Za-z0-9._/-]+)\s*)*" />
+        </xs:restriction>
+      </xs:simpleType>
+      <!-- (2) Non-URL keyword string list -->
+      <xs:simpleType>
+        <xs:restriction base="FreeTextListType" />
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+
+  <!-- RSS/XML feed item -->
+  <xs:complexType name="ItemType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <!-- Descriptive Metadata -->
+      <xs:element name="title" type="TitleType" minOccurs="1" maxOccurs="1" />
+      <xs:element name="link" type="xs:anyURI" minOccurs="1" maxOccurs="1" />
+      <xs:element name="id" type="IdentifierType" minOccurs="1" maxOccurs="1" />
+      <xs:element name="image" type="xs:anyURI" minOccurs="1" maxOccurs="1" />
+      <xs:element name="resource_type" type="ResourceTypeListType" minOccurs="1" maxOccurs="1" />
+      <xs:element name="description" type="DescriptionType" minOccurs="1" maxOccurs="1" />
+      <xs:element name="abstract" type="AbstractType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="language" type="LanguageListType" minOccurs="0" maxOccurs="1" />
+
+      <!-- Administrative Metadata -->
+      <xs:element name="date_created" type="PartialDateType" minOccurs="1" maxOccurs="1" />
+      <xs:element name="license" type="LicenseListType" minOccurs="1" maxOccurs="1" />
+      <xs:element name="use_restrictions" type="AudienceListType" minOccurs="1" maxOccurs="1" />
+      <xs:element name="use_restrictions_label" type="UseRestrictionsLabelType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="date_published" type="PartialDateType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="creator" type="CreatorListType" minOccurs="0" maxOccurs="1" />
+
+      <!-- Structural Metadata -->
+      <xs:element name="hasPart" type="RelatedIdentifierListType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="isPartOf" type="RelatedIdentifierListType" minOccurs="0" maxOccurs="1" />
+
+      <!-- Didactic Metadata -->
+      <xs:element name="school_type" type="SchoolTypeListType" minOccurs="1" maxOccurs="1" />
+      <xs:element name="grade" type="GradeListType" minOccurs="1" maxOccurs="1" />
+      <xs:element name="subject" type="SubjectListType" minOccurs="1" maxOccurs="1" />
+      <xs:element name="time_required" type="xs:duration" minOccurs="0" maxOccurs="1" />
+      <xs:element name="material_type" type="MaterialTypeListType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="learning_format" type="LearningFormatListType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="camera_perspective" type="CameraPerspectiveListType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="focus_instructional_quality" type="InstructionalQualityListType"
+        minOccurs="0" maxOccurs="1" />
+      <xs:element name="focus_digital_competence" type="DigitalCompetenceListType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="teaches" type="FreeTextPipeListType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="topic" type="TopicListType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="keywords" type="KeywordListType" minOccurs="0" maxOccurs="1" />
+      <xs:any
+          minOccurs="0"
+          maxOccurs="unbounded"
+          processContents="lax"/>
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- Channel with one or more items -->
+  <xs:complexType name="ChannelType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="title" type="TitleType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="link" type="xs:anyURI" minOccurs="0" maxOccurs="1" />
+      <xs:element name="description" type="DescriptionType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="image" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="url" type="xs:anyURI" minOccurs="0" maxOccurs="1" />
+            <xs:element name="title" type="TitleType" minOccurs="0" maxOccurs="1" />
+            <xs:element name="link" type="xs:anyURI" minOccurs="0" maxOccurs="1" />
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="docs" type="xs:anyURI" minOccurs="0" maxOccurs="1" />
+      <xs:element name="item" minOccurs="1" maxOccurs="unbounded" type="ItemType" />
+      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- RSS/XML feed -->
+  <xs:element name="rss">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="channel" type="ChannelType" minOccurs="1" maxOccurs="1" />
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:token" fixed="2.0" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

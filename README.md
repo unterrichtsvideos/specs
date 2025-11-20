@@ -8,13 +8,28 @@ RSS-/XML-basiertes Profil zur Beschreibung von Ressourcen im Kontext des Meta-Vi
 | `latest` | Neueste Version der Spezifikationen | [latest](https://unterrichtsvideos.github.io/specs/latest/) |
 | `draft`  | Aktuelle Entwurfsspezifikationen | [draft](https://unterrichtsvideos.github.io/specs/draft/)   |
 
-## Archiv
+### Archiv der Spezifikationen
 
 | Version  | Beschreibung  | Link                                                           |
 |----------|---------------|----------------------------------------------------------------|
 | `v2.0`   | 2025 (TBA)    | [Version 2.0](https://unterrichtsvideos.github.io/specs/version/2.0/) |
 | `v1.1`   | 08.03.2021    | [Version 1.1](https://unterrichtsvideos.github.io/specs/version/1.1/) |
 | `v1.0`   | 19.03.2019    | [Version 1.0](https://unterrichtsvideos.github.io/specs/version/1.0/) |
+
+## Validierung von RSS-/XML-Feeds
+
+### XML Schema Definition (XSD)
+
+| Version  | Beschreibung                 | Link                                                           |
+|----------|------------------------------|----------------------------------------------------------------|
+| `latest` | Neueste Version der XSD | [latest](https://unterrichtsvideos.github.io/specs/latest/schema/mvp.xsd) |
+| `v2.0` | XSD für v2.0 | [XSD v2.0](https://unterrichtsvideos.github.io/specs/version/2.0/schema/mvp.xsd) |
+
+### Webservice
+- [Webservice zur Validierung von RSS-/XML-Feeds (Beta)](https://unterrichtsvideos.net/feeds/validator/)
+
+### Script
+- [Python Script zur Validierung von XML-Feeds (Beta)](scripts/README.md)
 
 ## Mitwirken
 

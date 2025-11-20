@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:mvp="https://w3id.org/unterrichtsvideos.net/specs/">
+<rss version="2.0" xmlns:mvp="https://w3id.org/unterrichtsvideos.net/specs/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://w3id.org/unterrichtsvideos.net/specs/version/2.0/schema/mvp.xsd">
   <channel>
     <title><![CDATA[ProVision]]></title>
     <link>https://www.uni-muenster.de/ProVision/</link>
@@ -16,17 +18,24 @@
       <description><![CDATA[In der Vermittlungsphase des Partnerpuzzles tauschen sich die Schülerinnen und Schüler innerhalb der Tischgruppen über die Inhalte der gelesenen Texte aus und vergleichen diese anhand der angefertigten Steckbriefe miteinander. Ziel ist es, dass alle Schülerinnen und Schüler, die sich jeweils nur mit einem der beiden Texte zu den Superhelden-Figuren auseinandergesetzt haben, am Ende über beide Figuren gleichermaßen informiert sind.]]></description>
       <abstract><![CDATA[Dieser Clip aus einer Unterrichtsstunde, in der die ersten drei Lesestrategien des Trainingsprogramms „Lesen(d) lernen“ trainiert werden, zeigt die Austausch- bzw. Vermittlungsphase im Rahmen des Partnerpuzzles. ]]></abstract>
       <id>DEU_K5_LK2_2DS_LF_Clip5</id>
-      <resource_type>https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt005 | https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt001</resource_type>
-      <image>https://www.uni-muenster.de/imperia/md/images/ProVision/videos/02_Deutsch/fittosize_1140_641_fae1dab1f2a1f67ed848fd84ade1c892_deu_k5_lk2_2ds_lf_clip5_partnerpuzzle_ga_teaserbild.jpeg</image>
+      <resource_type>https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt005 |
+        https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt001</resource_type>
+      <image>
+        https://www.uni-muenster.de/imperia/md/images/ProVision/videos/02_Deutsch/fittosize_1140_641_fae1dab1f2a1f67ed848fd84ade1c892_deu_k5_lk2_2ds_lf_clip5_partnerpuzzle_ga_teaserbild.jpeg</image>
       <language>de</language>
       <date_created>2025-12-31</date_created>
       <license>https://w3id.org/unterrichtsvideos.net/vocabs/license/copyright</license>
       <creator>https://d-nb.info/gnd/1194191657</creator>
       <date_published>2026-01-01</date_published>
       <time_required>PT2H15M30S</time_required>
-      <use_restrictions>https://w3id.org/unterrichtsvideos.net/vocabs/audience/g6 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g3 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g1 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g4 | https://w3id.org/unterrichtsvideos.net/vocabs/audience/g7</use_restrictions>
+      <use_restrictions>https://w3id.org/unterrichtsvideos.net/vocabs/audience/g6 |
+        https://w3id.org/unterrichtsvideos.net/vocabs/audience/g3 |
+        https://w3id.org/unterrichtsvideos.net/vocabs/audience/g1 |
+        https://w3id.org/unterrichtsvideos.net/vocabs/audience/g4 |
+        https://w3id.org/unterrichtsvideos.net/vocabs/audience/g7</use_restrictions>
       <use_restrictions_label><![CDATA[Abrufbar im Rahmen eines aktiven Kurses.]]></use_restrictions_label>
-      <focus_instructional_quality>https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/1 | https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/4</focus_instructional_quality>
+      <focus_instructional_quality>https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/1 |
+        https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/4</focus_instructional_quality>
       <focus_digital_competence>https://w3id.org/unterrichtsvideos.net/vocabs/digcompeduobserve/2.4</focus_digital_competence>
       <material_type>https://w3id.org/unterrichtsvideos.net/vocabs/material_type/mt1002</material_type>
       <camera_perspective>https://w3id.org/unterrichtsvideos.net/vocabs/camera_perspective/c05</camera_perspective>
@@ -34,7 +43,8 @@
       <school_type>https://w3id.org/unterrichtsvideos.net/vocabs/school_type/st04</school_type>
       <grade>https://w3id.org/unterrichtsvideos.net/vocabs/grade/7</grade>
       <subject>https://w3id.org/unterrichtsvideos.net/vocabs/subject/s1005</subject>
-      <topic>https://w3id.org/unterrichtsvideos.net/vocabs/topic/81dbdf0e-c20d-481e-a0f9-ebbbb0abc2bd</topic>
+      <topic>
+        https://w3id.org/unterrichtsvideos.net/vocabs/topic/81dbdf0e-c20d-481e-a0f9-ebbbb0abc2bd</topic>
       <keywords><![CDATA[https://w3id.org/unterrichtsvideos.net/vocabs/keyword/k40030 | https://w3id.org/unterrichtsvideos.net/vocabs/keyword/k40050]]></keywords>
     </item>
   </channel>
