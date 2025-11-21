@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:mvp="https://w3id.org/unterrichtsvideos.net/specs/">
+<rss version="2.0" xmlns="https://w3id.org/unterrichtsvideos.net/specs/">
   <channel>
     <title><![CDATA[ProVision]]></title>
     <link>https://www.uni-muenster.de/ProVision/</link>
@@ -19,7 +19,7 @@
       <resource_type>https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt005 | https://w3id.org/unterrichtsvideos.net/vocabs/resource_type/rt001</resource_type>
       <image>https://www.uni-muenster.de/imperia/md/images/ProVision/videos/02_Deutsch/fittosize_1140_641_fae1dab1f2a1f67ed848fd84ade1c892_deu_k5_lk2_2ds_lf_clip5_partnerpuzzle_ga_teaserbild.jpeg</image>
       <language>de</language>
-      <date_created>2025-12-31</date_created>
+      <date_created>2026-12-31</date_created>
       <license>https://w3id.org/unterrichtsvideos.net/vocabs/license/copyright</license>
       <creator>https://d-nb.info/gnd/1194191657</creator>
       <date_published>2026-01-01</date_published>
@@ -28,7 +28,7 @@
       <use_restrictions_label><![CDATA[Abrufbar im Rahmen eines aktiven Kurses.]]></use_restrictions_label>
       <focus_instructional_quality>https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/1 | https://w3id.org/unterrichtsvideos.net/vocabs/mainteach/4</focus_instructional_quality>
       <focus_digital_competence>https://w3id.org/unterrichtsvideos.net/vocabs/digcompeduobserve/2.4</focus_digital_competence>
-      <material_type>https://w3id.org/unterrichtsvideos.net/vocabs/material_type/mt1002</material_type>
+      <material_type>https://w3id.org/unterrichtsvideos.net/vocabs/materialtype/mt1002</material_type>
       <camera_perspective>https://w3id.org/unterrichtsvideos.net/vocabs/camera_perspective/c05</camera_perspective>
       <learning_format>https://w3id.org/unterrichtsvideos.net/vocabs/learning_format/lf2</learning_format>
       <school_type>https://w3id.org/unterrichtsvideos.net/vocabs/school_type/st04</school_type>
