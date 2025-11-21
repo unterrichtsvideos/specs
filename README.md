@@ -30,7 +30,7 @@ RSS-/XML-basiertes Profil zur Beschreibung von Ressourcen im Kontext des Meta-Vi
 
 ### Python
 
-- [Script zur VAlidierung von XML-Feeds](scripts/README.md)
+- [Script zur Validierung von XML-Feeds](scripts/README.md)
 
 ## Mitwirken
 

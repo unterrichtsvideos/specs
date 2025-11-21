@@ -102,7 +102,7 @@ class XMLFileCollector:
         self.repo_root = repo_root
 
     def collect(self, pattern: str) -> List[Path]:
-        files = sorted(self.repo_root.glob(pattern))
+        files = sorted(p for p in self.repo_root.glob(pattern) if p.is_file())
         LOGGER.debug("Glob '%s' matched %d file(s).", pattern, len(files))
         return files
 
