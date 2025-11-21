@@ -16,6 +16,22 @@ RSS-/XML-basiertes Profil zur Beschreibung von Ressourcen im Kontext des Meta-Vi
 | `v1.1`   | 08.03.2021    | [Version 1.1](https://unterrichtsvideos.github.io/specs/version/1.1/) |
 | `v1.0`   | 19.03.2019    | [Version 1.0](https://unterrichtsvideos.github.io/specs/version/1.0/) |
 
+## Validierung
+
+### XML Schema Definition (XSD)
+
+| Version  | Beschreibung                 | Link                                                           |
+|----------|------------------------------|----------------------------------------------------------------|
+| `latest` | Neueste Version der XSD | [latest](https://unterrichtsvideos.github.io/specs/latest/schema/mvp.xsd) |
+
+### Webservice
+
+- TBA
+
+### Python
+
+- [Script zur VAlidierung von XML-Feeds](scripts/README.md)
+
 ## Mitwirken
 
 ### Bereitstellung von Metadaten
