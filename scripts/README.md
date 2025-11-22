@@ -16,7 +16,12 @@ pip install -r requirements.txt
 Um XML-Feeds in ./feeds mit dem neuesten XML-Schema von unterrichtsvideos.net zu validieren:
 
 ```sh
-python validate.py --schema https://w3id.org/unterrichtsvideos.net/specs/latest/schema/mvp.xsd
+python scripts/validate.py --schema https://w3id.org/unterrichtsvideos.net/specs/latest/schema/mvp.xsd
+```
+
+Beispiel-XML-Feeds
+```sh
+python scripts/validate.py --glob ../version/draft/examples/**/*.xml --schema https://w3id.org/unterrichtsvideos.net/specs/latest/schema/mvp.xsd
 ```
 
 ### CLI-Parameter
