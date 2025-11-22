@@ -60,7 +60,7 @@ class SchemaLoader:
         try:
             return module.XMLSchema(ref)
         except (OSError, xmlschema_exception) as exc:
-            raise RuntimeError(f"Failed to load schema from '{ref}'") from exc
+            raise RuntimeError(f"Failed to load schema from '{ref}': {exc}") from exc
 
 
 # ---------------------------------------------------------------------------
