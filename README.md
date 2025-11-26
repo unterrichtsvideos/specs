@@ -26,10 +26,10 @@ RSS-/XML-basiertes Profil zur Beschreibung von Ressourcen im Kontext des Meta-Vi
 | `v2.0` | XSD für v2.0 | [XSD v2.0](https://unterrichtsvideos.github.io/specs/version/2.0/schema/mvp.xsd) |
 
 ### Webservice
-- [Webservice zur Validierung von RSS-/XML-Feeds (Beta)](https://unterrichtsvideos.net/feeds/validator/)
+- [Webservice zur Validierung von RSS-/XML-Feeds](https://unterrichtsvideos.net/feeds/validator/)
 
 ### Script
-- [Python Script zur Validierung von XML-Feeds (Beta)](scripts/README.md)
+- [Python Script zur Validierung von XML-Feeds](scripts/README.md)
 
 ## Mitwirken
 

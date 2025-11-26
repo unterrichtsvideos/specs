@@ -19,7 +19,7 @@ LOGGER = logging.getLogger(__name__)
 
 @lru_cache(maxsize=1)
 def load_xmlschema_module():
-    """Load xmlschema dependency"""
+    """Load xmlschema dependency once; raise useful exception if missing."""
     try:
         return importlib.import_module("xmlschema")
     except ImportError as exc:
@@ -33,7 +33,7 @@ def load_xmlschema_module():
 # ---------------------------------------------------------------------------
 
 class SchemaLoader:
-    """Resolve and load XML Schema definitions."""
+    """Responsible for resolving and loading XML Schema definitions."""
 
     def __init__(self, repo_root: Path):
         self.repo_root = repo_root
@@ -60,7 +60,7 @@ class SchemaLoader:
         try:
             return module.XMLSchema(ref)
         except (OSError, xmlschema_exception) as exc:
-            raise RuntimeError(f"Failed to load schema from '{ref}': {exc}") from exc
+            raise RuntimeError(f"Failed to load schema from '{ref}'") from exc
 
 
 # ---------------------------------------------------------------------------
@@ -114,6 +114,8 @@ class XMLFileCollector:
 class XMLValidator:
     """
     Validates XML files against a provided xmlschema.XMLSchema instance.
+
+    Handles only the logic—not logging, not printing.
     """
 
     def __init__(
@@ -126,7 +128,10 @@ class XMLValidator:
 
     def validate(self, xml_files: Iterable[Path], repo_root: Path) -> Dict[Path, List[str]]:
         """
-        Validate each XML file
+        Validate each XML file and return a mapping:
+            relative_path -> [list of formatted error strings]
+
+        Files with *no* errors are omitted.
         """
         failures: Dict[Path, List[str]] = {}
 
