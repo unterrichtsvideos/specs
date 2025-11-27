@@ -7,7 +7,7 @@
   <!-- Meta-Videoportal Types -->
   <xs:simpleType name="TitleType">
     <xs:restriction base="xs:token">
-      <xs:maxLength value="150" />
+      <xs:maxLength value="250" />
     </xs:restriction>
   </xs:simpleType>
 
@@ -186,68 +186,206 @@
     </xs:union>
   </xs:simpleType>
 
+  <!-- RSS Types -->
+  <!-- Note: Constraints might be more lax than rss specs -->
+  <xs:complexType name="CategoryType">
+    <xs:annotation>
+      <xs:documentation>Categories for channel/items</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="domain" type="xs:string" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="TextInputType">
+    <xs:all>
+      <xs:element name="title" type="xs:string" />
+      <xs:element name="description" type="xs:string" />
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="link" type="xs:anyURI" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="EnclosureType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="url" type="xs:anyURI" use="required" />
+        <xs:attribute name="length" type="xs:nonNegativeInteger" />
+        <xs:attribute name="type" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+ </xs:complexType>
+
+  <xs:complexType name="SourceType">
+    <xs:simpleContent>
+    <xs:extension base="xs:string">
+      <xs:attribute name="url" type="xs:anyURI"/>
+    </xs:extension>
+    </xs:simpleContent>
+ </xs:complexType>
+
+   <xs:complexType name="GuidType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="isPermaLink" type="xs:boolean" use="optional" default="true"/>
+      </xs:extension>
+    </xs:simpleContent>
+ </xs:complexType>
+
+  <xs:complexType name="SkipHoursType">
+    <xs:sequence>
+      <xs:element name="hour" minOccurs="0" maxOccurs="24">
+        <xs:simpleType>
+          <xs:restriction base="xs:nonNegativeInteger">
+            <xs:minInclusive value="0" />
+            <xs:maxInclusive value="23" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SkipDaysType">
+    <xs:sequence>
+      <xs:element name="day" minOccurs="0" maxOccurs="7">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Monday" />
+            <xs:enumeration value="Tuesday" />
+            <xs:enumeration value="Wednesday" />
+            <xs:enumeration value="Thursday" />
+            <xs:enumeration value="Friday" />
+            <xs:enumeration value="Saturday" />
+            <xs:enumeration value="Sunday" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CloudType">
+    <xs:attribute name="domain" type="xs:string" use="required" />
+    <xs:attribute name="port" type="xs:positiveInteger" use="required" />
+    <xs:attribute name="path" type="xs:string" use="required" />
+    <xs:attribute name="registerProcedure" type="xs:string" use="required" />
+    <xs:attribute name="protocol" type="CloudProtocolType" use="required" />
+  </xs:complexType>
+
+  <xs:simpleType name="CloudProtocolType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="xml-rpc" />
+      <xs:enumeration value="http-post" />
+      <xs:enumeration value="soap" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ImageSizeType">
+    <xs:restriction base="xs:positiveInteger" />
+  </xs:simpleType>
+
+  <xs:complexType name="ChannelImageType">
+    <xs:all>
+      <xs:element name="url" type="xs:anyURI" />
+      <xs:element name="title" type="xs:string" minOccurs="0" />
+      <xs:element name="link" type="xs:anyURI" minOccurs="0" />
+      <xs:element name="width" type="ImageSizeType" minOccurs="0" />
+      <xs:element name="height" type="ImageSizeType" minOccurs="0" />
+      <xs:element name="description" type="xs:string" minOccurs="0" />
+    </xs:all>
+  </xs:complexType>
+
   <!-- RSS/XML feed item -->
   <xs:complexType name="ItemType">
-    <xs:all>
-      <!-- Descriptive Metadata -->
-      <xs:element name="title" type="TitleType" />
-      <xs:element name="link" type="xs:anyURI" />
-      <xs:element name="id" type="IdentifierType" />
-      <xs:element name="image" type="xs:anyURI" />
-      <xs:element name="resource_type" type="ResourceTypeListType" />
-      <xs:element name="description" type="DescriptionType" />
-      <xs:element name="abstract" type="AbstractType" minOccurs="0" />
-      <xs:element name="language" type="LanguageListType" minOccurs="0" />
+    <xs:sequence>
+      <!-- Item Metadata -->
+      <xs:choice maxOccurs="unbounded">
+          <!-- Descriptive Metadata -->
+          <xs:element name="title" type="TitleType" />
+          <xs:element name="description" type="DescriptionType" />
+          <xs:element name="link" type="xs:anyURI" />
+          <xs:element name="id" type="IdentifierType" />
+          <xs:element name="image" type="xs:anyURI" />
+          <xs:element name="resource_type" type="ResourceTypeListType" />
+          <xs:element name="abstract" type="AbstractType" minOccurs="0" />
+          <xs:element name="language" type="LanguageListType" minOccurs="0" />
 
-      <!-- Administrative Metadata -->
-      <xs:element name="date_created" type="PartialDateType" />
-      <xs:element name="license" type="LicenseListType" />
-      <xs:element name="use_restrictions" type="AudienceListType" />
-      <xs:element name="use_restrictions_label" type="UseRestrictionsLabelType" minOccurs="0" />
-      <xs:element name="date_published" type="PartialDateType" minOccurs="0" />
-      <xs:element name="creator" type="CreatorListType" minOccurs="0" />
+          <!-- Administrative Metadata -->
+          <xs:element name="date_created" type="PartialDateType" />
+          <xs:element name="license" type="LicenseListType" />
+          <xs:element name="use_restrictions" type="AudienceListType" />
+          <xs:element name="use_restrictions_label" type="UseRestrictionsLabelType" minOccurs="0" />
+          <xs:element name="date_published" type="PartialDateType" minOccurs="0" />
+          <xs:element name="creator" type="CreatorListType" minOccurs="0" />
 
-      <!-- Structural Metadata -->
-      <xs:element name="hasPart" type="RelatedIdentifierListType" minOccurs="0" />
-      <xs:element name="isPartOf" type="RelatedIdentifierListType" minOccurs="0" />
+          <!-- Structural Metadata -->
+          <xs:element name="hasPart" type="RelatedIdentifierListType" minOccurs="0" />
+          <xs:element name="isPartOf" type="RelatedIdentifierListType" minOccurs="0" />
 
-      <!-- Didactic Metadata -->
-      <xs:element name="school_type" type="SchoolTypeListType" />
-      <xs:element name="grade" type="GradeListType" />
-      <xs:element name="subject" type="SubjectListType" />
-      <xs:element name="time_required" type="xs:duration" minOccurs="0" />
-      <xs:element name="material_type" type="MaterialTypeListType" minOccurs="0" />
-      <xs:element name="learning_format" type="LearningFormatListType" minOccurs="0" />
-      <xs:element name="camera_perspective" type="CameraPerspectiveListType" minOccurs="0" />
-      <xs:element name="focus_instructional_quality" type="InstructionalQualityListType"
-        minOccurs="0" />
-      <xs:element name="focus_digital_competence" type="DigitalCompetenceListType" minOccurs="0" />
-      <xs:element name="teaches" type="FreeTextPipeListType" minOccurs="0" />
-      <xs:element name="topic" type="TopicListType" minOccurs="0" />
-      <xs:element name="keywords" type="KeywordListType" minOccurs="0" />
+          <!-- Didactic Metadata -->
+          <xs:element name="school_type" type="SchoolTypeListType" />
+          <xs:element name="grade" type="GradeListType" />
+          <xs:element name="subject" type="SubjectListType" />
+          <xs:element name="time_required" type="xs:duration" minOccurs="0" />
+          <xs:element name="material_type" type="MaterialTypeListType" minOccurs="0" />
+          <xs:element name="learning_format" type="LearningFormatListType" minOccurs="0" />
+          <xs:element name="camera_perspective" type="CameraPerspectiveListType" minOccurs="0" />
+          <xs:element name="focus_instructional_quality" type="InstructionalQualityListType"
+            minOccurs="0" />
+          <xs:element name="focus_digital_competence" type="DigitalCompetenceListType" minOccurs="0" />
+          <xs:element name="teaches" type="FreeTextPipeListType" minOccurs="0" />
+          <xs:element name="topic" type="TopicListType" minOccurs="0" />
+          <xs:element name="keywords" type="KeywordListType" minOccurs="0" />
 
-      <xs:element name="pubDate" type="xs:string" minOccurs="0" />
-    </xs:all>
+          <!-- Additional RSS Standard Metadata -->
+          <xs:element name="author" type="xs:string" minOccurs="0" />
+          <xs:element name="category" type="CategoryType" minOccurs="0" />
+          <xs:element name="comments" type="xs:anyURI" minOccurs="0" />
+          <xs:element name="enclosure" type="EnclosureType" minOccurs="0" />
+          <xs:element name="pubDate" type="xs:string" minOccurs="0" />
+          <xs:element name="source" type="SourceType" minOccurs="0" />
+          <xs:element name="guid" type="GuidType" minOccurs="0" />
+
+          <!-- Extensions -->
+          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+      </xs:choice>
+    </xs:sequence>
+  <xs:anyAttribute namespace="##any"/>
   </xs:complexType>
 
   <!-- Channel with one or more items -->
   <xs:complexType name="ChannelType">
     <xs:sequence>
-      <xs:element name="title" type="TitleType" minOccurs="0" />
-      <xs:element name="link" type="xs:anyURI" minOccurs="0" />
-      <xs:element name="description" type="DescriptionType" minOccurs="0" />
-      <xs:element name="image" minOccurs="0">
-        <xs:complexType>
-          <xs:all>
-            <xs:element name="url" type="xs:anyURI" />
-            <xs:element name="title" type="TitleType" minOccurs="0" />
-            <xs:element name="link" type="xs:anyURI" minOccurs="0" />
-          </xs:all>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="docs" type="xs:anyURI" minOccurs="0" />
-      <xs:element name="item" minOccurs="1" maxOccurs="unbounded" type="ItemType" />
+      <!-- Channel header -->
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="title" type="TitleType" minOccurs="0" />
+        <xs:element name="link" type="xs:anyURI" minOccurs="0" />
+        <xs:element name="description" type="DescriptionType" minOccurs="0" />
+        <xs:element name="language" type="xs:language" minOccurs="0" />
+        <xs:element name="copyright" type="xs:string" minOccurs="0" />
+        <xs:element name="managingEditor" type="xs:string" minOccurs="0" />
+        <xs:element name="webMaster" type="xs:string" minOccurs="0" />
+        <xs:element name="pubDate" type="xs:string" minOccurs="0" />
+        <xs:element name="lastBuildDate" type="xs:string" minOccurs="0" />
+        <xs:element name="category" type="CategoryType" minOccurs="0" />
+        <xs:element name="generator" type="xs:string" minOccurs="0" />
+        <xs:element name="docs" type="xs:anyURI" minOccurs="0" />
+        <xs:element name="cloud" type="CloudType" minOccurs="0" />
+        <xs:element name="ttl" type="xs:nonNegativeInteger" minOccurs="0" />
+        <xs:element name="image" type="ChannelImageType" minOccurs="0" />
+        <xs:element name="textInput" type="TextInputType" minOccurs="0" />
+        <xs:element name="skipHours" type="SkipHoursType" minOccurs="0" />
+        <xs:element name="skipDays" type="SkipDaysType" minOccurs="0" />
+        <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+      </xs:choice>
+
+      <!-- Items -->
+      <xs:element name="item" type="ItemType" minOccurs="1" maxOccurs="unbounded" />
+
+      <!-- Extensions -->
+      <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
+    <xs:anyAttribute namespace="##any"/>
   </xs:complexType>
 
   <!-- RSS/XML feed -->
@@ -255,8 +393,10 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element name="channel" type="ChannelType" />
+        <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
       </xs:sequence>
-      <xs:attribute name="version" type="xs:token" use="required" fixed="2.0" />
+      <xs:attribute name="version" type="xs:decimal" fixed="2.0" />
+      <xs:anyAttribute namespace="##any" />
     </xs:complexType>
   </xs:element>
 </xs:schema>
