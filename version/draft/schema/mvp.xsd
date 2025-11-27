@@ -19,7 +19,7 @@
 
   <xs:simpleType name="AbstractType">
     <xs:restriction base="xs:token">
-      <xs:maxLength value="300" />
+      <xs:maxLength value="650" />
     </xs:restriction>
   </xs:simpleType>
 
