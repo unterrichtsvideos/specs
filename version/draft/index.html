@@ -3,7 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <title>XML-Feed Spezifikationen – Anwendungsprofil für das Meta-Videoportal unterrichtsvideos.net</title>
-    <script src='https://unterrichtsvideos.github.io/specs/js/respec-dini.js' aync class='remove'></script>
+    <script src='https://unterrichtsvideos.github.io/specs/js/respec-dini.js' async class='remove'></script>
     <script class='remove'>
       var respecConfig = {
         shortName: "unterrichtsvideos.net/specs",
@@ -246,28 +246,46 @@ Metadatenfelder entsprechen XML-Elementen, bspw. `license` zur Kennzeichnung der
 - Links SOLLEN das Schema *https* verwenden.
 
 ## XML-Basisstruktur
-
 - Die XML-Basisstruktur MUSS das `rss`-Element enthalten.
-- Die XML-Basissstruktur SOLL den XML-Namensraum des Meta-Videoportals deklarieren:
-`https://w3id.org/unterrichtsvideos.net/specs/` 
-
+- Die XML-Basissstruktur SOLL den Namensraum des Meta-Videoportals deklarieren.
+- Die XML-Basisstruktur SOLL das XSD-Schema des Meta-Videoportals referenzieren.
+  
 <dl>
   <dt>Pflichtelement &lt;rss&gt;</dt>
   <dd>ja</dd>
   <dt>Typ</dt>
   <dd>`element` [[RSS 2.0]]</dd>
   <dt>Attribute</dt>
-  <dd>`xmlns` - benennt den deklarierten Namensraum und SOLL folgenden Wert haben: `https://w3id.org/unterrichtsvideos.net/specs/` [[RSS 2.0]]</dd>
+  <dd>
+    <ul>
+      <li>`xmlns:mvp="https://w3id.org/unterrichtsvideos.net/specs/"` - Namensraum des Meta-Videoportals</li>
+      <li>`xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"` - Namensraum der XSI</li>
+      <li>`xsi:noNamespaceSchemaLocation="https://w3id.org/unterrichtsvideos.net/specs/version/2.0/schema/mvp.xsd"` - XSD des Meta-Videoportals</li>
+    </ul> 
+  </dd>
 </dl>
 
-<pre class="example" title="Grundstruktur des XML-Feeds">
-  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-  &lt;rss version=&quot;2.0&quot; xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot;&gt;
-    &lt;!-- Metadaten zum Anbieter und den Inhalten gemäß Anwendungsprofil --&gt;
-  &lt;/rss&gt;
-</pre>
+  <pre class="example" title="Basisstruktur des XML-Feeds">
+    &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+    &lt;rss version=&quot;2.0&quot; 
+      xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot;
+      xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+      xsi:noNamespaceSchemaLocation=&quot;https://w3id.org/unterrichtsvideos.net/specs/version/2.0/schema/mvp.xsd&quot;
+    &gt;
+    &lt;channel&gt;
+      &lt;!-- Metadaten zum Anbieter gemäß Anwendungsprofil [...] --&gt;
+      &lt;item&gt;
+        &lt;!-- Metadaten zu einem konkreten Inhalt gemäß Anwendungsprofil [...] --&gt;
+      &lt;/item&gt;
+      &lt;item&gt;
+        &lt;!-- Metadaten zu einem weiteren konkreten Inhalt gemäß Anwendungsprofil (optional) [...] --&gt;
+      &lt;/item&gt;
+      [...]
+    &lt;/channel&gt;
+    &lt;/rss&gt;
+  </pre>
 </section>
-
+  
 ## Metadaten des Anbieters <code>&lt;channel&gt;</code>
 
 Das `channel`-Element im XML-Feed definiert allgemeine Informationen über den Anbieter der Metadaten, z.B. eines Portals, gemäß [[RSS 2.0]].
@@ -283,16 +301,6 @@ Das `channel`-Element im XML-Feed definiert allgemeine Informationen über den A
   <dt>Typ</dt>
   <dd>`element` [[RSS 2.0]]</dd>
 </dl>
-
-<pre class="example" title="Grundstruktur des XML-Feeds">
-  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-  &lt;rss version=&quot;2.0&quot; xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot;&gt;
-  &lt;channel&gt;
-    &lt;!-- Metadaten zum Anbieter gemäß Anwendungsprofil [...] --&gt;
-  &lt;/channel&gt;
-    &lt;!-- Metadaten zu den Inhalten gemäß Anwendungsprofil [...] --&gt;
-  &lt;/rss&gt;
-</pre>
 
 #### &#9679; Titel <code>&lt;title&gt;</code>
 
@@ -472,21 +480,6 @@ Jeder Inhalt (z.B. ein Unterrichtsvideo oder Lernangebot) wird durch ein eindeut
 - Ein Feed MUSS mindestens ein `item`-Element aufweisen.
 - Ein Feed KANN mehrere `item`-Elemente aufweisen.
 - Jedes `item`-Element MUSS mindestens die als Pflichtfelder deklarierten Metadaten enthalten.
-
-<pre class="example" title="Grundstruktur des XML-Feeds">
-  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-  &lt;rss version=&quot;2.0&quot; xmlns:mvp=&quot;https://w3id.org/unterrichtsvideos.net/specs/&quot;&gt;
-  &lt;channel&gt;
-    &lt;!-- Metadaten zum Anbieter gemäß Anwendungsprofil --&gt;
-  &lt;/channel&gt;
-  &lt;item&gt;
-    &lt;!-- Metadaten zu einem konkreten Inhalt gemäß Anwendungsprofil [...] --&gt;
-  &lt;/item&gt;
-  &lt;item&gt;
-    &lt;!-- Metadaten zu einem weiteren konkreten Inhalt gemäß Anwendungsprofil (optional) [...] --&gt;
-  &lt;/item&gt;
-  &lt;/rss&gt;
-</pre>
 
 ### Deskriptive Metadaten
 
@@ -1627,6 +1620,8 @@ Reservierte Zeichen DÜRFEN NICHT als Zeichen innerhalb der freien Schlagworten 
     <dd>Extensible Markup Language</dd>
     <dt><abbr title="XML Schema Definition">XSD</abbr></dt>
     <dd>XML Schema Definition</dd>
+    <dt><abbr title="XML Schema Instance">XSI</abbr></dt>
+    <dd>XML Schema Instance</dd>
     <dt><abbr title="Uniform Resource Identifier">URI</abbr></dt>
     <dd>Uniform Resource Identifier</dd>
     <dt><abbr title="Uniform Resource Locator">URL</abbr>, <abbr title="Uniform Resource Locators">URLs</abbr></dt>
@@ -1665,3 +1660,4 @@ Reservierte Zeichen DÜRFEN NICHT als Zeichen innerhalb der freien Schlagworten 
 </script>
 
 </body>
+</html>
