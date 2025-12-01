@@ -13,16 +13,28 @@ pip install -r requirements.txt
 ```
 
 ## Verwendungsbeispiel
-Um XML-Feeds in ./feeds mit dem neuesten XML-Schema von unterrichtsvideos.net zu validieren:
+Um XML-Feeds in .scripts//feeds mit dem neuesten XML-Schema von unterrichtsvideos.net zu validieren:
 
+- Feeds in ./scripts/feeds validieren
 ```sh
 python scripts/validate.py --schema https://w3id.org/unterrichtsvideos.net/specs/latest/schema/mvp.xsd
 ```
 
-Beispiel-XML-Feeds
+- Alle Feeds validieren
 ```sh
 python scripts/validate.py --glob ../version/draft/examples/**/*.xml --schema https://w3id.org/unterrichtsvideos.net/specs/latest/schema/mvp.xsd
 ```
+
+- Valide Feeds mit neustem draft XML-Schema validieren
+```sh
+python scripts/validate.py --glob ../version/draft/examples/valid/*.xml --schema ../version/draft/schema/mvp.xsd
+```
+
+- Invalide Feeds mit neustem draft XML-Schema validieren
+```sh
+python scripts/validate.py --glob ../version/draft/examples/invalid/*.xml --schema ../version/draft/schema/mvp.xsd
+```
+
 
 ### CLI-Parameter
 

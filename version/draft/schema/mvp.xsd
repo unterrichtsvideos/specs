@@ -8,24 +8,28 @@
   <xs:simpleType name="TitleType">
     <xs:restriction base="xs:token">
       <xs:maxLength value="250" />
+      <xs:pattern value="[\p{L}\p{N}\p{P}\p{S} ]+" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="DescriptionType">
     <xs:restriction base="xs:string">
       <xs:maxLength value="15000" />
+      <xs:pattern value="[\p{L}\p{N}\p{P}\p{S} ]+" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="AbstractType">
-    <xs:restriction base="xs:token">
+    <xs:restriction base="xs:string">
       <xs:maxLength value="650" />
+      <xs:pattern value="[\p{L}\p{N}\p{P}\p{S} ]+" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="UseRestrictionsLabelType">
-    <xs:restriction base="xs:token">
+    <xs:restriction base="xs:string">
       <xs:maxLength value="600" />
+      <xs:pattern value="[\p{L}\p{N}\p{P}\p{S} ]+" />
     </xs:restriction>
   </xs:simpleType>
 
@@ -135,22 +139,15 @@
 
   <xs:simpleType name="CreatorListType">
     <xs:restriction base="xs:token">
-      <xs:maxLength value="150" />
       <xs:pattern
-        value="\s*(https://d-nb\.info/gnd/[0-9X-]+|https://orcid.org/([0-9]{4}-){3}[0-9]{3}[0-9X]|([^\t\r\n :/|]+( [^\t\r\n :/|]+)+|[^\t\r\n :/|]+(,\s*[^\t\r\n :/|]+)+))\s*(\|\s*(https://d-nb\.info/gnd/[0-9X-]+|https://orcid.org/([0-9]{4}-){3}[0-9]{3}[0-9X]|([^\t\r\n :/|]+( [^\t\r\n :/|]+)+|[^\t\r\n :/|]+(,\s*[^\t\r\n :/|]+)+))\s*)*" />
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="FreeTextPipeListType">
-    <xs:restriction base="xs:token">
-      <xs:pattern value="\s*[^|]+\s*(\|\s*[^|]+\s*)*" />
+        value="\s*(https://d-nb\.info/gnd/[0-9X-]+|https://orcid\.org/([0-9]{4}-){3}[0-9]{3}[0-9X]|[\p{L}\p{N}\p{P}\p{S} ]+)\s*(\|\s*(https://d-nb\.info/gnd/[0-9X-]+|https://orcid\.org/([0-9]{4}-){3}[0-9]{3}[0-9X]|[\p{L}\p{N}\p{P}\p{S} ]+)\s*)*" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="FreeTextListType">
     <xs:restriction base="xs:token">
       <xs:pattern
-        value="\s*(([A-Za-z0-9 .,?!&amp;*()\[\];'&quot;_/-]|:([^/]|$))+)(\s*\|\s*(([A-Za-z0-9 .,?!&amp;*()\[\];'&quot;_/-]|:([^/]|$))+))*\s*" />
+        value="\s*([^\s:/|]+(/[^\s:/|]+)*([ ]+[^\s:/|]+(/[^\s:/|]+)*)*)\s*(\|\s*([^\s:/|]+(/[^\s:/|]+)*([ ]+[^\s:/|]+(/[^\s:/|]+)*)*)\s*)*" />
     </xs:restriction>
   </xs:simpleType>
 
@@ -216,23 +213,23 @@
         <xs:attribute name="type" type="xs:string" />
       </xs:extension>
     </xs:simpleContent>
- </xs:complexType>
+  </xs:complexType>
 
   <xs:complexType name="SourceType">
     <xs:simpleContent>
-    <xs:extension base="xs:string">
-      <xs:attribute name="url" type="xs:anyURI"/>
-    </xs:extension>
-    </xs:simpleContent>
- </xs:complexType>
-
-   <xs:complexType name="GuidType">
-    <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute name="isPermaLink" type="xs:boolean" use="optional" default="true"/>
+        <xs:attribute name="url" type="xs:anyURI" />
       </xs:extension>
     </xs:simpleContent>
- </xs:complexType>
+  </xs:complexType>
+
+  <xs:complexType name="GuidType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="isPermaLink" type="xs:boolean" use="optional" default="true" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:complexType name="SkipHoursType">
     <xs:sequence>
@@ -300,57 +297,57 @@
     <xs:sequence>
       <!-- Item Metadata -->
       <xs:choice maxOccurs="unbounded">
-          <!-- Descriptive Metadata -->
-          <xs:element name="title" type="TitleType" />
-          <xs:element name="description" type="DescriptionType" />
-          <xs:element name="link" type="xs:anyURI" />
-          <xs:element name="id" type="IdentifierType" />
-          <xs:element name="image" type="xs:anyURI" />
-          <xs:element name="resource_type" type="ResourceTypeListType" />
-          <xs:element name="abstract" type="AbstractType" minOccurs="0" />
-          <xs:element name="language" type="LanguageListType" minOccurs="0" />
+        <!-- Descriptive Metadata -->
+        <xs:element name="title" type="TitleType" />
+        <xs:element name="description" type="DescriptionType" />
+        <xs:element name="link" type="xs:anyURI" />
+        <xs:element name="id" type="IdentifierType" />
+        <xs:element name="image" type="xs:anyURI" />
+        <xs:element name="resource_type" type="ResourceTypeListType" />
+        <xs:element name="abstract" type="AbstractType" minOccurs="0" />
+        <xs:element name="language" type="LanguageListType" minOccurs="0" />
 
-          <!-- Administrative Metadata -->
-          <xs:element name="date_created" type="PartialDateType" />
-          <xs:element name="license" type="LicenseListType" />
-          <xs:element name="use_restrictions" type="AudienceListType" />
-          <xs:element name="use_restrictions_label" type="UseRestrictionsLabelType" minOccurs="0" />
-          <xs:element name="date_published" type="PartialDateType" minOccurs="0" />
-          <xs:element name="creator" type="CreatorListType" minOccurs="0" />
+        <!-- Administrative Metadata -->
+        <xs:element name="date_created" type="PartialDateType" />
+        <xs:element name="license" type="LicenseListType" />
+        <xs:element name="use_restrictions" type="AudienceListType" />
+        <xs:element name="use_restrictions_label" type="UseRestrictionsLabelType" minOccurs="0" />
+        <xs:element name="date_published" type="PartialDateType" minOccurs="0" />
+        <xs:element name="creator" type="CreatorListType" minOccurs="0" />
 
-          <!-- Structural Metadata -->
-          <xs:element name="hasPart" type="RelatedIdentifierListType" minOccurs="0" />
-          <xs:element name="isPartOf" type="RelatedIdentifierListType" minOccurs="0" />
+        <!-- Structural Metadata -->
+        <xs:element name="hasPart" type="RelatedIdentifierListType" minOccurs="0" />
+        <xs:element name="isPartOf" type="RelatedIdentifierListType" minOccurs="0" />
 
-          <!-- Didactic Metadata -->
-          <xs:element name="school_type" type="SchoolTypeListType" />
-          <xs:element name="grade" type="GradeListType" />
-          <xs:element name="subject" type="SubjectListType" />
-          <xs:element name="time_required" type="xs:duration" minOccurs="0" />
-          <xs:element name="material_type" type="MaterialTypeListType" minOccurs="0" />
-          <xs:element name="learning_format" type="LearningFormatListType" minOccurs="0" />
-          <xs:element name="camera_perspective" type="CameraPerspectiveListType" minOccurs="0" />
-          <xs:element name="focus_instructional_quality" type="InstructionalQualityListType"
-            minOccurs="0" />
-          <xs:element name="focus_digital_competence" type="DigitalCompetenceListType" minOccurs="0" />
-          <xs:element name="teaches" type="FreeTextPipeListType" minOccurs="0" />
-          <xs:element name="topic" type="TopicListType" minOccurs="0" />
-          <xs:element name="keywords" type="KeywordListType" minOccurs="0" />
+        <!-- Didactic Metadata -->
+        <xs:element name="school_type" type="SchoolTypeListType" />
+        <xs:element name="grade" type="GradeListType" />
+        <xs:element name="subject" type="SubjectListType" />
+        <xs:element name="time_required" type="xs:duration" minOccurs="0" />
+        <xs:element name="material_type" type="MaterialTypeListType" minOccurs="0" />
+        <xs:element name="learning_format" type="LearningFormatListType" minOccurs="0" />
+        <xs:element name="camera_perspective" type="CameraPerspectiveListType" minOccurs="0" />
+        <xs:element name="focus_instructional_quality" type="InstructionalQualityListType"
+          minOccurs="0" />
+        <xs:element name="focus_digital_competence" type="DigitalCompetenceListType" minOccurs="0" />
+        <xs:element name="teaches" type="FreeTextListType" minOccurs="0" />
+        <xs:element name="topic" type="TopicListType" minOccurs="0" />
+        <xs:element name="keywords" type="KeywordListType" minOccurs="0" />
 
-          <!-- Additional RSS Standard Metadata -->
-          <xs:element name="author" type="xs:string" minOccurs="0" />
-          <xs:element name="category" type="CategoryType" minOccurs="0" />
-          <xs:element name="comments" type="xs:anyURI" minOccurs="0" />
-          <xs:element name="enclosure" type="EnclosureType" minOccurs="0" />
-          <xs:element name="pubDate" type="xs:string" minOccurs="0" />
-          <xs:element name="source" type="SourceType" minOccurs="0" />
-          <xs:element name="guid" type="GuidType" minOccurs="0" />
+        <!-- Additional RSS Standard Metadata -->
+        <xs:element name="author" type="xs:string" minOccurs="0" />
+        <xs:element name="category" type="CategoryType" minOccurs="0" />
+        <xs:element name="comments" type="xs:anyURI" minOccurs="0" />
+        <xs:element name="enclosure" type="EnclosureType" minOccurs="0" />
+        <xs:element name="pubDate" type="xs:string" minOccurs="0" />
+        <xs:element name="source" type="SourceType" minOccurs="0" />
+        <xs:element name="guid" type="GuidType" minOccurs="0" />
 
-          <!-- Extensions -->
-          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+        <!-- Extensions -->
+        <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
       </xs:choice>
     </xs:sequence>
-  <xs:anyAttribute namespace="##any"/>
+    <xs:anyAttribute namespace="##any" />
   </xs:complexType>
 
   <!-- Channel with one or more items -->
@@ -385,7 +382,7 @@
       <!-- Extensions -->
       <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
-    <xs:anyAttribute namespace="##any"/>
+    <xs:anyAttribute namespace="##any" />
   </xs:complexType>
 
   <!-- RSS/XML feed -->
