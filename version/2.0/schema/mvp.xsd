@@ -8,28 +8,24 @@
   <xs:simpleType name="TitleType">
     <xs:restriction base="xs:token">
       <xs:maxLength value="250" />
-      <xs:pattern value="[\p{L}\p{N}\p{P}\p{S} ]+" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="DescriptionType">
     <xs:restriction base="xs:string">
       <xs:maxLength value="15000" />
-      <xs:pattern value="[\p{L}\p{N}\p{P}\p{S} ]+" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="AbstractType">
     <xs:restriction base="xs:string">
       <xs:maxLength value="650" />
-      <xs:pattern value="[\p{L}\p{N}\p{P}\p{S} ]+" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="UseRestrictionsLabelType">
     <xs:restriction base="xs:string">
       <xs:maxLength value="600" />
-      <xs:pattern value="[\p{L}\p{N}\p{P}\p{S} ]+" />
     </xs:restriction>
   </xs:simpleType>
 
