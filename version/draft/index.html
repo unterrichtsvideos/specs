@@ -1198,7 +1198,6 @@ Das `time_required`-Feld gibt die (Beschäftigungs-)Dauer des Inhalts an, z.B. d
   - `P` (Präfix der Zeitperiode, obligatorisch)
     - `nY` Jahre
     - `nM` Monate
-    - `nW` Wochen
     - `nD` Tage
   - `T` (Präfix für Zeitangaben, obligatorisch bei Zeitangaben)
     - `nH` Stunden
@@ -1215,11 +1214,11 @@ Das `time_required`-Feld gibt die (Beschäftigungs-)Dauer des Inhalts an, z.B. d
     <a href="https://schema.org/timeRequired">sdo:timeRequired</a>
   </dd>
   <dt>Typ</dt>
-  <dd>`string` der Form `P(n)Y(n)M(n)W(n)DT(n)H(n)M(n)S` [[ISO8601]]</dd>
+  <dd>`string` der Form `P(n)Y(n)M(n)DT(n)H(n)M(n)S` [[ISO8601]]</dd>
 </dl>
 
 <pre class="example" title="Möglicher regulärer Ausdruck zur Validierung der Dauer">
-^(-?)P(?=\d|T\d)(?:(\d+)Y(?:(\d+)M)?(?:(\d+)D)?|(?:(\d+)W))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$
+^P(?!$)(\d+Y)?(\d+M)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+S)?)?$
 </pre>
 
 ##### Beispiele zur Verwendung der Angaben zur Dauer
