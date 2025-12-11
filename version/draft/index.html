@@ -966,9 +966,9 @@ _und/oder als Freitext in der Form_
 
 ### Strukturelle Metadaten
 
-#### &#9675; hat Teile <code>&lt;hasPart&gt;</code>
+#### &#9675; hat Teile <code>&lt;has_part&gt;</code>
 
-Das `hasPart`-Feld definiert die Zugehörigkeit von Inhalten untereinander. 
+Das `has_part`-Feld definiert die Zugehörigkeit von Inhalten untereinander. 
 Die Reihenfolge der Werte ist bedeutsam. 
 
 <dl>
@@ -987,38 +987,38 @@ Die Reihenfolge der Werte ist bedeutsam.
   <dd>Jeder Wert MUSS dem Wert einer ID eines XML-Feeds des jeweiligen Anbieters entsprechen (siehe: [[[#identifier-id]]]).</dd>
 </dl>
 
-##### Beispiele für die Verwendung des `hasPart`-Feldes
+##### Beispiele für die Verwendung des `has_part`-Feldes
 
 <strong>Hiearchische Über-/Unterordnung</strong>
 - KANN als hierarchische Relation (Über-/Unterordnung) genutzt werden, z.B. {Inhalt} besitzt als Teile 1..n {Inhalte}.
   - Beispiel: Ein Video {ID_2} besitzt als Teile einen Clip 1 {ID_2_1} und einen Clip 2 {ID_2_2}, somit gilt:
-    - {ID_2} *hasPart* {ID_2_1} | {ID_2_2}
+    - {ID_2} *has_part* {ID_2_1} | {ID_2_2}
 
 <pre class="example" title="Der beschriebene Inhalt ID_2 hat dazugehörige Inhalte ID_2_1 und ID_2_2">
-  &lt;hasPart&gt;ID_2_1 | ID_2_2&lt;/hasPart&gt;
+  &lt;has_part&gt;ID_2_1 | ID_2_2&lt;/has_part&gt;
 </pre>
 
 <strong>Heterarchische Nebenordnung</strong>
  - KANN als Relation (Nebenordnung) genutzt werden.
    - Beispiel: Ein Video {ID_4} hat ein dazugehöriges Interview {ID_5], somit gilt:
-      - {ID_4} *hasPart* {ID_5}
+      - {ID_4} *has_part* {ID_5}
 
 <pre class="example" title="Der beschriebene Inhalt ID_4 hat einen dazugehörigen Inhalt ID_5">
-  &lt;hasPart&gt;ID_5&lt;/hasPart&gt;
+  &lt;has_part&gt;ID_5&lt;/has_part&gt;
 </pre>
 
 <strong>Assoziative Relation</strong>
 - KANN als assoziative Relation genutzt werden, z.B. {Inhalt} ist eine Reihe/Serie, bestehend aus 1..n {Inhalten}.
   - Beispiel: Videos sind Teil einer Videoreihe/-serie und besitzen ggf. Vorgänger und/oder Nachfolger, somit gilt:
-    - {ID_1} *hasPart* {ID_2} | {ID_3}
+    - {ID_1} *has_part* {ID_2} | {ID_3}
 
 <pre class="example" title="Der beschriebene Inhalt ID_1 hat dazugehörige Inhalte ID_2 und ID_3">
-  &lt;hasPart&gt;ID_2 | ID_3&lt;/hasPart&gt;
+  &lt;has_part&gt;ID_2 | ID_3&lt;/has_part&gt;
 </pre>
 
-#### &#9675; ist Teil <code>&lt;isPartOf&gt;</code>
+#### &#9675; ist Teil <code>&lt;is_part_of&gt;</code>
 
-Das `isPartOf`-Feld definiert die Zugehörigkeit von Inhalten untereinander und ist invers zu [[[#hat-teile-haspart]]]. 
+Das `is_part_of`-Feld definiert die Zugehörigkeit von Inhalten untereinander und ist invers zu [[[#hat-teile-has_part]]]. 
 Die Reihenfolge der Werte ist bedeutsam. 
 
 <dl>
@@ -1037,36 +1037,36 @@ Die Reihenfolge der Werte ist bedeutsam.
   <dd>Jeder Wert MUSS dem Wert einer ID eines XML-Feeds des jeweiligen Anbieters entsprechen (siehe: [[[#identifier-id]]]).</dd>
 </dl>
 
-##### Beispiele für die Verwendung des `isPartOf`-Feldes
+##### Beispiele für die Verwendung des `is_part_of`-Feldes
 
 <strong>Hierarchische Relation: Über-/Unterordnung</strong>
 - KANN als hierarchische Relation (Über-/Unterordnung) genutzt werden, z.B. {Inhalt} besitzt als Teile 1..n {Inhalte}.
   - Beispiel: Ein Video {ID_2} besitzt als Teile einen Clip 1 {ID_2_1} und einen Clip 2 {ID_2_2}, somit gilt:
-    - {ID_2} *hasPart* {ID_2_1} | {ID_2_2}
-    - {ID_2_1} *isPartOf* {ID_2}
-    - {ID_2_2} *isPartOf* {ID_2}
+    - {ID_2} *has_part* {ID_2_1} | {ID_2_2}
+    - {ID_2_1} *is_part_of* {ID_2}
+    - {ID_2_2} *is_part_of* {ID_2}
 
 <pre class="example" title="Der beschriebene Inhalt ID_2_1 ist Teil von ID_2">
-  &lt;isPartOf&gt;ID_2&lt;/isPartOf&gt;
+  &lt;is_part_of&gt;ID_2&lt;/is_part_of&gt;
 </pre>
 
 <strong>Hierarchische Relation: Nebenordnung</strong>
  - KANN als hierarchische Relation (Nebenordnung) genutzt werden.
    - Beispiel: Ein Video {ID_4} hat ein dazugehöriges Interview {ID_5], somit gilt:
-      - {ID_4} *hasPart* {ID_5}
-      - {ID_5} *isPartOf* {ID_4}
+      - {ID_4} *has_part* {ID_5}
+      - {ID_5} *is_part_of* {ID_4}
 
 <pre class="example" title="Der beschriebene Inhalt ID_5 ist Teil von ID_4">
-  &lt;isPartOf&gt;ID_4&lt;/isPartOf&gt;
+  &lt;is_part_of&gt;ID_4&lt;/is_part_of&gt;
 </pre>
 
 <strong>Assoziative Relation</strong>
 - KANN als assoziative Relation genutzt werden, z.B. {Inhalt} ist Teil einer Reihe/Serie.
   - Beispiel: Videos sind Teil einer Videoreihe/-serie, somit gilt:
-    - {ID_2} *isPartOf* {ID_1}
+    - {ID_2} *is_part_of* {ID_1}
 
 <pre class="example" title="Der beschriebene Inhalt ID_2 ist Teil von ID_1">
-  &lt;isPartOf&gt;ID_1&lt;/isPartOf&gt;
+  &lt;is_part_of&gt;ID_1&lt;/is_part_of&gt;
 </pre>
 
 ### Didaktische Metadaten
