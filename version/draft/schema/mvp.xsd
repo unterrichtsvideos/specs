@@ -312,9 +312,6 @@
         <xs:element name="creator" type="CreatorListType" minOccurs="0" />
 
         <!-- Structural Metadata -->
-        <xs:element name="has_part" type="RelatedIdentifierListType" minOccurs="0" />
-        <xs:element name="is_part_of" type="RelatedIdentifierListType" minOccurs="0" />
-        <!-- Legacy, deprecated -->
         <xs:element name="hasPart" type="RelatedIdentifierListType" minOccurs="0" />
         <xs:element name="isPartOf" type="RelatedIdentifierListType" minOccurs="0" />
 
