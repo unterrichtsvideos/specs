@@ -302,6 +302,7 @@
         <xs:element name="resource_type" type="ResourceTypeListType" />
         <xs:element name="abstract" type="AbstractType" minOccurs="0" />
         <xs:element name="language" type="LanguageListType" minOccurs="0" />
+        <xs:element name="embed_url" type="xs:anyURI" minOccurs="0" />
 
         <!-- Administrative Metadata -->
         <xs:element name="date_created" type="PartialDateType" />
