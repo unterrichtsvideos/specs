@@ -148,35 +148,15 @@
   </xs:simpleType>
 
   <xs:simpleType name="TopicListType">
-    <xs:union>
-      <!-- (1) URL list pattern  -->
-      <xs:simpleType>
-        <xs:restriction base="xs:token">
-          <xs:pattern
-            value="\s*(https://d-nb\.info/gnd/[0-9X-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/topic/[A-Za-z0-9._/-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/keyword/[A-Za-z0-9._/-]+|https://vocabs\.sodix\.de/sodix/educational/[A-Za-z0-9._/-]+)\s*(\|\s*(https://d-nb\.info/gnd/[0-9X-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/topic/[A-Za-z0-9._/-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/keyword/[A-Za-z0-9._/-]+|https://vocabs\.sodix\.de/sodix/educational/[A-Za-z0-9._/-]+)\s*)*" />
-        </xs:restriction>
-      </xs:simpleType>
-      <!-- (2) Non-URL keyword string list -->
-      <xs:simpleType>
-        <xs:restriction base="FreeTextListType" />
-      </xs:simpleType>
-    </xs:union>
+    <xs:restriction base="xs:token">
+      <xs:pattern value="\s*((https://d-nb\.info/gnd/[0-9X-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/topic/[A-Za-z0-9._/-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/keyword/[A-Za-z0-9._/-]+|https://vocabs\.sodix\.de/sodix/educational/[A-Za-z0-9._/-]+)|([^\s/|]+(/[^\s/|]+)*([ ]+[^\s/|]+(/[^\s/|]+)*)*))\s*(\|\s*((https://d-nb\.info/gnd/[0-9X-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/topic/[A-Za-z0-9._/-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/keyword/[A-Za-z0-9._/-]+|https://vocabs\.sodix\.de/sodix/educational/[A-Za-z0-9._/-]+)|([^\s/|]+(/[^\s/|]+)*([ ]+[^\s/|]+(/[^\s/|]+)*)*))\s*)*" />
+    </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="KeywordListType">
-    <xs:union>
-      <!-- (1) URL list pattern -->
-      <xs:simpleType>
-        <xs:restriction base="xs:token">
-          <xs:pattern
-            value="\s*(https://d-nb\.info/gnd/[0-9X-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/keyword/[A-Za-z0-9._/-]+)\s*(\|\s*(https://d-nb\.info/gnd/[0-9X-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/keyword/[A-Za-z0-9._/-]+)\s*)*" />
-        </xs:restriction>
-      </xs:simpleType>
-      <!-- (2) Non-URL keyword string list -->
-      <xs:simpleType>
-        <xs:restriction base="FreeTextListType" />
-      </xs:simpleType>
-    </xs:union>
+    <xs:restriction base="xs:token">
+      <xs:pattern value="\s*(((https://d-nb\.info/gnd/[0-9X-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/keyword/[A-Za-z0-9._/-]+))|([^\s/|]+(/[^\s/|]+)*([ ]+[^\s/|]+(/[^\s/|]+)*)*))\s*(\|\s*(((https://d-nb\.info/gnd/[0-9X-]+|https://w3id\.org/unterrichtsvideos\.net/vocabs/keyword/[A-Za-z0-9._/-]+))|([^\s/|]+(/[^\s/|]+)*([ ]+[^\s/|]+(/[^\s/|]+)*)*))\s*)*" />
+    </xs:restriction>
   </xs:simpleType>
 
   <!-- RSS Types -->
