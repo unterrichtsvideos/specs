@@ -19,13 +19,13 @@
 
   <xs:simpleType name="AbstractType">
     <xs:restriction base="xs:string">
-      <xs:maxLength value="650" />
+      <xs:maxLength value="800" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="UseRestrictionsLabelType">
     <xs:restriction base="xs:string">
-      <xs:maxLength value="600" />
+      <xs:maxLength value="800" />
     </xs:restriction>
   </xs:simpleType>
 
