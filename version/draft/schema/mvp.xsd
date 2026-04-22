@@ -287,7 +287,7 @@
         <!-- Administrative Metadata -->
         <xs:element name="date_created" type="PartialDateType" />
         <xs:element name="license" type="LicenseListType" />
-        <xs:element name="use_restrictions" type="AudienceListType" />
+        <xs:element name="use_restrictions" type="AudienceListType" minOccurs="0" />
         <xs:element name="use_restrictions_label" type="UseRestrictionsLabelType" minOccurs="0" />
         <xs:element name="date_published" type="PartialDateType" minOccurs="0" />
         <xs:element name="creator" type="CreatorListType" minOccurs="0" />

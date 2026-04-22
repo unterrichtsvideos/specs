@@ -754,7 +754,7 @@ Im Folgenden finden sich Beispiele für die Header (Apache), die auf der Seite d
 </dl>
 
 <pre class="example" title="Verwendung">
-&lt;embed_url&gt;https://example.com/embed&lt;/video/1&gt;
+&lt;embed_url&gt;https://example.com/embed/video/1&lt;/embed_url&gt;
 </pre>
 
 ### Administrative Metadaten
@@ -828,7 +828,7 @@ Das `license`-Feld gibt Auskunft über die vorliegende Lizenz zur Nutzung und Ve
 &lt;license&gt;https://w3id.org/unterrichtsvideos.net/vocabs/license/cc-by-sa&lt;/license&gt;
 </pre>
 
-#### &#9679; Nutzungsbeschränkungen <code>&lt;use_restrictions&gt;</code>
+#### &#9675; Nutzungsbeschränkungen <code>&lt;use_restrictions&gt;</code>
 
 Das `use_restrictions`-Feld definiert Einschränkungen der Nutzbarkeit durch Zielgruppen. 
 
@@ -838,9 +838,13 @@ Eine Zielgruppe wird nur und immer dann angegeben, wenn ...
 _und_
 - der Inhalt für die jeweilige Zielgruppe gemäß dem Anbieter relevant ist
 
+Hinweis:
+- Fehlt dieses Feld, so wird angenommen, dass es keine Einschränkungen der Nutzbarkeit durch Zielgruppen gibt.
+Dies entspricht der Angabe aller Zielgruppen, so dass das Feld entfallen kann, wenn alle Zielgruppen angegeben werden.
+
 <dl>
   <dt>Pflichtfeld</dt>
-  <dd>ja</dd>
+  <dd>nein</dd>
   <dt>Mehrfachwerte</dt>
   <dd>ja</dd>
   <dt>Verwandte Felder</dt>
@@ -1012,7 +1016,10 @@ _und/oder als Freitext in der Form_
 #### &#9675; hat Teile <code>&lt;hasPart&gt;</code>
 
 Das `hasPart`-Feld definiert die Zugehörigkeit von Inhalten untereinander. 
-Die Reihenfolge der Werte ist bedeutsam. 
+Die Reihenfolge der Werte SOLL bedeutsam sein.
+
+Hinweis: 
+- Da einige Anbieter keinen Einfluss auf die Reihenfolge haben, wird die Reihenfolge gemäß der lexikalischen Ordnung interpretiert
 
 <dl>
   <dt>Pflichtfeld</dt>
@@ -1062,7 +1069,10 @@ Die Reihenfolge der Werte ist bedeutsam.
 #### &#9675; ist Teil <code>&lt;isPartOf&gt;</code>
 
 Das `isPartOf`-Feld definiert die Zugehörigkeit von Inhalten untereinander und ist invers zu [[[#hat-teile-haspart]]]. 
-Die Reihenfolge der Werte ist bedeutsam. 
+Die Reihenfolge der Werte SOLL bedeutsam sein.
+
+Hinweis: 
+- Da einige Anbieter keinen Einfluss auf die Reihenfolge haben, wird die Reihenfolge gemäß der lexikalischen Ordnung interpretiert
 
 <dl>
   <dt>Pflichtfeld</dt>
