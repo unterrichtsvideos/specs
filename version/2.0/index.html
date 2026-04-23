@@ -719,7 +719,7 @@ Das `language`-Feld kennzeichnet die Sprachen, in denen der Inhalt verfügbar is
 Das `embed_url`-Feld gibt die URL an, über die der Inhalt eingebettet werden kann.
 
 **Hinweise**
-- Die URL MUSS eine gültige Adresse für die Einbettung des Inhalts sein (z.B. Video-Player)
+- Die URL MUSS eine gültige Adresse für die Einbettung des Inhalts sein (z.B. ein Video-Player, der in einem iframe/embed/object HTML-Tag als Quelle eingebettet werden kann).
 - Die URL MUSS das Schema *https* verwenden.
 - Inhalte MÜSSEN auf *.unterrichtsvideos.net einbettbar sein und dafür geeignete Header ausweisen
 
@@ -753,8 +753,48 @@ Im Folgenden finden sich Beispiele für die Header (Apache), die auf der Seite d
   <dd>`string` (URI)</dd>
 </dl>
 
+
+#### &#9675; Einbettungslink <code>&lt;content_url&gt;</code>
+
+Das `content_url`-Feld gibt die URL an, über die der Inhalt eingebettet werden kann.
+
+**Hinweise**
+- Die URL MUSS eine gültige Adresse für das Medienobjekt sein (z.B. MP4)
+- Die URL MUSS das Schema *https* verwenden.
+- Inhalte MÜSSEN auf *.unterrichtsvideos.net einbettbar sein und dafür geeignete Header ausweisen
+
+**Beispiele**
+Im Folgenden finden sich Beispiele für die Header (Apache), die auf der Seite des Anbieters (z.B. des Videoportals) gesetzt werden müssen, damit Inhalte von dort auf unterrichtsvideos.net eingebettet werden können:
+
+<pre class="example" title="Apache-Header-Konfiguration für CORS und Einbettung">
+&lt;IfModule mod_headers.c&gt;
+  &lt;IfModule mod_setenvif.c&gt;
+    Header unset X-Frame-Options
+    SetEnvIf Origin "https?://([a-z0-9-]+\.)*unterrichtsvideos\.net$" MVP=$0
+    Header set Access-Control-Allow-Origin "%{MVP}e" env=MVP
+    Header always set Access-Control-Allow-Origin "https://unterrichtsvideos.net" env=!MVP
+    Header always set Vary "Origin"
+  &lt;/IfModule&gt;
+  Header always set Content-Security-Policy "frame-ancestors 'self' unterrichtsvideos.net *.unterrichtsvideos.net;"
+  Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+&lt;/IfModule&gt;
+</pre>
+
+<dl>
+  <dt>Pflichtfeld</dt>
+  <dd>nein</dd>
+  <dt>Mehrfachwerte</dt>
+  <dd>nein</dd>
+  <dt>Verwandte Felder</dt>
+  <dd>
+    <a href="https://schema.org/contentUrl">sdo:contentUrl</a>
+  </dd>
+  <dt>Typ</dt>
+  <dd>`string` (URI)</dd>
+</dl>
+
 <pre class="example" title="Verwendung">
-&lt;embed_url&gt;https://example.com/embed/video/1&lt;/embed_url&gt;
+&lt;content_url&gt;https://example.com/content/video/1.mp4&lt;/content_url&gt;
 </pre>
 
 ### Administrative Metadaten
